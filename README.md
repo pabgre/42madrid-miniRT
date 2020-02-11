@@ -6,6 +6,7 @@ vector_utils_1.c
 - [x] Vector addition
 - [x] Vector substraction
 - [x] Product of vector and double
+
 vector_utilss_2.c
 - [x] Dot product of two vectors
 - [x] Cross product of two vectors
