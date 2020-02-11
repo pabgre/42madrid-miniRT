@@ -6,17 +6,12 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:16:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/11 18:35:08 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/11 20:18:23 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include <math.h>
-
-double dot_prod(vector u, vector v)
-{
-	return(u.x * v.x + u.y * v.y + u.z * v.z);
-}
 
 vector cross_prod(vector u, vector v)
 {
@@ -43,5 +38,10 @@ double angle(vector u, vector v)
 	double aux;
 
 	aux = dot_prod(u,v) / (magnitude(u) * magnitude(v));
-	return(acos(aux));
+	return (acos(aux));
+}
+
+vector normalize(vector u)
+{
+	return (prod(u, 1.0 / magnitude(u)));
 }

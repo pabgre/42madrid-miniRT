@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:36 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/11 18:24:09 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/11 20:18:21 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ vector add(vector u, vector v)
 vector subs(vector u, vector v)
 {
 	return(vec(u.x - v.x, u.y - v.y, u.z - v.z));
+}
+
+double dot_prod(vector u, vector v)
+{
+	return(u.x * v.x + u.y * v.y + u.z * v.z);
 }
