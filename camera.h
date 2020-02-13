@@ -18,13 +18,16 @@ typedef struct s_screen
 	vector pos;
 	vector x_axis;
 	vector y_axis;
+
+	int h;
+	int w;
 }				screen;
 
 typedef struct s_camera
 {
-	double dist;
+	vector pos;
 
-	screen my_display;
-
+	screen display;
+	double fov;
 }				camera;
 #endif
