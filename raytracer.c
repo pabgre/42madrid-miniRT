@@ -12,6 +12,8 @@
 
 #include "Vector/vector.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #include "camera.h"
 
@@ -41,6 +43,7 @@ bool is_point_in_sphere(vector point, double radius, vector center)
 	return(equation);
 }
 
+
 ray_hit_data trace_ray(vector point, vector direction, double step, double max_dist, scene my_scene)
 {
 	double dist;
@@ -60,45 +63,23 @@ ray_hit_data trace_ray(vector point, vector direction, double step, double max_d
 	return (hit_data);
 }
 
-
-#include <stdio.h>
-#include <unistd.h>
-int main()
+void perform_raytracer(camera my_camera, scene my_scene)
 {
-	scene my_scene;
-	vector hit_point;
-
+	int i;
+	int j;
+	vector current_point;
+	vector current_direction;
 	ray_hit_data data;
 
-	double fov = 10;
+	i = -(my_camera.display.h / 2);
 
-	vector camera_pos = vec(20, 0, 0);
-	vector x_axis =  normalize(vec(0, 1, 0));
-	vector y_axis =  normalize(vec(0, 0, -1));
-
-	vector my_screen_pos = add(prod(normalize(cross_prod(x_axis, y_axis)), fov), camera_pos);
-
-	int h = 16;
-	int w = 32;
-
-
-	my_scene.center = vec(0,0,0);
-	my_scene.radius = 12;
-
-	int i = -h/2;
-	int j = -w/2;
-
-	vector current_point;
-
-	vector current_direction;
-
-	while (i <= h/2)
+	while (i <= my_camera.display.h/2)
 	{
-		j = -w/2;
-		while (j <= w/2)
+		j = -my_camera.display.w/2;
+		while (j <= my_camera.display.w/2)
 		{
-			current_point = add(add(prod(x_axis, i), prod(y_axis, j)), my_screen_pos);
-			current_direction = normalize(subs(current_point, camera_pos));
+			current_point = add(add(prod(my_camera.display.x_axis, i), prod(my_camera.display.y_axis, j)), my_camera.display.pos);
+			current_direction = normalize(subs(current_point, my_camera.pos));
 			data = trace_ray(current_point, current_direction, 0.1, 50, my_scene);
 			if (data.hit_object == SPHERE)
 				write(1, "SS", 2);
@@ -111,4 +92,28 @@ int main()
 		write(1, "\n", 1);
 		i++;
 	}
+}
+
+int main()
+{
+	scene my_scene;
+
+	camera my_camera;
+	screen my_screen;
+
+	my_camera.pos = vec(20, 0, 0);
+	my_camera.fov = 10;
+
+	my_screen.h = 16;
+	my_screen.w = 32;
+	my_screen.x_axis = normalize(vec(0, 1, 0));
+	my_screen.y_axis = normalize(vec(0, 0, -1));
+	my_screen.pos = add(prod(normalize(cross_prod(my_screen.x_axis, my_screen.y_axis)), my_camera.fov), my_camera.pos);
+
+	my_camera.display = my_screen;
+
+	my_scene.center = vec(0,0,0);
+	my_scene.radius = 12;
+
+	perform_raytracer(my_camera, my_scene);
 }
