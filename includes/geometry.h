@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 13:44:40 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:13:13 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ bool is_point_in_sphere(t_vector point, t_sphere my_sphere);
 bool is_point_in_cylinder(t_vector point, t_cylinder my_cylinder);
 bool is_point_in_plane(t_vector point, t_plane my_plane, double epsilon);
 bool is_point_in_triangle(t_vector point, t_triangle my_triangle, double epsilon);
+bool	ray_hit_sphere(t_line ray, t_sphere sphere);
 #endif

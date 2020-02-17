@@ -6,11 +6,12 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 14:00:51 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:16:15 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/geometry.h"
+#include <math.h>
 
 bool is_point_in_sphere(t_vector point, t_sphere my_sphere)
 {
@@ -75,4 +76,15 @@ bool	is_point_in_triangle(t_vector point, t_triangle triangle, double epsilon)
 	triangle_dist = dist_point_line(triangle.point_c, aux_line);
 	equation = equation && (distance(triangle.point_c, point) <= triangle_dist);
 	return (equation);
+}
+
+bool	ray_hit_sphere(t_line ray, t_sphere sphere)
+{
+	double	disc;
+
+	disc = pow(2 * (dot_prod(ray.dir, subs(ray.point, sphere.center))), 2);
+	disc -= 4 * dot_prod(ray.dir, ray.dir) *
+	(dot_prod(subs(ray.point, sphere.center), subs(ray.point, sphere.center))
+	- sphere.radius * sphere.radius);
+	return (disc >= 0);
 }
