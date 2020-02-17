@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 17:47:07 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:27:32 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,4 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 	}
 	return (data);
 }
+
