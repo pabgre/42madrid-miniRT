@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 17:03:46 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:40:54 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GEOMETRY_H
 # include "vector.h"
 # include <stdbool.h>
+# include "color.h"
 
 typedef enum e_geometry{
 	NONE, SPHERE, CYLINDER, PLANE, CUBE, TRIANGLE, CONE
