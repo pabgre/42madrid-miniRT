@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"vector": "cpp",
+		"iosfwd": "cpp",
+		"iterator": "cpp",
+		"vector.h": "c",
+		"algorithm": "c"
+	}
+}

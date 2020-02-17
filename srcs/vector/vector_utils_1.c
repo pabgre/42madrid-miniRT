@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:36 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/11 20:18:21 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/13 18:31:56 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "../../minirt.h"
 
-vector vec(double x, double y, double z)
+t_vector vec(double x, double y, double z)
 {
-	vector out;
+	t_vector out;
 	out.x = x;
 	out.y = y;
 	out.z = z;
@@ -22,22 +22,22 @@ vector vec(double x, double y, double z)
 	return (out);
 }
 
-vector prod(vector u, double lamda)
+t_vector prod(t_vector u, double lamda)
 {
 	return (vec(u.x * lamda, u.y * lamda, u.z * lamda));
 }
 
-vector add(vector u, vector v)
+t_vector add(t_vector u, t_vector v)
 {
 	return(vec(u.x + v.x, u.y + v.y, u.z + v.z));
 }
 
-vector subs(vector u, vector v)
+t_vector subs(t_vector u, t_vector v)
 {
 	return(vec(u.x - v.x, u.y - v.y, u.z - v.z));
 }
 
-double dot_prod(vector u, vector v)
+double dot_prod(t_vector u, t_vector v)
 {
 	return(u.x * v.x + u.y * v.y + u.z * v.z);
 }

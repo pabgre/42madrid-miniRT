@@ -5,22 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:55:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/11 19:43:33 by psan-gre         ###   ########.fr       */
+/*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
+/*   Updated: 2020/02/17 14:23:30 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Vector/vector.h"
-#include <stdio.h>
+#include "minirt.h"
 
 int main()
 {
-	vector u;
-	vector v;
-	vector w;
+	t_scene my_scene;
+	t_sphere my_sphere;
+	t_cylinder my_cylinder;
 
-	u = vec(1, 2, 3);
-	v = vec(1, 1, 1);
+	t_camera my_camera;
+	t_screen my_screen;
 
-	return (0);
+	my_camera.pos = vec(20, 0, 0);
+	my_camera.fov = 5;
+
+	my_screen.h = 16;
+	my_screen.w = 32;
+	my_screen.x_axis = normalize(vec(0, -1, 0));
+	my_screen.y_axis = normalize(vec(0, 0, 1));
+	my_screen.pos = add(prod(normalize(cross_prod(my_screen.x_axis, my_screen.y_axis)), my_camera.fov), my_camera.pos);
+
+	my_camera.display = my_screen;
+
+	my_sphere.center = vec(0,0,0);
+	my_sphere.radius = 12;
+
+	my_cylinder.a_point = vec(0,0,20);
+	my_cylinder.b_point = vec(0,0,-20);
+	my_cylinder.radius = 10;
+
+	my_scene.my_sphere = my_sphere;
+	my_scene.my_cylinder = my_cylinder;
+
+	perform_raytracer(my_camera, my_scene);
 }

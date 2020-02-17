@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:06:28 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/12 16:42:57 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:42:23 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-typedef struct s_vector
+typedef struct	s_vector
 {
-	float x;
-	float y;
-	float z;
-}				vector;
+	float		x;
+	float		y;
+	float		z;
+}				t_vector;
 
-vector vec(double x, double y, double z);
-vector prod(vector u, double lamda);
-vector add(vector u, vector v);
-vector subs(vector u, vector v);
-double dot_prod(vector u, vector v);
-vector cross_prod(vector u, vector v);
-double magnitude(vector u);
-double distance(vector u, vector v);
-double angle(vector u, vector v);
-vector normalize(vector u);
+t_vector vec(double x, double y, double z);
+t_vector prod(t_vector u, double lamda);
+t_vector add(t_vector u, t_vector v);
+t_vector subs(t_vector u, t_vector v);
+double dot_prod(t_vector u, t_vector v);
+t_vector cross_prod(t_vector u, t_vector v);
+double magnitude(t_vector u);
+double distance(t_vector u, t_vector v);
+double angle(t_vector u, t_vector v);
+t_vector normalize(t_vector u);
 #endif

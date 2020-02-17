@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 19:36:34 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/11 20:18:17 by psan-gre         ###   ########.fr       */
+/*   Created: 2020/02/11 18:55:53 by psan-gre          #+#    #+#             */
+/*   Updated: 2020/02/11 19:43:33 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
 #include "Vector/vector.h"
-typedef struct s_screen
+#include <stdio.h>
+
+int main()
 {
-	vector pos;
-	vector x_axis;
-	vector y_axis;
+	vector u;
+	vector v;
+	vector w;
 
-	int h;
-	int w;
-}				screen;
+	u = vec(1, 2, 3);
+	v = vec(1, 1, 1);
 
-typedef struct s_camera
-{
-	vector pos;
-
-	screen display;
-	double fov;
-}				camera;
-#endif
+	return (0);
+}
