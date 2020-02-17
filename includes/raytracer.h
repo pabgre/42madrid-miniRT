@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 16:16:42 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:58:40 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ typedef	struct	s_scene
 	t_plane		my_plane;
 	t_triangle	my_triangle;
 }				t_scene;
-
-typedef struct	s_ray_hit_data
-{
-	t_vector	hit_point;
-	t_geometry	hit_object;
-}				t_ray_hit_data;
 
 t_geometry is_point_in_any_object(t_vector point, t_scene my_scene);
 t_ray_hit_data trace_ray(t_vector point, t_vector direction, t_scene my_scene);

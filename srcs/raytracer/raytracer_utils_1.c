@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 16:30:32 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:04:01 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 t_geometry hit_ray_in_any_object(t_line ray, t_scene my_scene)
 {
 	t_geometry result;
+	t_ray_hit_data hit_data;
 
-	if (ray_hit_sphere(ray, my_scene.my_sphere))
+	hit_data = sphere_hit_point(ray, my_scene.my_sphere);
+	if (hit_data.hit_object == SPHERE)
 		result = SPHERE;
 	else
 		result = NONE;
