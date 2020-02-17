@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 17:11:19 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:47:46 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ t_ray_hit_data	ray_hit_data_init(t_vector point)
 
 	data.hit_point = point;
 	data.hit_object = NONE;
+	data.color.r = 255;
+	data.color.g = 255;
+	data.color.b = 255;
 	return (data);
 }
 
