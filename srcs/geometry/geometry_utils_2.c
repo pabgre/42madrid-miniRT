@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 17:03:32 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:10:35 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/raytracer.h"
 #include <math.h>
 
-double	ray_hit_sphere(t_line ray, t_sphere sphere)
+double			ray_hit_sphere(t_line ray, t_sphere sphere)
 {
 	double	disc;
 
@@ -24,16 +24,15 @@ double	ray_hit_sphere(t_line ray, t_sphere sphere)
 	return (disc);
 }
 
-t_ray_hit_data sphere_hit_point(t_line ray, t_sphere sphere)
+t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 {
-	double disc;
-	double dist_a;
-	double dist_b;
-	t_ray_hit_data data;
+	double			disc;
+	double			dist_a;
+	double			dist_b;
+	t_ray_hit_data	data;
 
 	disc = ray_hit_sphere(ray, sphere);
-	data.hit_point = ray.point;
-	data.hit_object = NONE;
+	data = ray_hit_data_init(ray.point);
 	if (disc > 0)
 	{
 		dist_a = -(dot_prod(ray.dir, subs(ray.point, sphere.center)));
@@ -53,4 +52,3 @@ t_ray_hit_data sphere_hit_point(t_line ray, t_sphere sphere)
 	}
 	return (data);
 }
-

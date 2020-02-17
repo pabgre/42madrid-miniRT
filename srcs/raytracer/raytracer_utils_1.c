@@ -6,17 +6,25 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 17:04:01 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:11:19 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
 
-
-t_geometry hit_ray_in_any_object(t_line ray, t_scene my_scene)
+t_ray_hit_data	ray_hit_data_init(t_vector point)
 {
-	t_geometry result;
-	t_ray_hit_data hit_data;
+	t_ray_hit_data data;
+
+	data.hit_point = point;
+	data.hit_object = NONE;
+	return (data);
+}
+
+t_geometry		hit_ray_in_any_object(t_line ray, t_scene my_scene)
+{
+	t_geometry		result;
+	t_ray_hit_data	hit_data;
 
 	hit_data = sphere_hit_point(ray, my_scene.my_sphere);
 	if (hit_data.hit_object == SPHERE)
@@ -26,10 +34,10 @@ t_geometry hit_ray_in_any_object(t_line ray, t_scene my_scene)
 	return (result);
 }
 
-t_ray_hit_data trace_ray(t_vector point, t_vector direction, t_scene my_scene)
+t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 {
-	t_ray_hit_data hit_data;
-	t_line ray;
+	t_ray_hit_data	hit_data;
+	t_line			ray;
 
 	ray.point = point;
 	ray.dir = direction;
@@ -38,9 +46,3 @@ t_ray_hit_data trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 	hit_data.hit_point = point;
 	return (hit_data);
 }
-
-
-
-
-
-
