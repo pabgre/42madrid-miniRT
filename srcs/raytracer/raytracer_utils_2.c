@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 19:22:54 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:55:33 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 {
 	int i;
 	int j;
+	int pos;
+	unsigned int color;
 	t_vector current_point;
 	t_vector current_direction;
 	t_ray_hit_data data;
-
+	pos = 0;
+	color = mlx_get_color_value(mlx->ptr, 0x00ECFF);
+	
 	ft_init_mlx(mlx);
 
 	i = -(my_camera.display.h / 2);
@@ -33,16 +37,15 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			current_direction = normalize(subs(current_point, my_camera.pos));
 			data = trace_ray(current_point, current_direction, my_scene);
 			if (data.hit_object == SPHERE)
-				write(1, "SS", 2);
+				ft_paint_pixel(pos++, color, mlx);
 			else if (data.hit_object == CYLINDER)
-				write(1, "CC", 2);
+				pos++;
 			else
 			{
-				write(1, "__", 2);
+				pos++;
 			}
 			j++;
 		}
-		write(1, "\n", 1);
 		i++;
 	}
 }

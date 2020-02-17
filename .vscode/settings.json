@@ -4,6 +4,8 @@
 		"iosfwd": "cpp",
 		"iterator": "cpp",
 		"vector.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"minirt.h": "c",
+		"ostream": "c"
 	}
 }

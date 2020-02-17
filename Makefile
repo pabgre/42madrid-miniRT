@@ -6,7 +6,7 @@
 #    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/17 19:26:17 by jballest         ###   ########.fr        #
+#    Updated: 2020/02/17 20:46:22 by jballest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ CC = gcc
 
 LIBFT = libs/libft/libft.a
 
-SRC = mainnotsoold.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
+SRC_OLD = mainnotsoold.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
+
+SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
 
 SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c	\
 
@@ -33,3 +35,6 @@ MLX_FLAGS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -fra
 
 all: $(SRC)
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC) $(LIBFT)
+
+old: $(SRC_OLD)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC_OLD) $(LIBFT)

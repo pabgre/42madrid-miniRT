@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/17 19:27:27 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:55:44 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 		cntx++;
 	}
 }*/
+
+void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)
+{
+	mlx->img_ptr[i] = (unsigned int)color;
+	mlx->img_ptr[++i] = ((unsigned int)color >> 8);
+	mlx->img_ptr[++i] = ((unsigned int)color >> 16);
+	mlx->img_ptr[++i] = 0;
+}
 
 void	ft_init_mlx(t_mlx *mlx)
 {
