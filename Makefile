@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
+#    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/17 16:30:56 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/02/17 16:47:10 by jballest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY)
+LIBFT = libs/libft/libft.a
+
+SRC = mainnotsoold.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY)
 
 SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c	\
 
@@ -28,4 +30,4 @@ MLX_FLAGS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -fra
 #MLX_FLAGS = -L./libs/minilibx_linux -lmlx -lm -L/usr/include/../lib -lXext -lX11 -lbsd
 
 all: $(SRC)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC) libs/minilibx_linux/libmlx*.a
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC) $(LIBFT)

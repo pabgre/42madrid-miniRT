@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 16:30:43 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:32:23 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void perform_raytracer(t_camera my_camera, t_scene my_scene)
 {
+	t_mlx		mlx;
+	t_mlx_data	mlx_data;
+	mlx_data.window_title = ft_strdup("Test scene");
+	mlx_data.window_size.x = my_camera.display.w;
+	mlx_data.window_size.y = my_camera.display.h;
+	mlx = ft_init_mlx(&mlx_data);
+
 	int i;
 	int j;
 	t_vector current_point;

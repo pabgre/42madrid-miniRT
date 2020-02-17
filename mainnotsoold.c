@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainnotsoold.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 13:53:54 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/17 14:23:06 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:06:40 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int main()
 	int x = 100;
 	int y = 100;
 
-	int cnt = 0;
+	//int cnt = 0;
 
 	unsigned int color;
-	unsigned int color2;
+	//unsigned int color2;
 
 	//int curx;
 	//int cury;
@@ -61,8 +61,8 @@ int main()
 	mlx.img_ptr = mlx_get_data_addr(mlx.img, &bpp, &size_line, &endian);
 	color = mlx_get_color_value(mlx.ptr, 0x00ECFF);
 	printf("endian = %d\n", endian);
-	//reverse_colors(mlx.img_ptr, bpp, size_line, 100, 100, color);
-	while (cnt < (10000))
+	reverse_colors(mlx.img_ptr, bpp, size_line, 100, 100, color);
+	/*while (cnt < (10000))
 	{
 		int x;
 
@@ -76,7 +76,7 @@ int main()
 			x++;
 		}
 		cnt++;
-	}
+	}*/
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, x/2, y/2);
 	mlx_loop(mlx.ptr);
 }

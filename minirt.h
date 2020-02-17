@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:03:12 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/17 14:23:03 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:31:58 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "includes/matrix.h"
 # include "includes/geometry.h"
 # include "includes/raytracer.h"
+# include "includes/libft.h"
 
 typedef struct	s_mlx
 {
@@ -32,5 +33,16 @@ typedef struct	s_mlx
 	void	*img;
 	char	*img_ptr;
 }				t_mlx;
+
+typedef struct	s_mlx_data
+{
+	char		*window_title;
+	t_vector	window_size;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_mlx_data;
+
+t_mlx	ft_init_mlx(t_mlx_data *data);
 
 #endif
