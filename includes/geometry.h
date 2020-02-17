@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 17:40:54 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:43:35 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_sphere
 {
 	t_vector center;
 	double radius;
+	t_color color;
 }				t_sphere;
 
 typedef struct s_cylinder
@@ -31,6 +32,7 @@ typedef struct s_cylinder
 	t_vector a_point;;
 	t_vector b_point;
 	double radius;
+	t_color color;
 }				t_cylinder;
 
 typedef struct s_line
@@ -43,6 +45,7 @@ typedef struct s_plane
 {
 	t_vector point;
 	t_vector normal;
+	t_color color;
 }				t_plane;
 
 typedef struct s_triangle
@@ -50,12 +53,14 @@ typedef struct s_triangle
     t_vector point_a;
     t_vector point_b;
     t_vector point_c;
+	t_color color;
 }               t_triangle;
 
 typedef struct	s_ray_hit_data
 {
 	t_vector	hit_point;
 	t_geometry	hit_object;
+	t_color		color;
 }				t_ray_hit_data;
 
 t_vector closest_point_line(t_vector point, t_line my_line);
