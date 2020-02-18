@@ -4,6 +4,11 @@
 		"iosfwd": "cpp",
 		"iterator": "cpp",
 		"vector.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"minirt.h": "c",
+		"ostream": "c",
+		"__node_handle": "c",
+		"my_mlx.h": "c",
+		"libft.h": "c"
 	}
 }
