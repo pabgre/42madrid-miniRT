@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 17:43:35 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:42:02 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ double dist_point_line(t_vector point, t_line my_line);
 double dist_point_plane(t_vector point, t_plane my_plane);
 double	ray_hit_sphere(t_line ray, t_sphere sphere);
 t_ray_hit_data sphere_hit_point(t_line ray, t_sphere sphere);
+double		ray_hit_cylinder(t_line ray, t_cylinder cylinder);
+t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder);
 #endif

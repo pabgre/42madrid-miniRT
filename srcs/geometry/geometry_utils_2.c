@@ -6,21 +6,33 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/17 18:27:32 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:03:27 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/geometry.h"
 #include "../../includes/raytracer.h"
+#include "../../includes/polinom.h"
 #include <math.h>
+
+t_polinom2		sphere_ray_equation(t_line ray, t_sphere sphere)
+{
+	t_polinom2	pol;
+
+	pol.a = dot_prod(ray.dir, ray.dir);
+	pol.b = 2 * dot_prod(ray.dir, subs(ray.point, sphere.center));
+	pol.c = dot_prod(subs(ray.point, sphere.center),
+	subs(ray.point, sphere.center)) - sphere.radius * sphere.radius;
+	return (pol);
+}
 
 double			ray_hit_sphere(t_line ray, t_sphere sphere)
 {
-	double	disc;
+	double		disc;
+	t_polinom2	sphere_pol;
 
-	disc = pow((dot_prod(ray.dir, subs(ray.point, sphere.center))), 2);
-	disc -= (dot_prod(subs(ray.point, sphere.center),
-	subs(ray.point, sphere.center)) - sphere.radius * sphere.radius);
+	sphere_pol = sphere_ray_equation(ray, sphere);
+	disc = discr(sphere_pol) / 4;
 	return (disc);
 }
 

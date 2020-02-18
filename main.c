@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 17:03:11 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:40:45 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int main()
 	my_sphere.center = vec(0,0,0);
 	my_sphere.radius = 5;
 
-	my_cylinder.a_point = vec(0,0,20);
-	my_cylinder.b_point = vec(0,0,-20);
-	my_cylinder.radius = 5;
+	my_cylinder.a_point = vec(10,-10,10);
+	my_cylinder.b_point = vec(-10,10,8);
+	my_cylinder.radius = 2;
 
 	my_scene.my_sphere = my_sphere;
 	my_scene.my_cylinder = my_cylinder;
@@ -51,7 +51,7 @@ int main()
 	mlx.win = mlx_new_window(mlx.ptr, my_screen.w, my_screen.h, mlx.window_title);
 	mlx.img = mlx_new_image(mlx.ptr, my_screen.w, my_screen.h);
 	mlx.img_ptr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size_line, &mlx.endian);
-	
+
 	//perform_raytracer(my_camera, my_scene, &mlx);
 	perform_raytracer(my_camera, my_scene, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
