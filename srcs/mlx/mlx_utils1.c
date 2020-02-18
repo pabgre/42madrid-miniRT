@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/17 20:55:44 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 15:27:15 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 			cnty++;
 		}
 		cntx++;
-	}
+	}(my_camera.display.w/2) * mlx->bpp + mlx->size_line * (my_camera.display.h/2 + j)
 }*/
 
 void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)

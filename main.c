@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 20:48:54 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 15:26:09 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int main()
 
 	t_mlx mlx;
 
-	my_camera.pos = vec(20, 0, 0);
+	my_camera.pos = vec(10, 0, 0);
 	my_camera.fov = 5;
 
-	my_screen.h = 720;
-	my_screen.w = 1080;
+	my_screen.h = 320/20;
+	my_screen.w = 640/20;
 	my_screen.x_axis = normalize(vec(0, -1, 0));
 	my_screen.y_axis = normalize(vec(0, 0, 1));
 	my_screen.pos = add(prod(normalize(cross_prod(my_screen.x_axis, my_screen.y_axis)), my_camera.fov), my_camera.pos);
