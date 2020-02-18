@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 19:36:34 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 13:48:29 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/18 15:38:50 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct s_camera
 	t_vector pos;
 
 	t_screen display;
-	double fov;
+	double dist;
 }				t_camera;
 #endif
