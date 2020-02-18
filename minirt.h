@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:03:12 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/18 16:12:27 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:11:56 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@
 # include "includes/raytracer.h"
 # include "includes/libft.h"
 # include "includes/my_mlx.h"
+# include "includes/color.h"
 
 #endif
