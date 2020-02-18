@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 15:21:38 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:03:26 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,52 @@
 
 void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 {
-	int i;
-	int j;
-	int posx;
-	int posy;
+	int x;
+	int y;
+	double x_plane;
+	double y_plane;
 	unsigned int color;
+	unsigned int color2;
 	t_vector current_point;
 	t_vector current_direction;
 	t_ray_hit_data data;
-	posy = 0;
 	color = mlx_get_color_value(mlx->ptr, 0x00ECFF);
+	color2 = mlx_get_color_value(mlx->ptr, 0xED5132);
 	
 	ft_init_mlx(mlx);
 	printf("window_h = %f \n window_w = %f\n", mlx->window_size.y, mlx->window_size.x);
 	printf("bpp = %d \n", mlx->bpp);
 
-	i = 0;
+	x = 0;
 
-	while (i <= my_camera.display.h)
+	while (x < mlx->window_size.y)
 	{
-		j = 0;
-		while (j <= my_camera.display.w)
+		y = 0;
+		while (y < mlx->window_size.x)
 		{
-			posx = 0;
-			current_point = add(add(prod(my_camera.display.x_axis, i -(my_camera.display.h / 2)), prod(my_camera.display.y_axis, j - my_camera.display.w/2)), my_camera.display.pos);
+			x_plane = (x + 1.0)/ mlx->window_size.y * my_camera.display.h - my_camera.display.h / 2.0;
+			y_plane = (y + 1.0)/ mlx->window_size.x * my_camera.display.w - my_camera.display.w / 2.0;
+			current_point = add(add(prod(my_camera.display.x_axis, x_plane) , prod(my_camera.display.y_axis, y_plane)), my_camera.display.pos);
 			current_direction = normalize(subs(current_point, my_camera.pos));
 			data = trace_ray(current_point, current_direction, my_scene);
 			if (data.hit_object == SPHERE)
 			{
-				ft_paint_pixel(i * mlx->size_line +  j * 8, color, mlx);
-				write(1, "SS", 2);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color, mlx);
+				//write(1, "SS", 2);
 			}
-			/*else if (data.hit_object == CYLINDER)
-				posx++;*/
+			else if (data.hit_object == CYLINDER)
+			{
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color2, mlx);
+				//write(1, "CC", 2);
+			}
 			else
 			{
-				write(1, "__", 2);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color2, mlx);
+				//write(1, "__", 2);
 			}
-			posx++;
-			j++;
+			y += 1;
 		}
-		write(1, "\n", 1);
-		posy++;
-		i++;
+		//write(1, "\n", 1);
+		x += 1;
 	}
 }

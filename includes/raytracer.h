@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/17 19:22:32 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/18 16:17:21 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ t_ray_hit_data	ray_hit_data_init(t_vector point);
 t_geometry is_point_in_any_object(t_vector point, t_scene my_scene);
 t_ray_hit_data trace_ray(t_vector point, t_vector direction, t_scene my_scene);
 void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx);
+
 #endif
