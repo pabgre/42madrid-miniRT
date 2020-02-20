@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 19:44:05 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:42:08 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 	int y;
 	double x_plane;
 	double y_plane;
-	unsigned int color;
-	unsigned int color2;
-	unsigned int color3;
+	int color;
+	int color2;
+	t_color rgb;
+	rgb.r = 54;
+	rgb.g = 227;
+	rgb.b = 80;
 	t_vector current_point;
 	t_vector current_direction;
 	t_ray_hit_data data;
 	color = mlx_get_color_value(mlx->ptr, 0x00ECFF);
 	color2 = mlx_get_color_value(mlx->ptr, 0xED5132);
-	color3 = mlx_get_color_value(mlx->ptr, 0xffffff);
 
 	ft_init_mlx(mlx);
 	printf("window_h = %f \n window_w = %f\n", mlx->window_size.y, mlx->window_size.x);
@@ -46,12 +48,12 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			data = trace_ray(current_point, current_direction, my_scene);
 			if (data.hit_object == SPHERE)
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color, mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, ft_rgb_tint(rgb, 0.1), mlx);
 				//write(1, "SS", 2);
 			}
 			else if (data.hit_object == CYLINDER)
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color3, mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color, mlx);
 				//write(1, "CC", 2);
 			}
 			else

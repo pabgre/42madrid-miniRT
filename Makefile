@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/18 19:43:28 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/02/20 17:40:50 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libs/libft/libft.a
 
 SRC_OLD = mainnotsoold.c 	$(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
 
-SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_POL)
+SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) $(SRC_POL)
 
 SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c
 
@@ -29,6 +29,8 @@ SRC_RAY = srcs/raytracer/raytracer_utils_1.c srcs/raytracer/raytracer_utils_2.c
 SRC_MLX = srcs/mlx/mlx_utils1.c
 
 SRC_POL = srcs/polinom/polinom_utils_1.c
+
+SRC_COLOR = srcs/color/color_utils.c
 
 CFLAGS = -Wall -Werror -Wextra
 
