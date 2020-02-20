@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 19:40:45 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:30:31 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int main()
 	my_sphere.center = vec(0,0,0);
 	my_sphere.radius = 5;
 
-	my_cylinder.a_point = vec(10,-10,10);
-	my_cylinder.b_point = vec(-10,10,8);
+	my_cylinder.center = vec(0, 0, 0);
+	my_cylinder.dir = vec(-1,1, 1);
 	my_cylinder.radius = 2;
 
 	my_scene.my_sphere = my_sphere;

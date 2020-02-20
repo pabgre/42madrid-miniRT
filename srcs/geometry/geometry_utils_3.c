@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 19:38:31 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:30:49 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_polinom2		cylinder_ray_equation(t_line ray, t_cylinder cylinder)
 	t_vector	ab;
 
 
-	oa = subs(ray.point, cylinder.a_point);
-	ab = subs(cylinder.a_point, cylinder.b_point);
+	oa = subs(ray.point, cylinder.center);
+	ab = cylinder.dir;
 
 	aux = cross_prod(ray.dir, ab);
 	pol.a = dot_prod(aux, aux);
@@ -45,7 +45,7 @@ t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder)
 {
 	t_ray_hit_data data;
 
-	data = ray_hit_data_init(cylinder.a_point);
+	data = ray_hit_data_init(cylinder.center);
 	if (ray_hit_cylinder(ray, cylinder) >= 0)
 	{
 		data.hit_object = CYLINDER;

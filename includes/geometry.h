@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/18 18:42:02 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:31:48 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	t_vector a_point;;
-	t_vector b_point;
+	t_vector dir;
+	t_vector center;
 	double radius;
+	double height;
 	t_color color;
 }				t_cylinder;
 
