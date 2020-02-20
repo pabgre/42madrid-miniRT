@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 21:32:24 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 21:59:08 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_ray_hit_data	choose_hit_point(t_vector point_a, t_vector point_b, t_cylinder c
 	bool			a_in_cylinder;
 	bool			b_in_cylinder;
 	t_line			cylinder_line;
+	t_vector		middle_point;
 
 	cylinder_line = l(cylinder.dir, cylinder.center);
 	data = ray_hit_data_init();
@@ -58,15 +59,26 @@ t_ray_hit_data	choose_hit_point(t_vector point_a, t_vector point_b, t_cylinder c
 		data.hit_object = NONE;
 	else
 	{
-		data.hit_point = line_plane_intersection(ray,
-		pl(cylinder.dir, closest_point(add(cylinder.center, prod(cylinder.dir,cylinder.height)), add(cylinder.center, prod(cylinder.dir, -cylinder.height)), ray.point)));
-		if (distance(data.hit_point, ray.point) <= distance(point_a, ray.point) && distance(data.hit_point, ray.point) <= distance(point_b, ray.point))
+		middle_point = line_plane_intersection(ray, pl(cylinder.dir, add(cylinder.center, prod(cylinder.dir,cylinder.height))));
+		if(distance(middle_point, add(cylinder.center, prod(cylinder.dir,cylinder.height))) > cylinder.radius)
 		{
-			data.hit_point = closest_point(point_a, point_b, ray.point);
+			middle_point = line_plane_intersection(ray, pl(cylinder.dir, add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
+		}
+		if (a_in_cylinder && distance(point_a, ray.point) <= distance(middle_point, ray.point))
+		{
+			data.hit_point = point_a;
+			data.hit_object = CYLINDER;
+		}
+		else if (b_in_cylinder && distance(point_b, ray.point) <= distance(middle_point, ray.point))
+		{
+			data.hit_point = point_b;
 			data.hit_object = CYLINDER;
 		}
 		else
+		{
+			data.hit_point = middle_point;
 			data.hit_object = PLANE;
+		}
 	}
 	return (data);
 }

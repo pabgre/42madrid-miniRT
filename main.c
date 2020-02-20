@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 21:30:26 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:03:04 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int main()
 
 	my_camera.display = my_screen;
 
-	my_sphere.center = vec(0,10,0);
-	my_sphere.radius = 0;
+	my_sphere.center = vec(0,0,0);
+	my_sphere.radius = 5;
 
-	double angle = 1;
+	double angle = 0.9;
 
-	my_cylinder.center = vec(0, 0, 2);
-	my_cylinder.dir = normalize(vec(1 * sin(angle) ,1 * cos(angle), 0 * sin(angle)));
+	my_cylinder.center = vec(0, 0, 0);
+	my_cylinder.dir = normalize(vec(1 * sin(angle) ,1 * cos(angle), 0 * tan(angle)));
 	my_cylinder.radius = 2;
 	my_cylinder.height = 10;
 
