@@ -6,17 +6,17 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 18:44:06 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 19:04:44 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
 
-t_ray_hit_data	ray_hit_data_init(t_vector point)
+t_ray_hit_data	ray_hit_data_init()
 {
 	t_ray_hit_data data;
 
-	data.hit_point = point;
+	data.hit_point = vec(0,0,0);
 	data.hit_object = NONE;
 	data.color.r = 255;
 	data.color.g = 255;
@@ -26,18 +26,22 @@ t_ray_hit_data	ray_hit_data_init(t_vector point)
 
 t_geometry		hit_ray_in_any_object(t_line ray, t_scene my_scene)
 {
-	t_geometry		result;
 	t_ray_hit_data	hit_data;
 	t_ray_hit_data hit_data_aux;
 
-	result = NONE;
 	hit_data = sphere_hit_point(ray, my_scene.my_sphere);
-	if (hit_data.hit_object == SPHERE)
-		result = SPHERE;
 	hit_data_aux = cylinder_hit_point(ray, my_scene.my_cylinder);
-	if (hit_data_aux.hit_object == CYLINDER)
-		result = CYLINDER;
-	return (result);
+	if (hit_data.hit_object != NONE)
+	{
+		if (hit_data_aux.hit_object != NONE && (distance(hit_data.hit_point, ray.point) >= distance(hit_data_aux.hit_point, ray.point)))
+			hit_data = hit_data_aux;
+	}
+	else
+	{
+		hit_data = hit_data_aux;
+	}
+
+	return (hit_data.hit_object);
 }
 
 t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)

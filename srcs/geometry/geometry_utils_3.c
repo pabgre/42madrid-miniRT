@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 17:30:49 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 21:32:24 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "../../includes/raytracer.h"
 #include "../../includes/polinom.h"
 #include <math.h>
+
+#define MIN(x, y) x < y ? x : y
+
 
 t_polinom2		cylinder_ray_equation(t_line ray, t_cylinder cylinder)
 {
@@ -33,22 +36,62 @@ t_polinom2		cylinder_ray_equation(t_line ray, t_cylinder cylinder)
 	return (pol);
 }
 
-double		ray_hit_cylinder(t_line ray, t_cylinder cylinder)
+#include <unistd.h>
+
+t_ray_hit_data	choose_hit_point(t_vector point_a, t_vector point_b, t_cylinder cylinder, t_line ray)
 {
-	t_polinom2 pol;
+	t_ray_hit_data	data;
+	bool			a_in_cylinder;
+	bool			b_in_cylinder;
+	t_line			cylinder_line;
+
+	cylinder_line = l(cylinder.dir, cylinder.center);
+	data = ray_hit_data_init();
+	a_in_cylinder = distance(closest_point_line(point_a, cylinder_line), cylinder.center) <= cylinder.height;
+	b_in_cylinder = distance(closest_point_line(point_b, cylinder_line), cylinder.center) <= cylinder.height;
+	if (a_in_cylinder && b_in_cylinder)
+	{
+		data.hit_point = closest_point(point_a, point_b, ray.point);
+		data.hit_object = CYLINDER;
+	}
+	else if (!a_in_cylinder && !b_in_cylinder)
+		data.hit_object = NONE;
+	else
+	{
+		data.hit_point = line_plane_intersection(ray,
+		pl(cylinder.dir, closest_point(add(cylinder.center, prod(cylinder.dir,cylinder.height)), add(cylinder.center, prod(cylinder.dir, -cylinder.height)), ray.point)));
+		if (distance(data.hit_point, ray.point) <= distance(point_a, ray.point) && distance(data.hit_point, ray.point) <= distance(point_b, ray.point))
+		{
+			data.hit_point = closest_point(point_a, point_b, ray.point);
+			data.hit_object = CYLINDER;
+		}
+		else
+			data.hit_object = PLANE;
+	}
+	return (data);
+}
+
+t_ray_hit_data	ray_hit_cylinder(t_line ray, t_cylinder cylinder)
+{
+	t_polinom2		pol;
+	t_ray_hit_data	data;
+	t_vector		point_a;
+	t_vector		point_b;
+	double			disc;
 
 	pol = cylinder_ray_equation(ray, cylinder);
-	return (discr(pol));
+	disc = discr(pol);
+	data = ray_hit_data_init();
+	if (disc >= 0)
+	{
+		point_a = add(ray.point, prod(ray.dir, -(-pol.b + sqrt(disc)) / (-2 * pol.a)));
+		point_b = add(ray.point, prod(ray.dir, -(-pol.b - sqrt(disc)) / (-2 * pol.a)));
+		data = choose_hit_point(point_a, point_b, cylinder, ray);
+	}
+	return (data);
 }
 
 t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder)
 {
-	t_ray_hit_data data;
-
-	data = ray_hit_data_init(cylinder.center);
-	if (ray_hit_cylinder(ray, cylinder) >= 0)
-	{
-		data.hit_object = CYLINDER;
-	}
-	return (data);
+	return (ray_hit_cylinder(ray, cylinder));
 }

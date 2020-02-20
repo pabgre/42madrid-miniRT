@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/18 18:03:27 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:36:16 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 	t_ray_hit_data	data;
 
 	disc = ray_hit_sphere(ray, sphere);
-	data = ray_hit_data_init(ray.point);
+	data = ray_hit_data_init();
 	if (disc > 0)
 	{
 		dist_a = -(dot_prod(ray.dir, subs(ray.point, sphere.center)));

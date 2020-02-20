@@ -9,6 +9,10 @@
 		"ostream": "c",
 		"__node_handle": "c",
 		"my_mlx.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"geometry.h": "c"
 	}
 }

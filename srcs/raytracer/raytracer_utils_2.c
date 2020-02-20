@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 17:42:08 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/20 19:13:46 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 	double y_plane;
 	int color;
 	int color2;
+	int color3;
 	t_color rgb;
 	rgb.r = 54;
 	rgb.g = 227;
@@ -29,6 +30,7 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 	t_ray_hit_data data;
 	color = mlx_get_color_value(mlx->ptr, 0x00ECFF);
 	color2 = mlx_get_color_value(mlx->ptr, 0xED5132);
+	color3 = mlx_get_color_value(mlx->ptr, 0xFFFFFF);
 
 	ft_init_mlx(mlx);
 	printf("window_h = %f \n window_w = %f\n", mlx->window_size.y, mlx->window_size.x);
@@ -55,6 +57,10 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			{
 				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color, mlx);
 				//write(1, "CC", 2);
+			}
+			else if (data.hit_object == PLANE)
+			{
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color3, mlx);
 			}
 			else
 			{
