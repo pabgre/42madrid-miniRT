@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 11:46:57 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:55:07 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main()
 	t_scene my_scene;
 	t_sphere my_sphere;
 	t_cylinder my_cylinder;
+	t_triangle my_triangle;
 
 	t_camera my_camera;
 	t_screen my_screen;
@@ -37,15 +38,21 @@ int main()
 	my_sphere.center = vec(0,0,0);
 	my_sphere.radius = 5;
 
-	double angle = 0.9;
+	double angle = 0.5;
 
 	my_cylinder.center = vec(0, 0, 0);
 	my_cylinder.dir = normalize(vec(1 * sin(angle) ,1 * cos(angle), 0 * tan(angle)));
-	my_cylinder.radius = 2;
+	my_cylinder.radius = 4;
 	my_cylinder.height = 10;
+
+	my_triangle.point_a = vec(0, 0, 0);
+	my_triangle.point_b = vec(0, -5, 0);
+	my_triangle.point_c = vec(0, 0, 5);
+
 
 	my_scene.my_sphere = my_sphere;
 	my_scene.my_cylinder = my_cylinder;
+	my_scene.my_triangle = my_triangle;
 
 	mlx.ptr = mlx_init();
 	mlx.window_title = ft_strdup("Test");

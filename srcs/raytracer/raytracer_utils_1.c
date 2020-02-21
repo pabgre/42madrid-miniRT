@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 12:24:11 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:51:35 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,15 @@ t_geometry		hit_ray_in_any_object(t_line ray, t_scene my_scene)
 	}
 	else
 		hit_data = hit_data_aux;
-	//hit_data_aux = line_plane_intersection
-
+	hit_data_aux = ray_hit_triangle(ray, my_scene.my_triangle);
+	if (hit_data.hit_object != NONE)
+	{
+		if (hit_data_aux.hit_object != NONE && which_is_near(
+			hit_data_aux.hit_point, hit_data.hit_point, ray.point))
+			hit_data = hit_data_aux;
+	}
+	else
+		hit_data = hit_data_aux;
 	return (hit_data.hit_object);
 }
 

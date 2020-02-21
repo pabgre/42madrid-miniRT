@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 18:35:26 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:54:43 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef	struct	s_scene
 {
 	t_cylinder	my_cylinder;
 	t_sphere	my_sphere;
-	t_plane		my_plane;
 	t_triangle	my_triangle;
 }				t_scene;
 

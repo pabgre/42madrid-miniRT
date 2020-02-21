@@ -6,23 +6,32 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 12:48:01 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:52:59 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/geometry.h"
 #include "../../includes/raytracer.h"
 
-t_ray_hit_data	ray_hit_plane(t_line ray, t_plane plane)
+bool		is_in_positive_plane_side(t_vector point, t_m_plane pl)
+{
+	return (dot_prod(subs(point, pl.point), pl.normal) > 0);
+}
+
+t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 {
 	t_ray_hit_data data;
 
 	data = ray_hit_data_init();
 	if (dot_prod(ray.dir, plane.normal) != 0)
 	{
-		data.hit_object = PLANE;
+
 		data.hit_point = line_plane_intersection(ray, plane);
-		data.color = plane.color;
+		if (is_in_positive_plane_side(data.hit_point, pl(ray.dir, ray.point)))
+		{
+			data.color = plane.color;
+			data.hit_object = PLANE;
+		}
 	}
 	return (data);
 }
@@ -51,18 +60,23 @@ bool			is_point_in_triangle(t_vector pt, t_triangle triangle)
 
 t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 {
-	t_plane			plane_container;
+	t_m_plane			plane_container;
 	t_ray_hit_data	data;
 
 	plane_container = pl(cross_prod(subs(triangle.point_a, triangle.point_b),
 				subs(triangle.point_c, triangle.point_b)), triangle.point_b);
 
-	data = ray_hit_plane(ray, plane_container);
+	data = ray_hit_math_plane(ray, plane_container);
 	if (data.hit_object != NONE &&
 	is_point_in_triangle(data.hit_point, triangle))
 	{
 		data.hit_object = TRIANGLE;
 		data.color = triangle.color;
 	}
+	else
+	{
+		data.hit_object = NONE;
+	}
+
 	return (data);
 }

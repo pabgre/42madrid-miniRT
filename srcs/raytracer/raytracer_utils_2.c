@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/20 19:13:46 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:31:06 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,25 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			data = trace_ray(current_point, current_direction, my_scene);
 			if (data.hit_object == SPHERE)
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, ft_rgb_tint(rgb, 0.1), mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0x00ECFF), mlx);
 				//write(1, "SS", 2);
 			}
 			else if (data.hit_object == CYLINDER)
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color, mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0xFF0000), mlx);
 				//write(1, "CC", 2);
 			}
 			else if (data.hit_object == PLANE)
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color3, mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0x00FF00), mlx);
+			}
+			else if (data.hit_object == TRIANGLE)
+			{
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0x0000FF), mlx);
 			}
 			else
 			{
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, color2, mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0xFFFFFF), mlx);
 				//write(1, "__", 2);
 			}
 			y += 1;

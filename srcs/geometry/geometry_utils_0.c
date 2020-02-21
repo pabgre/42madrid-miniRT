@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:35:46 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 11:36:24 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:50:21 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double		dist_point_line(t_vector point, t_line my_line)
 }
 
 
-t_vector	line_plane_intersection(t_line line, t_plane pl)
+t_vector	line_plane_intersection(t_line line, t_m_plane pl)
 {
 	double dist;
 
