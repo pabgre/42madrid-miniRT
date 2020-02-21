@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 11:32:30 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/21 11:43:23 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 		data.hit_object = NONE;
 	else
 	{
-		middle_point = line_plane_intersection(ray, pl(cylinder.dir, add(cylinder.center, prod(cylinder.dir,cylinder.height))));
-		if(distance(middle_point, add(cylinder.center, prod(cylinder.dir,cylinder.height))) > cylinder.radius)
-			middle_point = line_plane_intersection(ray, pl(cylinder.dir, add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
+		middle_point = line_plane_intersection(ray, pl(cylinder.dir,
+			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
+		if (distance(middle_point, add(cylinder.center,
+			prod(cylinder.dir, cylinder.height))) > cylinder.radius)
+			middle_point = line_plane_intersection(ray, pl(cylinder.dir,
+			add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
 		if (a_in_cylinder && which_is_near(pt_a, middle_point, ray.point))
 			data.hit_point = pt_a;
 		else if (b_in_cylinder && which_is_near(pt_b, middle_point, ray.point))
