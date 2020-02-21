@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/21 11:45:06 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/02/21 12:46:44 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_
 
 SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c
 
-SRC_GEO = srcs/geometry/geometry_utils_0.c srcs/geometry/geometry_utils_1.c srcs/geometry/geometry_utils_2.c srcs/geometry/geometry_utils_3.c
+SRC_GEO = srcs/geometry/geometry_utils_0.c srcs/geometry/geometry_utils_1.c srcs/geometry/geometry_utils_2.c srcs/geometry/geometry_utils_3.c srcs/geometry/geometry_utils_4.c
 
 SRC_MATRIX = srcs/matrix/matrix_utils_1.c srcs/matrix/matrix_utils_2.c
 
