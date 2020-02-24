@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/20 18:36:16 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:56:13 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 			data.hit_point = add(ray.point, prod(ray.dir, dist_b));
 			data.hit_object = SPHERE;
 		}
+		data.normal = normalize(subs(data.hit_point, sphere.center));
+		data.color = sphere.color;
 	}
 	return (data);
 }

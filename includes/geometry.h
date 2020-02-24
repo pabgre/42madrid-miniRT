@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/21 13:54:36 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:53:17 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_ray_hit_data
 {
 	t_vector	hit_point;
 	t_geometry	hit_object;
+	t_vector	normal;
 	t_color		color;
 }				t_ray_hit_data;
 
@@ -74,4 +75,5 @@ t_vector line_plane_intersection(t_line line, t_m_plane plane);
 t_ray_hit_data sphere_hit_point(t_line ray, t_sphere sphere);
 t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder);
 t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle);
+bool		is_in_positive_plane_side(t_vector point, t_m_plane pl);
 #endif

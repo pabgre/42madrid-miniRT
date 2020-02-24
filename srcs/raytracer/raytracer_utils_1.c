@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 13:51:35 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:19:07 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ t_ray_hit_data	ray_hit_data_init(void)
 	data.color.r = 255;
 	data.color.g = 255;
 	data.color.b = 255;
+	data.normal = vec(0,0,0);
 	return (data);
 }
 
-t_geometry		hit_ray_in_any_object(t_line ray, t_scene my_scene)
+t_ray_hit_data		hit_ray_in_any_object(t_line ray, t_scene my_scene)
 {
 	t_ray_hit_data	hit_data;
 	t_ray_hit_data	hit_data_aux;
@@ -48,18 +49,19 @@ t_geometry		hit_ray_in_any_object(t_line ray, t_scene my_scene)
 	}
 	else
 		hit_data = hit_data_aux;
-	return (hit_data.hit_object);
+	return (hit_data);
 }
 
 t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 {
 	t_ray_hit_data	hit_data;
 	t_line			ray;
+	double			fac;
 
 	ray.point = point;
 	ray.dir = direction;
+	fac = 1;
 
-	hit_data.hit_object = hit_ray_in_any_object(ray, my_scene);
-	hit_data.hit_point = point;
+	hit_data = hit_ray_in_any_object(ray, my_scene);
 	return (hit_data);
 }

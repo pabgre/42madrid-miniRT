@@ -13,6 +13,7 @@
 		"array": "c",
 		"string": "c",
 		"string_view": "c",
-		"geometry.h": "c"
+		"geometry.h": "c",
+		"color.h": "c"
 	}
 }

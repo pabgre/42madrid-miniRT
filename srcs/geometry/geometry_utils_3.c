@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 11:43:23 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:22:28 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ t_ray_hit_data	ray_hit_cylinder(t_line ray, t_cylinder cylinder)
 		pt_b = add(ray.point,
 					prod(ray.dir, -(-pol.b - sqrt(disc)) / (-2 * pol.a)));
 		data = choose_hit_point_1(pt_a, pt_b, cylinder, ray);
+		data.color = cylinder.color;
 	}
 	return (data);
 }
 
 t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder)
 {
+
 	return (ray_hit_cylinder(ray, cylinder));
 }

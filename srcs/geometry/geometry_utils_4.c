@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 13:52:59 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:02:02 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 	{
 		data.hit_object = TRIANGLE;
 		data.color = triangle.color;
+		data.normal = plane_container.normal;
 	}
 	else
 	{
