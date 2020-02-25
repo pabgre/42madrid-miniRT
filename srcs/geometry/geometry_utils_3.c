@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/25 15:57:19 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:11:58 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ t_ray_hit_data	ray_hit_cylinder(t_line ray, t_cylinder cylinder)
 
 t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder)
 {
+	t_ray_hit_data data;
 
-	return (ray_hit_cylinder(ray, cylinder));
+	data = ray_hit_cylinder(ray, cylinder);
+	if (!is_in_positive_plane_side(data.hit_point, pl(ray.dir, ray.point)))
+		data.hit_object = NONE;
+	return (data);
 }

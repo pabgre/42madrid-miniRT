@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:06:28 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/13 17:42:23 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:13:33 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct	s_vector
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }				t_vector;
 
 t_vector vec(double x, double y, double z);
