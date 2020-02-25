@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 13:55:07 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:06:09 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ int main()
 	t_cylinder my_cylinder;
 	t_triangle my_triangle;
 
-	t_camera my_camera;
+	t_camera 	my_camera;
+	t_light		my_light;
 	t_screen my_screen;
 
 	t_mlx mlx;
 
 	my_camera.pos = vec(20, 0, 0);
 	my_camera.dist = 5;
+
+	my_light.pos = vec(20,10,0);
 
 	my_screen.h = 9;
 	my_screen.w = 16;
@@ -36,28 +39,37 @@ int main()
 	my_camera.display = my_screen;
 
 	my_sphere.center = vec(0,0,0);
+	my_sphere.color = init_rgb(255,0,0);
 	my_sphere.radius = 5;
 
-	double angle = 0.5;
 
-	my_cylinder.center = vec(0, 0, 0);
-	my_cylinder.dir = normalize(vec(1 * sin(angle) ,1 * cos(angle), 0 * tan(angle)));
-	my_cylinder.radius = 4;
+	my_cylinder.center = vec(0, 0, -15);
+	my_cylinder.dir = normalize(vec(1 , 1, 0));
+	my_cylinder.radius = 2;
 	my_cylinder.height = 10;
+	my_cylinder.color = init_rgb(0,255,0);
 
-	my_triangle.point_a = vec(0, 0, 0);
-	my_triangle.point_b = vec(0, -5, 0);
-	my_triangle.point_c = vec(0, 0, 5);
-
+	my_triangle.point_a = vec(0, 0, 10);
+	my_triangle.point_b = vec(0, -5, 10);
+	my_triangle.point_c = vec(0, 0, 15);
+	my_triangle.color = init_rgb(0,0,255);
 
 	my_scene.my_sphere = my_sphere;
 	my_scene.my_cylinder = my_cylinder;
 	my_scene.my_triangle = my_triangle;
+	my_scene.my_light = my_light;
+
+
+	t_vector u = vec(-1,0,0);
+	t_vector v = vec(1,0,0);
+
+
+	printf("%f\n", angle(u,v));
 
 	mlx.ptr = mlx_init();
 	mlx.window_title = ft_strdup("Test");
-	mlx.window_size.x = 640;
-	mlx.window_size.y = 360;
+	mlx.window_size.x = 1280;
+	mlx.window_size.y = 720;
 	mlx.win = mlx_new_window(mlx.ptr, my_screen.w, my_screen.h, mlx.window_title);
 	mlx.img = mlx_new_image(mlx.ptr, my_screen.w, my_screen.h);
 	mlx.img_ptr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size_line, &mlx.endian);
