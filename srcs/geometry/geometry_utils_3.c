@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/24 18:22:28 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:57:19 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 	b_in_cylinder = is_pt_in_cylinder(pt_b, cylinder);
 	data.hit_object = CYLINDER;
 	if (a_in_cylinder && b_in_cylinder)
+	{
 		data.hit_point = closest_point(pt_a, pt_b, ray.point);
+		data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+	}
 	else if (!a_in_cylinder && !b_in_cylinder)
 		data.hit_object = NONE;
 	else
@@ -65,11 +68,21 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 			middle_point = line_plane_intersection(ray, pl(cylinder.dir,
 			add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
 		if (a_in_cylinder && which_is_near(pt_a, middle_point, ray.point))
+		{
 			data.hit_point = pt_a;
+			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+		
+		}
 		else if (b_in_cylinder && which_is_near(pt_b, middle_point, ray.point))
+		{
 			data.hit_point = pt_b;
+			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+		}
 		else
+		{
 			data.hit_point = middle_point;
+			data.normal = cylinder.dir;
+		}
 	}
 	return (data);
 }

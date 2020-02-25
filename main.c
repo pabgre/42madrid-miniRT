@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/24 18:22:50 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:06:09 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main()
 	my_camera.pos = vec(20, 0, 0);
 	my_camera.dist = 5;
 
-	my_light.pos = vec(0,0,15);
+	my_light.pos = vec(20,10,0);
 
 	my_screen.h = 9;
 	my_screen.w = 16;
@@ -49,9 +49,9 @@ int main()
 	my_cylinder.height = 10;
 	my_cylinder.color = init_rgb(0,255,0);
 
-	my_triangle.point_a = vec(-2, 0, 10);
+	my_triangle.point_a = vec(0, 0, 10);
 	my_triangle.point_b = vec(0, -5, 10);
-	my_triangle.point_c = vec(-2, 0, 15);
+	my_triangle.point_c = vec(0, 0, 15);
 	my_triangle.color = init_rgb(0,0,255);
 
 	my_scene.my_sphere = my_sphere;
