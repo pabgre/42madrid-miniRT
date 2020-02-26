@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/25 17:12:10 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/26 16:55:22 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main()
 	my_cylinder.height = 10;
 	my_cylinder.color = init_rgb(0,255,0);
 
-	my_triangle.point_a = vec(0, 0, 10);
+	my_triangle.point_a = vec(0, 0, 0);
 	my_triangle.point_b = vec(0, -5, 10);
 	my_triangle.point_c = vec(0, 0, 15);
 	my_triangle.color = init_rgb(0,0,255);
