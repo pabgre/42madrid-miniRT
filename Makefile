@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
+#    By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/21 12:46:44 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/02/25 11:45:18 by npinto-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libs/libft/libft.a
 
 SRC_OLD = mainnotsoold.c 	$(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
 
-SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) $(SRC_POL)
+SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) $(SRC_POL) $(SRC_CONF)
 
 SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c
 
@@ -31,6 +31,10 @@ SRC_MLX = srcs/mlx/mlx_utils1.c
 SRC_POL = srcs/polinom/polinom_utils_1.c
 
 SRC_COLOR = srcs/color/color_utils.c
+
+SRC_CONF = srcs/configuration/file_reader_utils.c srcs/configuration/atod.c\
+			srcs/configuration/gnl/get_next_line.c
+
 
 CFLAGS = -Wall -Werror -Wextra
 
