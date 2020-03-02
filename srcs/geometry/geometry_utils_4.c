@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/02 17:22:32 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:17:25 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 bool			is_pt_between_origin_and_line(t_vector pt,
 											t_vector origin, t_line line)
 {
-	bool result;
-	t_vector origin_b;
-	t_m_plane plane;
+	bool		result;
+	t_vector	origin_b;
+	t_m_plane	plane;
 
 	origin_b = closest_point_line(origin, line);
 	plane = pl(normalize(subs(origin_b, origin)), origin_b);
