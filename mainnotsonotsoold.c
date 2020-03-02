@@ -3,50 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/02 13:57:05 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:12:06 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int main(int argc,char **argv)
+int main()
 {
-	t_screen my_screen;
-	t_mlx mlx;
-	t_conf	conf;
-	t_light my_light;
+	t_scene my_scene;
+	t_sphere my_sphere;
+	t_cylinder my_cylinder;
+	t_triangle my_triangle;
 
-	if (argc > 1)
-	{ 
-		conf = scene_conf(argv[1]);
-	}
-	else
-	{
-		conf = scene_conf("default.rt");
-	}
-	my_light.pos = vec(20,0,-10);
-	my_screen = conf.my_camera.display;
-	conf.my_scene.my_light = my_light;
-	conf_printer(conf);
+	t_camera my_camera;
+	t_screen my_screen;
+
+	t_mlx mlx;
+
+	my_camera.pos = vec(20, 0, 0);
+	my_camera.dist = 5;
+
+	my_screen.h = 9;
+	my_screen.w = 16;
+	my_screen.x_axis = normalize(vec(0, -1, 0));
+	my_screen.y_axis = normalize(vec(0, 0, 1));
+	my_screen.pos = add(prod(normalize(cross_prod(my_screen.x_axis, my_screen.y_axis)), my_camera.dist), my_camera.pos);
+
+	my_camera.display = my_screen;
+
+	my_sphere.center = vec(0,0,0);
+	my_sphere.radius = 5;
+
+	double angle = 0.7;
+
+	my_cylinder.center = vec(0, 0, 0);
+	my_cylinder.dir = normalize(vec(1 * sin(angle) ,1 * cos(angle), 0 * tan(angle)));
+	my_cylinder.radius = 3;
+	my_cylinder.height = 10;
+
+	my_triangle.point_a = vec(5, 0, 0);
+	my_triangle.point_b = vec(0, 5, 0);
+	my_triangle.point_c = vec(0, 0, 5);
+
+
+	my_scene.my_sphere = my_sphere;
+	my_scene.my_cylinder = my_cylinder;
+	my_scene.my_triangle = my_triangle;
+
 	mlx.ptr = mlx_init();
-	printf("ptr:%p", mlx.ptr);
 	mlx.window_title = ft_strdup("Test");
-	mlx.window_size.x = conf.mlx.window_size.x;
-	mlx.window_size.y = conf.mlx.window_size.y;
-	
+	mlx.window_size.x = 640;
+	mlx.window_size.y = 360;
 	mlx.win = mlx_new_window(mlx.ptr, my_screen.w, my_screen.h, mlx.window_title);
 	mlx.img = mlx_new_image(mlx.ptr, my_screen.w, my_screen.h);
 	mlx.img_ptr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size_line, &mlx.endian);
-	
 
 	//perform_raytracer(my_camera, my_scene, &mlx);
-	perform_raytracer(conf.my_camera, conf.my_scene, &mlx);
-	
-	mlx_hook(mlx.win, 2, 0, pressed_key, &mlx);
-	mlx_hook(mlx.win, 17, 0, close_mlx, &mlx);
+	perform_raytracer(my_camera, my_scene, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.ptr);
 }

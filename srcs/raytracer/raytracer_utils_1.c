@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/25 15:51:27 by jballest         ###   ########.fr       */
+/*   Updated: 2020/02/26 16:56:30 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 	hit_data = hit_ray_in_any_object(ray, my_scene);
 	if (hit_data.hit_object != NONE)
 	{
-		ray.point = hit_data.hit_point;
 		ray.dir = normalize(subs(my_scene.my_light.pos, hit_data.hit_point));
-		fac = 1 - dot_prod(hit_data.normal, ray.dir);
+		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.01));
+		if (hit_ray_in_any_object(ray, my_scene).hit_object)
+			fac = 1;
+		else
+			fac = 1 - dot_prod(hit_data.normal, ray.dir);
 		hit_data.color = ft_rgb_shade(hit_data.color, fac);
 	}
 
