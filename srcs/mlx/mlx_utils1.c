@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/26 15:59:09 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/03/02 13:57:10 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)
 
 void	ft_init_mlx(t_mlx *mlx)
 {
-	mlx->ptr = mlx_init();
+	//mlx->ptr = mlx_init();
 	mlx->win = mlx_new_window(mlx->ptr, mlx->window_size.x, mlx->window_size.y,
 								mlx->window_title);
 	mlx->img = mlx_new_image(mlx->ptr, mlx->window_size.x, mlx->window_size.y);
