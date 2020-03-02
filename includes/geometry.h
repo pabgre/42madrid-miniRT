@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:00:47 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/24 17:53:17 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/02 17:42:03 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct	s_triangle
 	t_vector	point_c;
 	t_color		color;
 }				t_triangle;
+
+typedef struct	s_3d_obj
+{
+	void		*obj;
+	t_geometry	type;
+}				t_3d_obj;
 
 typedef struct	s_ray_hit_data
 {

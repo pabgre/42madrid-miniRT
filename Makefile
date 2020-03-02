@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/02/25 11:45:18 by npinto-g         ###   ########.fr        #
+#    Updated: 2020/03/02 17:28:39 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_COLOR = srcs/color/color_utils.c
 SRC_CONF = srcs/configuration/file_reader_utils.c srcs/configuration/atod.c\
 			srcs/configuration/gnl/get_next_line.c
 
+SRC_LIST = srcs/list/list_utils_1.c
 
 CFLAGS = -Wall -Werror -Wextra
 

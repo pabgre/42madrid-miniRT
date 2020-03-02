@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/24 14:11:48 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/02 17:49:36 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "geometry.h"
 # include "camera.h"
 # include "my_mlx.h"
+# include "libft.h"
 
 typedef struct	s_light
 {
@@ -27,6 +28,7 @@ typedef	struct	s_scene
 	t_cylinder	my_cylinder;
 	t_sphere	my_sphere;
 	t_triangle	my_triangle;
+	t_list		*obj_lst;
 }				t_scene;
 
 t_ray_hit_data	ray_hit_data_init();
