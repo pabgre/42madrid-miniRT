@@ -154,6 +154,13 @@ void	resolution(char *buf, t_conf *conf)
 	
 }
 
+void	light(char *buf, t_conf *conf)
+{
+	conf->my_scene.my_light.pos = v3_param(&buf);
+	conf->my_scene.my_light.radius = v1_param(&buf);
+	conf->my_scene.my_light.color = v3_param_color(&buf);
+}
+
 void		sphere(char *buf, t_conf *conf)
 {
 
@@ -191,6 +198,8 @@ void		scene_parser(char *buf, t_conf *conf)
 	}
 	/*if (*buf == 'A')
 		ambient(buf, conf)*/
+	else if (*buf == 'l')
+		light(buf, conf);
 	else if (*buf == 's' && (++buf && *buf == 'p'))
 		sphere(buf, conf);
 	else if (*buf == 'c')
@@ -202,8 +211,7 @@ void		scene_parser(char *buf, t_conf *conf)
 			camera(buf, conf);
 	}
 	else if (*buf == 't')
-		triangle(buf, conf);
-	
+		triangle(buf, conf);	
 }
 
 t_conf		scene_conf(char *scene)
