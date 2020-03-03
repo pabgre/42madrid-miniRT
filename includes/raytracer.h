@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/24 14:11:48 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:27:09 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_light
 {
 	t_vector	pos;
 	double		radius;
+	t_color		color;
 }				t_light;
 typedef	struct	s_scene
 {

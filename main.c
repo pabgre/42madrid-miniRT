@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/02 13:57:05 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/02 19:04:36 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int main(int argc,char **argv)
 	t_screen my_screen;
 	t_mlx mlx;
 	t_conf	conf;
-	t_light my_light;
 
 	if (argc > 1)
 	{ 
@@ -27,9 +26,6 @@ int main(int argc,char **argv)
 	{
 		conf = scene_conf("default.rt");
 	}
-	my_light.pos = vec(20,0,-10);
-	my_screen = conf.my_camera.display;
-	conf.my_scene.my_light = my_light;
 	conf_printer(conf);
 	mlx.ptr = mlx_init();
 	printf("ptr:%p", mlx.ptr);
