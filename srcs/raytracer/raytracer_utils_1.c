@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/03 14:47:42 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/04 19:19:47 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_ray_hit_data	hit_ray_in_any_object_lst(t_line ray, t_scene my_scene)
 	data = ray_hit_data_init();
 	aux = my_scene.obj_lst;
 	while (aux != NULL)
-	{
+	{	
 		data_aux = ray_hit_this_obj(ray, (t_3d_obj*)aux->content);
 		if (data_aux.hit_object != NONE)
 		{
@@ -112,7 +112,7 @@ t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 	if (hit_data.hit_object != NONE)
 	{
 		ray.dir = normalize(subs(my_scene.my_light.pos, hit_data.hit_point));
-		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.01));
+		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.000001));
 		if (hit_ray_in_any_object_lst(ray, my_scene).hit_object)
 			fac = 1;
 		else

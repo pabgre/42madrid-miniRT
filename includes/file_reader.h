@@ -17,7 +17,7 @@ typedef	struct	s_conf
 	t_camera	my_camera;
 	t_mlx		mlx;
 	t_flag		flag;		
-	}				t_conf;
+}				t_conf;
 
 t_conf		scene_conf(char *scene);
 void		scene_parser(char *buf, t_conf *conf);

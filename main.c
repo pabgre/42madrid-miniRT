@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/04 15:28:48 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/04 19:16:29 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	w_header(size_t fd, size_t width, size_t height, size_t bpp)
 	header.dataoffset = 54;
 	write(fd, header.signature, 2);
 	w_to_file(fd, 3, header.filesize, header.reserved, header.dataoffset);
+	free(header.signature);
 }
 
 void	w_infoheader(size_t fd, uint32_t width, uint32_t height, uint16_t bpp)
@@ -131,6 +132,8 @@ int main(int argc,char **argv)
 	t_conf	conf;
 	t_light my_light;
 
+
+	conf.my_scene.obj_lst = ft_lstnew(NULL);
 	if (argc > 1)
 	{ 
 		conf = scene_conf(argv[1]);
@@ -141,13 +144,13 @@ int main(int argc,char **argv)
 	{
 		conf = scene_conf("default.rt");
 	}	
-	my_light.pos = vec(20,0,-10);
+	my_light.pos = vec(15,0,0);
 	my_screen = conf.my_camera.display;
 	conf.my_scene.my_light = my_light;
 	conf_printer(conf);
 	mlx.ptr = mlx_init();
 	printf("ptr:%p", mlx.ptr);
-	mlx.window_title = ft_strdup("Test");
+	mlx.window_title = ft_strdup("My_test my_of my_my my_raytracer");
 	mlx.window_size.x = conf.mlx.window_size.x;
 	mlx.window_size.y = conf.mlx.window_size.y;
 
@@ -156,12 +159,12 @@ int main(int argc,char **argv)
 	mlx.img_ptr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size_line, &mlx.endian);
 
 
-	t_3d_obj *obj_data;
-	t_sphere *my_sphere;
-	t_cylinder *my_cylinder;
+	//t_3d_obj *obj_data;
+	//t_sphere *my_sphere;
+	//t_cylinder *my_cylinder;
 
 
-	my_sphere = malloc(sizeof(t_sphere));
+	/*my_sphere = malloc(sizeof(t_sphere));
 	my_sphere->center = vec(0,0,0);
 	my_sphere->radius = 10;
 	my_sphere->color = init_rgb(255, 255, 0);
@@ -179,9 +182,9 @@ int main(int argc,char **argv)
 	obj_data = malloc(sizeof(t_3d_obj));
 	obj_data->type = SPHERE;
 	obj_data->obj = my_sphere;
-	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));
+	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));*/
 
-	my_cylinder = malloc(sizeof(t_cylinder));
+	/*my_cylinder = malloc(sizeof(t_cylinder));
 	my_cylinder->center = vec(0,0,0);
 	my_cylinder->color = init_rgb(0,0,255);
 	my_cylinder->dir = vec(0,1,0);
@@ -191,7 +194,7 @@ int main(int argc,char **argv)
 	obj_data = malloc(sizeof(t_3d_obj));
 	obj_data->type = CYLINDER;
 	obj_data->obj = my_cylinder;
-	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));
+	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));*/
 	//perform_raytracer(my_camera, my_scene, &mlx);
 	perform_raytracer(conf.my_camera, conf.my_scene, &mlx);
 	if (conf.flag.save)

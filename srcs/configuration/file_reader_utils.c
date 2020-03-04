@@ -163,22 +163,38 @@ void	light(char *buf, t_conf *conf)
 
 void		sphere(char *buf, t_conf *conf)
 {
+	t_sphere *my_sphere;
+	t_3d_obj *obj;
 
-	conf->my_scene.my_sphere.center = v3_param(&buf);
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = SPHERE;
+	my_sphere = malloc(sizeof(t_sphere));
+	my_sphere->center = v3_param(&buf);
 	printf("1 buf = %s \n", buf);
-	conf->my_scene.my_sphere.radius = v1_param(&buf) / 2;
+	my_sphere->radius = v1_param(&buf) / 2;
 	printf("2 buf = %s \n", buf);
-	conf->my_scene.my_sphere.color = v3_param_color(&buf);
+	my_sphere->color = v3_param_color(&buf);
 	printf("3 buf = %s \n", buf);
+	obj->obj = my_sphere;
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
 void		cylinder(char *buf, t_conf *conf)
 {
-	conf->my_scene.my_cylinder.center = v3_param(&buf);
-	conf->my_scene.my_cylinder.dir = normalize(v3_param(&buf));
-	conf->my_scene.my_cylinder.radius = v1_param(&buf) / 2;
-	conf->my_scene.my_cylinder.height = v1_param(&buf) / 2;
-	conf->my_scene.my_cylinder.color = v3_param_color(&buf);	
+	t_cylinder *my_cylinder;
+	t_3d_obj *obj;
+
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = CYLINDER;
+	my_cylinder = malloc(sizeof(t_cylinder));
+
+	my_cylinder->center = v3_param(&buf);
+	my_cylinder->dir = normalize(v3_param(&buf));
+	my_cylinder->radius = v1_param(&buf) / 2;
+	my_cylinder->height = v1_param(&buf) / 2;
+	my_cylinder->color = v3_param_color(&buf);
+	obj->obj = my_cylinder;
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
 void		triangle(char *buf, t_conf *conf)

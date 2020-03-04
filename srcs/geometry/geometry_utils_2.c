@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/24 17:56:13 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/04 19:25:10 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ double			ray_hit_sphere(t_line ray, t_sphere sphere)
 	disc = discr(sphere_pol) / 4;
 	return (disc);
 }
+#include <stdio.h>
 
 t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 {
