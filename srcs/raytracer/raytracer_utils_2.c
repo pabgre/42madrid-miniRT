@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/02 13:57:58 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:55:36 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,11 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			current_direction = normalize(subs(current_point, my_camera.pos));
 			data = trace_ray(current_point, current_direction, my_scene);
 			if (data.hit_object != NONE)
-			{
 				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, ft_rgb_to_int(data.color), mlx);
-				//write(1, "SS", 2);
-			}
 			else
-			{
 				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0xFFFFFF), mlx);
-				//write(1, "__", 2);
-			}
 			y += 1;
 		}
-		//write(1, "\n", 1);
 		x += 1;
 	}
 }

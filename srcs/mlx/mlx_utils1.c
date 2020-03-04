@@ -6,35 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/03/02 13:57:10 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:56:06 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
-
-/*static void	reverse_colors(char *img, int bpp, int size_line, int x, int y,
-															unsigned int color)
-{
-	int i;
-	int cntx;
-	int cnty;
-
-	cntx = 0;
-	while (cntx < x)
-	{
-		cnty = 0;
-		while (cnty < y)
-		{
-			i = ((int)cntx * (int)bpp / 8) + ((int)cnty * (int)size_line);
-			img[i] = (unsigned int)color;
-			img[++i] = ((unsigned int)color >> 8);
-			img[++i] = ((unsigned int)color >> 16);
-			img[++i] = 0;
-			cnty++;
-		}
-		cntx++;
-	}(my_camera.display.w/2) * mlx->bpp + mlx->size_line * (my_camera.display.h/2 + j)
-}*/
 
 void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)
 {

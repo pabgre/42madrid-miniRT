@@ -6,123 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/04 15:28:48 by jballest         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:54:50 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-typedef	struct	s_header
-{
-	char		*signature;
-	uint32_t	filesize;
-	uint32_t	reserved;
-	uint32_t	dataoffset;
-}				t_header;
-
-typedef	struct s_info_header
-{
-	size_t		size_info_header;
-	uint16_t	planes;
-	uint32_t	compression;
-	uint32_t	comp_size;
-	uint32_t	xppm;
-	uint32_t	yppm;
-	uint32_t	palette;
-	uint32_t	imp_color;
-}				t_info_header;
-
-
-int		w_to_file(size_t fd, int num, ...)
-{
-	va_list		args;
-	int			value;
-
-	va_start(args, num);
-	value = va_arg(args, uint32_t);
-	while(num--)
-	{
-		//printf("%d\n", value);
-		write(fd, &value, sizeof(uint32_t));
-		value = va_arg(args, uint32_t);
-	}
-	va_end(args);
-	return (value);
-}
-
-int		intpow(int base, int exponent)
-{
-	int		power;
-
-	power = base;
-	exponent = (exponent > 24) ? 24 : exponent;
-	while (exponent-- > 1)
-	{
-		power = power * base;
-	}
-	return (power);
-}
-
-void	w_header(size_t fd, size_t width, size_t height, size_t bpp)
-{
-	t_header	header;
-
-	header.signature = ft_strdup("BM");//ft_strdup
-	header.filesize = width * height * bpp / 8 + 54;
-	header.reserved = 0;
-	header.dataoffset = 54;
-	write(fd, header.signature, 2);
-	w_to_file(fd, 3, header.filesize, header.reserved, header.dataoffset);
-}
-
-void	w_infoheader(size_t fd, uint32_t width, uint32_t height, uint16_t bpp)
-{
-	t_info_header	info;
-
-	info.size_info_header = 40;
-	info.planes = 1;
-	info.compression = 0;
-	info.comp_size = 0;
-	info.xppm = 0;
-	info.yppm = 0;
-	info.palette = (uint32_t)intpow(2, bpp);
-	info.imp_color = 0;
-	w_to_file(fd, 3, info.size_info_header, width, height);
-	write(fd, &info.planes, 2);
-	write(fd, &bpp, 2);
-	w_to_file(fd, 4, info.compression, info.comp_size, info.xppm, info.yppm);
-	w_to_file(fd, 2, info.palette, info.imp_color);
-}
-
-void	get_bmp_image(t_mlx	*mlx)
-{
-	size_t		fd;
-	size_t		width = (size_t)mlx->window_size.x;
-	size_t		height = (size_t)mlx->window_size.y;
-	size_t		bpp = (size_t)mlx->bpp;
-	char		*pixel = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
-	
-	fd = open("save.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0640);
-	w_header(fd, width, height, bpp);
-	w_infoheader(fd, width, height, bpp);
-	int		h = 0;
-	int		w;
-	pixel += (width * height * bpp / 8) - width * bpp / 8;
-	while (h < (int)height)
-	{
-		w = 0;
-		while (w < (int)width)
-		{
-			write(fd, pixel, 4);
-			pixel += 4;
-			w++;
-		}
-		pixel -= width * bpp / 8 * 2;
-		h++;
-	}
-	//write (fd, pixel, width * height * bpp / 8);
-	close(fd);
-}
 
 int main(int argc,char **argv)
 {
@@ -132,15 +20,13 @@ int main(int argc,char **argv)
 	t_light my_light;
 
 	if (argc > 1)
-	{ 
+	{
 		conf = scene_conf(argv[1]);
-		if ( argc > 2 && strcmp("--save", argv[2]) == 0)
-			conf.flag.save = 1;
 	}
 	else
 	{
 		conf = scene_conf("default.rt");
-	}	
+	}
 	my_light.pos = vec(20,0,-10);
 	my_screen = conf.my_camera.display;
 	conf.my_scene.my_light = my_light;
@@ -194,8 +80,7 @@ int main(int argc,char **argv)
 	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));
 	//perform_raytracer(my_camera, my_scene, &mlx);
 	perform_raytracer(conf.my_camera, conf.my_scene, &mlx);
-	if (conf.flag.save)
-		get_bmp_image(&mlx);
+
 	mlx_hook(mlx.win, 2, 0, pressed_key, &mlx);
 	mlx_hook(mlx.win, 17, 0, close_mlx, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);

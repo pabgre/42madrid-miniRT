@@ -6,6 +6,7 @@
 
 typedef	struct s_flag
 {
+	int		save;
 	int		r;
 }				t_flag;
 
