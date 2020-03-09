@@ -173,7 +173,7 @@ double			*get_params_array(char **s_param)
 void		camera(char *buf, t_conf *conf)
 {
 	t_screen my_screen;
-	
+
 	conf->my_camera.pos = v3_param(&buf);
 	conf->my_camera.dist = 5;
 	my_screen.h = 9;
@@ -242,13 +242,9 @@ void		cylinder(char *buf, t_conf *conf)
 {
 	t_cylinder 	*my_cylinder;
 	t_3d_obj 	*obj;
-	char		*cylinder;
-	char		**s_param;
 	double		*param;
 
-	cylinder = rm_spaces(buf);
-	s_param = ft_split(cylinder, ',');
-	param = get_params_array(s_param);
+	param = get_params_array(ft_split(rm_spaces(buf), ','));
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
 	my_cylinder = malloc(sizeof(t_cylinder));
