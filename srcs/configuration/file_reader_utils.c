@@ -69,14 +69,6 @@ int		nbrlen(long nb)
 
 //####CORE_FTS####
 
-void	conf_printer(t_conf conf)
-{
-	printf("R : x = %f y = %f \n", conf.mlx.window_size.x, conf.mlx.window_size.y);
-	printf("c : pos x = %f pos y = %f pos z %f\n", conf.my_camera.pos.x, conf.my_camera.pos.y, conf.my_camera.pos.z);
-	printf("sp : pos = %f,%f,%f diameter = %f RGB = %d,%d,%d\n", conf.my_scene.my_sphere.center.x, conf.my_scene.my_sphere.center.y, conf.my_scene.my_sphere.center.z, conf.my_scene.my_sphere.radius, conf.my_scene.my_sphere.color.r, conf.my_scene.my_sphere.color.g,
-	conf.my_scene.my_sphere.color.b);
-}
-
 double		v1_param(char **buf)
 {
 	double	param;
@@ -93,36 +85,89 @@ t_vector	v3_param(char **buf)
 	double		z;
 	t_vector	param;
 
-	printf("\t0 sub-buf = %s \n", *buf);
 	x = get_double(buf);
 	*buf += declen(x);
-	printf("\t1 sub-buf = %s \n", *buf);
 	y = get_double(buf);
 	*buf += declen(y);
-	printf("\t2 sub-buf = %s \n", *buf);
 	z = get_double(buf);
 	*buf += declen(z);
 	param = vec(x, y, z);
 	return (param);
 }
 
-t_color		v3_param_color(char **buf)
+t_color		color(double r, double g, double b)
 {
-	int			r;
-	int			g;
-	int			b;
 	t_color		color;
 
-	r = get_int(buf);
-	*buf += nbrlen(r);
-	g = get_int(buf);
-	*buf +=  nbrlen(g);
-	b = get_int(buf);
-	*buf += nbrlen(b);
 	color.r = r;
 	color.g = g;
 	color.b = b;
 	return (color);
+}
+
+char		*rm_spaces(char *buf)
+{
+	char	*aux;
+	int		i;
+	
+	i = 0;
+	aux = ft_strdup(buf);
+	while(aux[i] != '\0')
+	{
+		if (ft_isspace(aux[i]))
+		{
+			aux[i] = ',';
+		}
+		i++;
+	}
+	return (aux);
+}
+
+size_t		str_array_len(char **array)
+{
+	size_t		i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		i++;
+	}
+	return (i);
+}
+
+size_t		array_len(double *array, size_t size)
+{
+	size_t		i;
+
+	array = NULL;
+	i = size / sizeof(array[0]);
+	return (i);
+}
+
+double			*get_params_array(char **s_param)
+{
+	double		*param;
+	size_t		i;
+	size_t		j;
+	size_t		len;
+	//printf("SIZE SIZE = %zu\n", i = sizeof(param));
+	i = (ft_isdigit(**s_param)) ? 0 : 1;
+	j = 0;
+	len = str_array_len(s_param);
+	param = malloc(sizeof(param) * len);
+	while (i < len)
+	{
+		param[j] = ft_atod(s_param[i]);
+		printf("converting : %s \n", s_param[i]);
+		printf("converted : %f \n", param[j]);
+		i++;
+		j++;
+		/*if (i == 5)
+		{
+			break ;
+		}*/
+	}
+	return (param);
 }
 
 void		camera(char *buf, t_conf *conf)
@@ -143,12 +188,17 @@ void		camera(char *buf, t_conf *conf)
 
 void	resolution(char *buf, t_conf *conf)
 {
-	float	x;
-	float	y;
+	float		x;
+	float		y;
+	//char		*res;
+	//char		**s_param;
+	double		*param;
 
-	x = get_int(&buf);
-	buf += nbrlen(x);
-	y = get_int(&buf);
+	//res = rm_spaces(buf);
+	//s_param = ft_split(res, ',');
+	param = get_params_array(ft_split(rm_spaces(buf), ','));
+	x = param[0];
+	y = param[1];
 	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
 	conf->mlx.window_size.y = (y > 1440) ? 1440 : y;
 	
@@ -156,53 +206,81 @@ void	resolution(char *buf, t_conf *conf)
 
 void	light(char *buf, t_conf *conf)
 {
-	conf->my_scene.my_light.pos = v3_param(&buf);
-	conf->my_scene.my_light.radius = v1_param(&buf);
-	conf->my_scene.my_light.color = v3_param_color(&buf);
+	//t_light 	*my_light;
+	char		*light;
+	char		**s_param;
+	double		*param;
+
+	light = rm_spaces(buf);
+	s_param = ft_split(light, ',');
+	param = get_params_array(s_param);
+	conf->my_scene.my_light.pos = vec(param[0], param[1], param[2]);
+	conf->my_scene.my_light.radius = param[3];
+	conf->my_scene.my_light.color = color(param[4], param[5], param[6]);
 }
+
+
 
 void		sphere(char *buf, t_conf *conf)
 {
-	t_sphere *my_sphere;
-	t_3d_obj *obj;
+	t_sphere 	*my_sphere;
+	t_3d_obj 	*obj;
+	double		*param;
 
+	param = get_params_array(ft_split(rm_spaces(buf), ','));
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = SPHERE;
 	my_sphere = malloc(sizeof(t_sphere));
-	my_sphere->center = v3_param(&buf);
-	printf("1 buf = %s \n", buf);
-	my_sphere->radius = v1_param(&buf) / 2;
-	printf("2 buf = %s \n", buf);
-	my_sphere->color = v3_param_color(&buf);
-	printf("3 buf = %s \n", buf);
+	my_sphere->center = vec(param[0], param[1], param[2]);
+	my_sphere->radius = param[3] / 2;
+	my_sphere->color = color(param[4], param[5], param[6]);
 	obj->obj = my_sphere;
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
 void		cylinder(char *buf, t_conf *conf)
 {
-	t_cylinder *my_cylinder;
-	t_3d_obj *obj;
+	t_cylinder 	*my_cylinder;
+	t_3d_obj 	*obj;
+	char		*cylinder;
+	char		**s_param;
+	double		*param;
 
+	cylinder = rm_spaces(buf);
+	s_param = ft_split(cylinder, ',');
+	param = get_params_array(s_param);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
 	my_cylinder = malloc(sizeof(t_cylinder));
-
-	my_cylinder->center = v3_param(&buf);
-	my_cylinder->dir = normalize(v3_param(&buf));
-	my_cylinder->radius = v1_param(&buf) / 2;
-	my_cylinder->height = v1_param(&buf) / 2;
-	my_cylinder->color = v3_param_color(&buf);
+	my_cylinder->center = vec(param[0], param[1], param[2]);
+	my_cylinder->dir = normalize(vec(param[3], param[4], param[5]));
+	my_cylinder->radius = param[6] / 2;
+	my_cylinder->height = param[7];
+	my_cylinder->color = color(param[8], param[9], param[10]);
 	obj->obj = my_cylinder;
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
 void		triangle(char *buf, t_conf *conf)
 {
-	conf->my_scene.my_triangle.point_a = v3_param(&buf);
-	conf->my_scene.my_triangle.point_b = v3_param(&buf);
-	conf->my_scene.my_triangle.point_c = v3_param(&buf);
-	conf->my_scene.my_triangle.color = v3_param_color(&buf);
+	t_triangle 	*my_triangle;
+	t_3d_obj 	*obj;
+	char		*triangle;
+	char		**s_param;
+	double		*param;
+
+	triangle = rm_spaces(buf);
+	s_param = ft_split(triangle, ',');
+	param = get_params_array(s_param);
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = TRIANGLE;
+	my_triangle = malloc(sizeof(t_cylinder));
+	my_triangle->point_a = vec(param[0], param[1], param[2]);
+	my_triangle->point_b = vec(param[3], param[4], param[5]);
+	my_triangle->point_c = vec(param[6], param[7], param[8]);
+	my_triangle->color = color(param[9], param[10], param[11]);
+	obj->obj = my_triangle;
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
 void		scene_parser(char *buf, t_conf *conf)

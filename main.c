@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/04 19:16:29 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:18:37 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ int main(int argc,char **argv)
 	my_light.pos = vec(15,0,0);
 	my_screen = conf.my_camera.display;
 	conf.my_scene.my_light = my_light;
-	conf_printer(conf);
 	mlx.ptr = mlx_init();
 	printf("ptr:%p", mlx.ptr);
 	mlx.window_title = ft_strdup("My_test my_of my_my my_raytracer");

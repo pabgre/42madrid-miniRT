@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/03/04 19:25:10 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:52:44 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 		data.normal = normalize(subs(data.hit_point, sphere.center));
 		data.color = sphere.color;
 	}
+	/*printf(" CENTER X = %f \n", sphere.center.x);
+	printf(" CENTER Z = %f \n", sphere.center.z);
+	printf(" RADIUS = %f \n", sphere.radius);*/
 	return (data);
 }
 
