@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/05 12:18:37 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:22:46 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "includes/minirt.h"
 
 typedef	struct	s_header
 {

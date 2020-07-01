@@ -1,4 +1,4 @@
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 size_t		declen(double d)
 {

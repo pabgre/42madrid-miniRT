@@ -6,11 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:36 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/13 18:31:56 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:20:58 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 t_vector vec(double x, double y, double z)
 {

@@ -6,11 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:06 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:21:52 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)
 {

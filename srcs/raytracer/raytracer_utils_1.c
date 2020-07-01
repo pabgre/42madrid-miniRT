@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/04 19:19:47 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:21:31 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 t_ray_hit_data	ray_hit_data_init(void)
 {

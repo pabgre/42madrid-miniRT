@@ -6,43 +6,110 @@
 #    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/03/04 15:15:58 by jballest         ###   ########.fr        #
+#    Updated: 2020/07/01 11:30:49 by jballest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+PWD = $(shell pwd)
+
+UNAME := $(shell uname)
+
+NAME = coolMiniRT
+
 CC = gcc
 
-LIBFT = libs/libft/libft.a
+RM = rm -rf
 
-#SRC_OLD = mainnotsoold.c 	$(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX)
+HEADERS = includes
 
-SRC = main.c $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) $(SRC_POL) $(SRC_CONF)
+OBJS = $(SRC:.c=.o)
 
-SRC_VECTOR = srcs/vector/vector_utils_1.c	srcs/vector/vector_utils_2.c
+LIBFT_DIR = ./libs/libft/
+LIBFT = -L $(LIBFT_DIR) -lft
 
-SRC_GEO = srcs/geometry/geometry_utils_0.c srcs/geometry/geometry_utils_1.c srcs/geometry/geometry_utils_2.c srcs/geometry/geometry_utils_3.c srcs/geometry/geometry_utils_4.c
+CFLAGS = -Wall -Werror -Wextra
 
-#SRC_MATRIX = srcs/matrix/matrix_utils_1.c srcs/matrix/matrix_utils_2.c
+ifeq ($(UNAME), Linux)
+	MLX_DIR = ./libs/minilibx_linux/
+	MLX = -L $(MLX_DIR) -lmlx_Linux
+	CFLAGS += -lXext -lX11 -lm -lbsd
+endif
 
-SRC_RAY = srcs/raytracer/raytracer_utils_1.c srcs/raytracer/raytracer_utils_2.c
+ifeq ($(UNAME), Darwin)
+	MLX_DIR = ./libs/minilibx_macos/
+#	MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+	MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+endif
 
-SRC_MLX = srcs/mlx/mlx_utils1.c
+# SOURCES -----------------------------------------------------------------------
 
-SRC_POL = srcs/polinom/polinom_utils_1.c
+SRC = $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) $(SRC_POL) $(SRC_CONF)
 
-SRC_COLOR = srcs/color/color_utils.c
+SRC_VECTOR =	srcs/vector/vector_utils_1.c	\
+				srcs/vector/vector_utils_2.c	\
 
-SRC_CONF = srcs/configuration/file_reader_utils.c srcs/configuration/atod.c\
-			srcs/configuration/gnl/get_next_line.c
+SRC_GEO =	srcs/geometry/geometry_utils_0.c	\
+			srcs/geometry/geometry_utils_1.c	\
+			srcs/geometry/geometry_utils_2.c	\
+			srcs/geometry/geometry_utils_3.c	\
+			srcs/geometry/geometry_utils_4.c	\
 
+SRC_RAY =	srcs/raytracer/raytracer_utils_1.c	\
+			srcs/raytracer/raytracer_utils_2.c	\
+
+SRC_MLX = srcs/mlx/mlx_utils1.c	\
+
+SRC_POL = srcs/polinom/polinom_utils_1.c	\
+
+SRC_COLOR = srcs/color/color_utils.c	\
+
+SRC_CONF =	srcs/configuration/file_reader_utils.c	\
+			srcs/configuration/atod.c	\
+			srcs/configuration/gnl/get_next_line.c	\
+			srcs/configuration/gnl/get_next_line_utils.c	\
+# --------------------------------------------------------------------------------
 
 CFLAGS = -Wall -Werror -Wextra
 
 MLX_FLAGS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-#MLX_FLAGS = -L./libs/minilibx_linux -lmlx -lm -L/usr/include/../lib -lXext -lX11 -lbsd
 
-all: $(SRC)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC) $(LIBFT)
+#all2: $(SRC)
+#	$(CC) $(CFLAGS) $(MLX_FLAGS) main.c $(SRC) $(LIBFT)
 
-old: $(SRC_OLD)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRC_OLD) $(LIBFT)
+
+all: mlx $(NAME)
+	-@$(CC) $(OBJS) -I $(HEADERS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
+
+debug:
+	-@$(CC) -g main_workinglists.c libs/libft/*.c $(SRC) -I $(HEADERS) $(MLX) $(CFLAGS) -o $(NAME)
+
+$(NAME): $(OBJS)
+	-@make bonus -C $(LIBFT_DIR)
+
+%.o: %.c
+	-@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@
+
+normi: $(SRC)
+	norminette $(SRC)
+
+mlx:
+	-@make -C $(MLX_DIR) >> /dev/null
+
+mlxclean:
+	-@make clean -C $(MLX_DIR)
+
+
+clean:
+	-@$(RM) $(OBJS)
+	-@make cleanall -C $(LIBFT_DIR)
+
+fclean:	clean
+	-@make fclean -C $(LIBFT_DIR)
+	-@$(RM) $(NAME)
+
+re:	fclean all
+
+pwd:
+	echo $(PWD)
+
+.PHONY:	all clean fclean re

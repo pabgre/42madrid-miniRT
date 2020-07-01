@@ -1,4 +1,4 @@
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 int		is_in_set(const char c, char* set)
 {

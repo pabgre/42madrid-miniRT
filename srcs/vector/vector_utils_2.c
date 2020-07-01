@@ -6,11 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:16:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/13 18:32:03 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:21:12 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 t_vector cross_prod(t_vector u, t_vector v)
 {

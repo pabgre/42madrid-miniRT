@@ -6,11 +6,11 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/04 13:55:36 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:21:31 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minirt.h"
+#include "../../includes/minirt.h"
 
 void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 {
