@@ -6,11 +6,9 @@
 #    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/01 11:30:49 by jballest         ###   ########.fr        #
+#    Updated: 2020/07/01 13:28:31 by jballest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-PWD = $(shell pwd)
 
 UNAME := $(shell uname)
 
@@ -37,8 +35,8 @@ endif
 
 ifeq ($(UNAME), Darwin)
 	MLX_DIR = ./libs/minilibx_macos/
-#	MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-	MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+	MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+#	MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
 
 # SOURCES -----------------------------------------------------------------------
@@ -78,18 +76,19 @@ MLX_FLAGS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -fra
 
 
 all: mlx $(NAME)
-	-@$(CC) $(OBJS) -I $(HEADERS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
+	-@$(CC) main.c $(OBJS) -I $(HEADERS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
 debug:
 	-@$(CC) -g main_workinglists.c libs/libft/*.c $(SRC) -I $(HEADERS) $(MLX) $(CFLAGS) -o $(NAME)
 
 $(NAME): $(OBJS)
-	-@make bonus -C $(LIBFT_DIR)
+#	-@make bonus -C $(LIBFT_DIR)
 
 %.o: %.c
 	-@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@
 
 normi: $(SRC)
+	#make norminette -C $(LIBFT_DIR)
 	norminette $(SRC)
 
 mlx:
@@ -101,10 +100,11 @@ mlxclean:
 
 clean:
 	-@$(RM) $(OBJS)
-	-@make cleanall -C $(LIBFT_DIR)
+#	-@make cleanall -C $(LIBFT_DIR)
 
 fclean:	clean
-	-@make fclean -C $(LIBFT_DIR)
+#	-@make fclean -C $(LIBFT_DIR)
+	-@make clean -C $(MLX_DIR)
 	-@$(RM) $(NAME)
 
 re:	fclean all
