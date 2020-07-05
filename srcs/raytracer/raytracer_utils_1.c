@@ -27,7 +27,6 @@ t_ray_hit_data	ray_hit_data_init(void)
 
 t_ray_hit_data	ray_hit_this_obj(t_line ray, t_3d_obj *obj_data)
 {
-
 	if (obj_data->type == SPHERE)
 	{
 		return (sphere_hit_point(ray, *(t_sphere*)(obj_data->obj)));

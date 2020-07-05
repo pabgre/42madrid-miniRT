@@ -1,16 +1,12 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int		is_in_set(const char c, char* set)
 {
-	while (set++)
+	while (*set)
 	{
-		if (ft_isspace(*set))
-			;
-		else
-		{
-			if (*set == c)
-				return (c);
-		}
+		if (*set == c)
+			return (c);
+		set++;
 	}
 	return (0);
 }
@@ -270,7 +266,7 @@ void		triangle(char *buf, t_conf *conf)
 	param = get_params_array(s_param);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = TRIANGLE;
-	my_triangle = malloc(sizeof(t_cylinder));
+	my_triangle = malloc(sizeof(t_triangle));
 	my_triangle->point_a = vec(param[0], param[1], param[2]);
 	my_triangle->point_b = vec(param[3], param[4], param[5]);
 	my_triangle->point_c = vec(param[6], param[7], param[8]);
@@ -311,7 +307,7 @@ t_conf		scene_conf(char *scene)
 	char	*buf;
 	char	*set;
 
-	set = strdup("R A c l sp pl sq cy tr");
+	set = ft_strdup("R A c l sp pl sq cy tr");
 	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &buf))
 	{

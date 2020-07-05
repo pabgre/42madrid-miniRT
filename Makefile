@@ -15,10 +15,11 @@ UNAME := $(shell uname)
 NAME = coolMiniRT
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 
-HEADERS = includes
+INCLUDES = -I ./includes
 
 OBJS = $(SRC:.c=.o)
 
@@ -28,12 +29,14 @@ LIBFT = -L $(LIBFT_DIR) -lft
 CFLAGS = -Wall -Werror -Wextra
 
 ifeq ($(UNAME), Linux)
+	NORMINETTE = ~/.norminette/norminette.rb
 	MLX_DIR = ./libs/minilibx_linux/
 	MLX = -L $(MLX_DIR) -lmlx_Linux
 	CFLAGS += -lXext -lX11 -lm -lbsd
 endif
 
 ifeq ($(UNAME), Darwin)
+	NORMINETTE = norminette
 	MLX_DIR = ./libs/minilibx_macos/
 	MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 #	MLX = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
@@ -61,55 +64,46 @@ SRC_POL = srcs/polinom/polinom_utils_1.c	\
 
 SRC_COLOR = srcs/color/color_utils.c	\
 
-SRC_CONF =	srcs/configuration/file_reader_utils.c	\
-			srcs/configuration/atod.c	\
+SRC_CONF =				srcs/configuration/atod.c	\
 			srcs/configuration/gnl/get_next_line.c	\
-			srcs/configuration/gnl/get_next_line_utils.c	\
+			srcs/configuration/file_reader_utils.c	\
 # --------------------------------------------------------------------------------
 
-CFLAGS = -Wall -Werror -Wextra
-
-MLX_FLAGS = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-
-#all2: $(SRC)
-#	$(CC) $(CFLAGS) $(MLX_FLAGS) main.c $(SRC) $(LIBFT)
-
-
 all: mlx $(NAME)
-	-@$(CC) main.c $(OBJS) -I $(HEADERS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
+	-@$(CC) main.c $(OBJS) $(INCLUDES) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
-debug:
-	-@$(CC) -g main_workinglists.c libs/libft/*.c $(SRC) -I $(HEADERS) $(MLX) $(CFLAGS) -o $(NAME)
+debug: mlx
+	-@$(CC) -g main.c $(SRC) $(INCLUDES) $(LIBFT_DIR)*.c $(MLX) $(CFLAGS) -o $(NAME)Debug
 
 $(NAME): $(OBJS)
-#	-@make bonus -C $(LIBFT_DIR)
+	-@make bonus -C $(LIBFT_DIR)
 
 %.o: %.c
-	-@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@
+	-@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 normi: $(SRC)
-	#make norminette -C $(LIBFT_DIR)
-	norminette $(SRC)
+	-@make normi -C $(LIBFT_DIR)
+	-@$(NORMINETTE) $(SRC)
 
 mlx:
-	-@make -C $(MLX_DIR) >> /dev/null
+	-@make -C $(MLX_DIR) $(SILENCE_ALL)
+
 
 mlxclean:
 	-@make clean -C $(MLX_DIR)
 
 
 clean:
+	-@make bclean -C $(LIBFT_DIR)
 	-@$(RM) $(OBJS)
-#	-@make cleanall -C $(LIBFT_DIR)
 
 fclean:	clean
-#	-@make fclean -C $(LIBFT_DIR)
+	-@make fclean -C $(LIBFT_DIR)
+
 	-@make clean -C $(MLX_DIR)
+
 	-@$(RM) $(NAME)
 
 re:	fclean all
-
-pwd:
-	echo $(PWD)
 
 .PHONY:	all clean fclean re

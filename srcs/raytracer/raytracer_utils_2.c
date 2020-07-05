@@ -27,6 +27,7 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 	printf("bpp = %d \n", mlx->bpp);
 
 	x = 0;
+	data = ray_hit_data_init();
 
 	while (x < mlx->window_size.y)
 	{
