@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/01 11:22:46 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/06 11:25:55 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	get_bmp_image(t_mlx	*mlx)
 	size_t		height = (size_t)mlx->window_size.y;
 	size_t		bpp = (size_t)mlx->bpp;
 	char		*pixel = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
-	
+
 	fd = open("save.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0640);
 	w_header(fd, width, height, bpp);
 	w_infoheader(fd, width, height, bpp);
@@ -130,12 +130,11 @@ int main(int argc,char **argv)
 	t_screen my_screen;
 	t_mlx mlx;
 	t_conf	conf;
-	t_light my_light;
 
 
 	conf.my_scene.obj_lst = ft_lstnew(NULL);
 	if (argc > 1)
-	{ 
+	{
 		conf = scene_conf(argv[1]);
 		if ( argc > 2 && strcmp("--save", argv[2]) == 0)
 			conf.flag.save = 1;
@@ -143,10 +142,8 @@ int main(int argc,char **argv)
 	else
 	{
 		conf = scene_conf("default.rt");
-	}	
-	my_light.pos = vec(15,0,0);
+	}
 	my_screen = conf.my_camera.display;
-	conf.my_scene.my_light = my_light;
 	mlx.ptr = mlx_init();
 	printf("ptr:%p", mlx.ptr);
 	mlx.window_title = ft_strdup("My_test my_of my_my my_raytracer");

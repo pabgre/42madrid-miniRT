@@ -105,7 +105,7 @@ char		*rm_spaces(char *buf)
 {
 	char	*aux;
 	int		i;
-	
+
 	i = 0;
 	aux = ft_strdup(buf);
 	while(aux[i] != '\0')
@@ -173,11 +173,11 @@ void		camera(char *buf, t_conf *conf)
 	conf->my_camera.pos = v3_param(&buf);
 	conf->my_camera.dist = 5;
 	my_screen.h = 9;
-	my_screen.w = 16;
+	my_screen.w = 9;
 	my_screen.x_axis = normalize(vec(0, -1, 0));
 	my_screen.y_axis = normalize(vec(0, 0, 1));
 	my_screen.pos = add(prod(normalize(cross_prod
-				(my_screen.x_axis, my_screen.y_axis)), 
+				(my_screen.x_axis, my_screen.y_axis)),
 				conf->my_camera.dist), conf->my_camera.pos);
 	conf->my_camera.display = my_screen;
 }
@@ -197,7 +197,7 @@ void	resolution(char *buf, t_conf *conf)
 	y = param[1];
 	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
 	conf->mlx.window_size.y = (y > 1440) ? 1440 : y;
-	
+
 }
 
 void	light(char *buf, t_conf *conf)
@@ -297,7 +297,7 @@ void		scene_parser(char *buf, t_conf *conf)
 			camera(buf, conf);
 	}
 	else if (*buf == 't')
-		triangle(buf, conf);	
+		triangle(buf, conf);
 }
 
 t_conf		scene_conf(char *scene)
