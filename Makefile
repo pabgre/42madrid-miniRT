@@ -73,6 +73,7 @@ all: mlx $(NAME)
 	-@$(CC) main.c $(OBJS) $(INCLUDES) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
 debug: mlx
+	$(RM) coolMiniRTDebug
 	-@$(CC) -g main.c $(SRC) $(INCLUDES) $(LIBFT_DIR)*.c $(MLX) $(CFLAGS) -o $(NAME)Debug
 
 $(NAME): $(OBJS)

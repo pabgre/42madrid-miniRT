@@ -116,6 +116,7 @@ char		*rm_spaces(char *buf)
 		}
 		i++;
 	}
+	free(aux);
 	return (aux);
 }
 
@@ -156,6 +157,7 @@ double			*get_params_array(char **s_param)
 		param[j] = ft_atod(s_param[i]);
 		printf("converting : %s \n", s_param[i]);
 		printf("converted : %f \n", param[j]);
+		free(s_param[i]);
 		i++;
 		j++;
 		/*if (i == 5)
@@ -163,6 +165,8 @@ double			*get_params_array(char **s_param)
 			break ;
 		}*/
 	}
+	free(s_param);
+	free(param);
 	return (param);
 }
 
