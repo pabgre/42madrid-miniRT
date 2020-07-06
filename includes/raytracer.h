@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/03 14:53:11 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/06 10:21:46 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ typedef struct	s_light
 typedef	struct	s_scene
 {
 	t_light		my_light;
-	t_cylinder	my_cylinder;
-	t_sphere	my_sphere;
-	t_triangle	my_triangle;
 	t_list		*obj_lst;
 }				t_scene;
 
