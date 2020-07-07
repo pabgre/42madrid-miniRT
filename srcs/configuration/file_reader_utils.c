@@ -67,7 +67,6 @@ int		nbrlen(long nb)
 t_color		color(double r, double g, double b)
 {
 	t_color		color;
-<<<<<<< HEAD
 
 	color.r = r;
 	color.g = g;
@@ -75,15 +74,6 @@ t_color		color(double r, double g, double b)
 	return (color);
 }
 
-=======
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
-}
-
->>>>>>> 7defe1161109e16177f5fcb8f5d2c603ae806b9d
 //#####INITS######
 
 t_sphere	*sphere_init(double	*param)
@@ -283,7 +273,7 @@ void		cylinder(char *buf, t_conf *conf)
 	t_3d_obj 	*obj;
 	double		*param;
 
-	
+
 	param = get_params(buf, 11);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
