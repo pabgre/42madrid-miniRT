@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/06 10:21:46 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/07 11:15:15 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct	s_light
 }				t_light;
 typedef	struct	s_scene
 {
-	t_light		my_light;
+	t_list		*light_lst;
 	t_list		*obj_lst;
 }				t_scene;
 

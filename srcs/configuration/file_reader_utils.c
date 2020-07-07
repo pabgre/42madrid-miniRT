@@ -105,7 +105,7 @@ char		*rm_spaces(char *buf)
 {
 	char	*aux;
 	int		i;
-	
+
 	i = 0;
 	aux = ft_strdup(buf);
 	while(aux[i] != '\0')
@@ -177,7 +177,7 @@ void		camera(char *buf, t_conf *conf)
 	my_screen.x_axis = normalize(vec(0, -1, 0));
 	my_screen.y_axis = normalize(vec(0, 0, 1));
 	my_screen.pos = add(prod(normalize(cross_prod
-				(my_screen.x_axis, my_screen.y_axis)), 
+				(my_screen.x_axis, my_screen.y_axis)),
 				conf->my_camera.dist), conf->my_camera.pos);
 	conf->my_camera.display = my_screen;
 }
@@ -197,22 +197,25 @@ void	resolution(char *buf, t_conf *conf)
 	y = param[1];
 	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
 	conf->mlx.window_size.y = (y > 1440) ? 1440 : y;
-	
+
 }
 
 void	light(char *buf, t_conf *conf)
 {
-	//t_light 	*my_light;
+	t_light 	*current_light;
 	char		*light;
 	char		**s_param;
 	double		*param;
 
+	current_light = malloc(sizeof(t_light));
 	light = rm_spaces(buf);
 	s_param = ft_split(light, ',');
 	param = get_params_array(s_param);
-	conf->my_scene.my_light.pos = vec(param[0], param[1], param[2]);
-	conf->my_scene.my_light.radius = param[3];
-	conf->my_scene.my_light.color = color(param[4], param[5], param[6]);
+	current_light->pos = vec(param[0], param[1], param[2]);
+	current_light->radius = param[3];
+	current_light->color = color(param[4], param[5], param[6]);
+
+	ft_lstadd_front(&(conf->my_scene.light_lst), ft_lstnew(current_light));
 }
 
 
@@ -297,7 +300,7 @@ void		scene_parser(char *buf, t_conf *conf)
 			camera(buf, conf);
 	}
 	else if (*buf == 't')
-		triangle(buf, conf);	
+		triangle(buf, conf);
 }
 
 t_conf		scene_conf(char *scene)

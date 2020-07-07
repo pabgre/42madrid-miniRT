@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/06 12:23:02 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/07 11:27:40 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,30 +97,44 @@ t_ray_hit_data	hit_ray_in_any_object_lst(t_line ray, t_scene my_scene)
 	return (hit_data);
 }*/
 
-t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
-{
-	t_ray_hit_data	hit_data;
-	t_line			ray;
-	double			fac;
-	double			ratio;
-	double			ambient;
+t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
+	float	ratio;
+	float	fac;
+	t_list	*aux;
+	t_line	ray;
+	t_light	current_light;
+	float	ambient = 0.8;
 
-	ray.point = point;
-	ray.dir = direction;
-	ambient = 0.8;
-
-	hit_data = hit_ray_in_any_object_lst(ray, my_scene);
-	if (hit_data.hit_object != NONE)
-	{
-		ray.dir = normalize(subs(my_scene.my_light.pos, hit_data.hit_point));
+	aux = my_scene.light_lst;
+	while (aux != NULL){
+		current_light = *((t_light*)aux->content);
+		ray.dir = normalize(subs(current_light.pos, hit_data.hit_point));
 		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.000001));
-		ratio = my_scene.my_light.radius;
+		ratio = current_light.radius;
 		fac = 1;
 		if (!hit_ray_in_any_object_lst(ray, my_scene).hit_object)
 			fac = (1 - (dot_prod(normalize(hit_data.normal), \
 									normalize(ray.dir)) * ratio));
 		fac = fac > 1 ? 1 : fac;
-		hit_data.color = ft_rgb_shade(hit_data.color, fac * ambient);
+		hit_data.color = ft_rgb_shade(hit_data.color, fac * ambient); //Combine last with current
+		aux = aux->next;
+	}
+
+	return (hit_data);
+}
+
+t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
+{
+	t_ray_hit_data	hit_data;
+	t_line			ray;
+
+	ray.point = point;
+	ray.dir = direction;
+
+	hit_data = hit_ray_in_any_object_lst(ray, my_scene);
+	if (hit_data.hit_object != NONE)
+	{
+		hit_data = light_info(my_scene, hit_data);
 	}
 
 	return (hit_data);
