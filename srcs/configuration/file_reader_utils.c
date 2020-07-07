@@ -1,5 +1,6 @@
 #include "minirt.h"
 
+
 int		is_in_set(const char c, char* set)
 {
 	while (*set)
@@ -63,34 +64,6 @@ int		nbrlen(long nb)
 	return (len);
 }
 
-//####CORE_FTS####
-
-double		v1_param(char **buf)
-{
-	double	param;
-
-	param = get_double(buf);
-	*buf += declen(param);
-	return (param);
-}
-
-t_vector	v3_param(char **buf)
-{
-	double		x;
-	double		y;
-	double		z;
-	t_vector	param;
-
-	x = get_double(buf);
-	*buf += declen(x);
-	y = get_double(buf);
-	*buf += declen(y);
-	z = get_double(buf);
-	*buf += declen(z);
-	param = vec(x, y, z);
-	return (param);
-}
-
 t_color		color(double r, double g, double b)
 {
 	t_color		color;
@@ -99,6 +72,69 @@ t_color		color(double r, double g, double b)
 	color.g = g;
 	color.b = b;
 	return (color);
+}
+
+//#####INITS######
+
+t_sphere	*sphere_init(double	*param)
+{
+	t_sphere	*sphere;
+
+	sphere = (t_sphere*)malloc(sizeof(t_sphere));
+	sphere->center = vec(param[0], param[1], param[2]);
+	sphere->radius = param[3] / 2;
+	sphere->color = color(param[4], param[5], param[6]);
+	return (sphere);
+}
+
+t_cylinder		*cylinder_init(double *param)
+{
+	t_cylinder	*cylinder;
+
+	cylinder = malloc(sizeof(t_cylinder));
+	cylinder->center = vec(param[0], param[1], param[2]);
+	cylinder->dir = normalize(vec(param[3], param[4], param[5]));
+	cylinder->radius = param[6] / 2;
+	cylinder->height = param[7];
+	cylinder->color = color(param[8], param[9], param[10]);
+	return (cylinder);
+}
+
+t_triangle	*triangle_init(double *param)
+{
+	t_triangle	*triangle;
+
+	triangle = malloc(sizeof(t_triangle));
+	triangle->point_a = vec(param[0], param[1], param[2]);
+	triangle->point_b = vec(param[3], param[4], param[5]);
+	triangle->point_c = vec(param[6], param[7], param[8]);
+	triangle->color = color(param[9], param[10], param[11]);
+	return (triangle);
+}
+
+//####CORE_FTS####
+
+double		*get_params(const char *buf, int size)
+{
+	double		*param;
+	int			pos;
+	int			l;
+
+	pos = 0;
+	l = 0;
+	param = (double *)malloc(sizeof(double) * size);
+	while (buf[pos])
+	{
+		if ((ft_isdigit(buf[pos]) || buf[pos] == '-') && l < size)
+		{
+			param[l] = ft_atod(&buf[pos]);
+			l++;
+			while(!ft_isspace(buf[pos]) && buf[pos] != ',' && buf[pos])
+				pos++;
+		}
+		pos++;
+	}
+	return (param);
 }
 
 char		*rm_spaces(char *buf)
@@ -154,8 +190,8 @@ double			*get_params_array(char **s_param)
 	while (i < len)
 	{
 		param[j] = ft_atod(s_param[i]);
-		printf("converting : %s \n", s_param[i]);
-		printf("converted : %f \n", param[j]);
+		//printf("converting : %s \n", s_param[i]);
+		//printf("converted : %f \n", param[j]);
 		i++;
 		j++;
 		/*if (i == 5)
@@ -169,8 +205,10 @@ double			*get_params_array(char **s_param)
 void		camera(char *buf, t_conf *conf)
 {
 	t_screen my_screen;
+	double	*param;
 
-	conf->my_camera.pos = v3_param(&buf);
+	param = get_params(buf, 7);
+	conf->my_camera.pos = vec(param[0], param[1], param[2]);
 	conf->my_camera.dist = 5;
 	my_screen.h = 9;
 	my_screen.w = 16;
@@ -186,13 +224,9 @@ void	resolution(char *buf, t_conf *conf)
 {
 	float		x;
 	float		y;
-	//char		*res;
-	//char		**s_param;
 	double		*param;
 
-	//res = rm_spaces(buf);
-	//s_param = ft_split(res, ',');
-	param = get_params_array(ft_split(rm_spaces(buf), ','));
+	param = get_params(buf, 2);
 	x = param[0];
 	y = param[1];
 	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
@@ -219,59 +253,42 @@ void	light(char *buf, t_conf *conf)
 
 void		sphere(char *buf, t_conf *conf)
 {
-	t_sphere 	*my_sphere;
 	t_3d_obj 	*obj;
 	double		*param;
 
-	param = get_params_array(ft_split(rm_spaces(buf), ','));
+	param = get_params(buf, 7);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = SPHERE;
-	my_sphere = malloc(sizeof(t_sphere));
-	my_sphere->center = vec(param[0], param[1], param[2]);
-	my_sphere->radius = param[3] / 2;
-	my_sphere->color = color(param[4], param[5], param[6]);
-	obj->obj = my_sphere;
+	obj->obj = sphere_init(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
+
+
 
 void		cylinder(char *buf, t_conf *conf)
 {
-	t_cylinder 	*my_cylinder;
 	t_3d_obj 	*obj;
 	double		*param;
 
-	param = get_params_array(ft_split(rm_spaces(buf), ','));
+	
+	param = get_params(buf, 11);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
-	my_cylinder = malloc(sizeof(t_cylinder));
-	my_cylinder->center = vec(param[0], param[1], param[2]);
-	my_cylinder->dir = normalize(vec(param[3], param[4], param[5]));
-	my_cylinder->radius = param[6] / 2;
-	my_cylinder->height = param[7];
-	my_cylinder->color = color(param[8], param[9], param[10]);
-	obj->obj = my_cylinder;
+	obj->obj = cylinder_init(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
+
+
 void		triangle(char *buf, t_conf *conf)
 {
-	t_triangle 	*my_triangle;
 	t_3d_obj 	*obj;
-	char		*triangle;
-	char		**s_param;
 	double		*param;
 
-	triangle = rm_spaces(buf);
-	s_param = ft_split(triangle, ',');
-	param = get_params_array(s_param);
+	param = get_params(buf, 12);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = TRIANGLE;
-	my_triangle = malloc(sizeof(t_triangle));
-	my_triangle->point_a = vec(param[0], param[1], param[2]);
-	my_triangle->point_b = vec(param[3], param[4], param[5]);
-	my_triangle->point_c = vec(param[6], param[7], param[8]);
-	my_triangle->color = color(param[9], param[10], param[11]);
-	obj->obj = my_triangle;
+	obj->obj = triangle_init(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 

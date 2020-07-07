@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/01 11:21:52 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/06 11:39:27 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		pressed_key(int key, t_mlx *mlx)
 	}
 	else if (key == 37)
 	{
-		system("leaks a.out");
+		system("leaks coolMiniRT");
 	}
 	return(0);
 }
