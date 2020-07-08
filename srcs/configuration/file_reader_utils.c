@@ -220,11 +220,11 @@ void		camera(char *buf, t_conf *conf)
 	my_screen.w = conf->mlx.window_size.x / mcd;
 	my_screen.h = conf->mlx.window_size.y / mcd;
 	conf->my_camera.dist = (my_screen.w / 2.0) / tan(param[6] * 3.14 / 360.0);
-	my_screen.x_axis = normalize(vec(0, -1, 0));
-	my_screen.y_axis = normalize(vec(0, 0, 1));
+	my_screen.x_axis = normalize(cross_prod(
+								vec(param[3],param[4],param[5]),vec(0, 0, -1)));
+	my_screen.y_axis = normalize(vec(0, 0, -1));
 	my_screen.pos = vec(param[0], param[1], param[2]);
-	conf->my_camera.pos = add(prod(normalize(cross_prod(
-				my_screen.x_axis, my_screen.y_axis)),
+	conf->my_camera.pos = add(prod(normalize(vec(param[3],param[4],param[5])),
 				-conf->my_camera.dist), my_screen.pos);
 	free(param);
 	conf->my_camera.display = my_screen;
