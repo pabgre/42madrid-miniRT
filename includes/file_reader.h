@@ -8,6 +8,7 @@ typedef	struct s_flag
 {
 	int		save;
 	int		r;
+	int		error;
 }				t_flag;
 
 

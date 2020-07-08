@@ -295,8 +295,8 @@ void		scene_parser(char *buf, t_conf *conf)
 		resolution(buf, conf);
 		conf->flag.r = 1;
 	}
-	/*if (*buf == 'A')
-		ambient(buf, conf)*/
+	else if (*buf == 'A')
+		write(1, "AMBIENT LIGHT IS HARDCODED >:(\n", ft_strlen("AMBIENT L IS HARDCODED >:(\n"));
 	else if (*buf == 'l')
 		light(buf, conf);
 	else if (*buf == 's' && (++buf && *buf == 'p'))
@@ -311,6 +311,11 @@ void		scene_parser(char *buf, t_conf *conf)
 	}
 	else if (*buf == 't')
 		triangle(buf, conf);
+	else
+	{
+		conf->flag.error += 1;
+		printf("ERROR #%d : Check your '.rt' file\n", conf->flag.error);
+	}
 }
 
 t_conf		scene_conf(char *scene)
@@ -333,5 +338,6 @@ t_conf		scene_conf(char *scene)
 	free(buf);
 	free(set);
 	close(fd);
+	printf("\n\t Leak chasing : conf 1 : %p\n", &conf);
 	return (conf);
 }

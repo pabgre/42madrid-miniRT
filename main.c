@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/06 11:25:55 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/08 09:55:56 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,12 @@ int main(int argc,char **argv)
 	{
 		conf = scene_conf("default.rt");
 	}
+	if (conf.flag.error || !conf.flag.r)
+		return (-1);
 	my_screen = conf.my_camera.display;
 	mlx.ptr = mlx_init();
 	printf("ptr:%p", mlx.ptr);
+	printf("\n\t Leak chasing : conf 0 : %p\n", &conf);
 	mlx.window_title = ft_strdup("My_test my_of my_my my_raytracer");
 	mlx.window_size.x = conf.mlx.window_size.x;
 	mlx.window_size.y = conf.mlx.window_size.y;
