@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/07 11:15:15 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:15:43 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef	struct	s_scene
 {
 	t_list		*light_lst;
 	t_list		*obj_lst;
+	t_light		ambient;
 }				t_scene;
 
 t_ray_hit_data	ray_hit_data_init();

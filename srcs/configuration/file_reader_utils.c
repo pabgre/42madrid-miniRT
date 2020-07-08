@@ -304,6 +304,16 @@ void		triangle(char *buf, t_conf *conf)
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
+void		ambient(char *buf, t_conf * conf){
+	double *param;
+
+	param = get_params(buf, 4);
+	conf->my_scene.ambient.radius = (1.0 - param[0]);
+	conf->my_scene.ambient.color = color(param[1], param[2], param[3]);
+	free(param);
+}
+
+
 void		scene_parser(char *buf, t_conf *conf)
 {
 	if (*buf == 'R')
@@ -312,7 +322,7 @@ void		scene_parser(char *buf, t_conf *conf)
 		conf->flag.r = 1;
 	}
 	else if (*buf == 'A')
-		write(1, "AMBIENT LIGHT IS HARDCODED >:(\n", ft_strlen("AMBIENT LIGHT IS HARDCODED >:(\n"));
+		ambient(buf, conf);
 	else if (*buf == 'l')
 		light(buf, conf);
 	else if (*buf == 's' && (++buf && *buf == 'p'))

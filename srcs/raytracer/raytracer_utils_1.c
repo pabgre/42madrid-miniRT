@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/07 11:27:40 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:28:02 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 	t_list	*aux;
 	t_line	ray;
 	t_light	current_light;
-	float	ambient = 0.8;
 
 	aux = my_scene.light_lst;
 	while (aux != NULL){
@@ -116,7 +115,7 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 			fac = (1 - (dot_prod(normalize(hit_data.normal), \
 									normalize(ray.dir)) * ratio));
 		fac = fac > 1 ? 1 : fac;
-		hit_data.color = ft_rgb_shade(hit_data.color, fac * ambient); //Combine last with current
+		hit_data.color = ft_rgb_shade(hit_data.color, fac * my_scene.ambient.radius); //Combine last with current
 		aux = aux->next;
 	}
 
