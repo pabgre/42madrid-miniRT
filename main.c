@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 11:33:47 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:23:27 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,11 +194,24 @@ int main(int argc,char **argv)
 	obj_data->obj = my_cylinder;
 	ft_lstadd_front(&conf.my_scene.obj_lst, ft_lstnew(obj_data));*/
 	//perform_raytracer(my_camera, my_scene, &mlx);
+
+	t_hook_data *hook_data;
+
+	hook_data = malloc(sizeof(t_hook_data));
+
+	hook_data->mlx = &mlx;
+
+	hook_data->cameras = &conf.my_camera;
+	hook_data->scene = &conf.my_scene;
+
+	ft_init_mlx(&mlx);
 	perform_raytracer(conf.my_camera, conf.my_scene, &mlx);
 	if (conf.flag.save)
 		get_bmp_image(&mlx);
-	mlx_hook(mlx.win, 2, 0, pressed_key, &mlx);
+	mlx_hook(mlx.win, 2, 0, pressed_key, hook_data);
 	mlx_hook(mlx.win, 17, 0, close_mlx, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.ptr);
+
+
 }
