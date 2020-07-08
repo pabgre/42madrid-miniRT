@@ -182,7 +182,6 @@ double			*get_params_array(char **s_param)
 	size_t		i;
 	size_t		j;
 	size_t		len;
-	//printf("SIZE SIZE = %zu\n", i = sizeof(param));
 	i = (ft_isdigit(**s_param)) ? 0 : 1;
 	j = 0;
 	len = str_array_len(s_param);
@@ -190,14 +189,8 @@ double			*get_params_array(char **s_param)
 	while (i < len)
 	{
 		param[j] = ft_atod(s_param[i]);
-		//printf("converting : %s \n", s_param[i]);
-		//printf("converted : %f \n", param[j]);
 		i++;
 		j++;
-		/*if (i == 5)
-		{
-			break ;
-		}*/
 	}
 	return (param);
 }
@@ -217,6 +210,7 @@ void		camera(char *buf, t_conf *conf)
 	my_screen.pos = add(prod(normalize(cross_prod
 				(my_screen.x_axis, my_screen.y_axis)),
 				conf->my_camera.dist), conf->my_camera.pos);
+	free(param);
 	conf->my_camera.display = my_screen;
 }
 
@@ -229,26 +223,22 @@ void	resolution(char *buf, t_conf *conf)
 	param = get_params(buf, 2);
 	x = param[0];
 	y = param[1];
+	free(param);
 	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
 	conf->mlx.window_size.y = (y > 1440) ? 1440 : y;
-
 }
 
 void	light(char *buf, t_conf *conf)
 {
 	t_light 	*current_light;
-	char		*light;
-	char		**s_param;
 	double		*param;
 
 	current_light = malloc(sizeof(t_light));
-	light = rm_spaces(buf);
-	s_param = ft_split(light, ',');
-	param = get_params_array(s_param);
+	param = get_params(buf, 7);
 	current_light->pos = vec(param[0], param[1], param[2]);
 	current_light->radius = param[3];
 	current_light->color = color(param[4], param[5], param[6]);
-
+	free(param);
 	ft_lstadd_front(&(conf->my_scene.light_lst), ft_lstnew(current_light));
 }
 
@@ -263,6 +253,7 @@ void		sphere(char *buf, t_conf *conf)
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = SPHERE;
 	obj->obj = sphere_init(param);
+	free(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
@@ -273,11 +264,12 @@ void		cylinder(char *buf, t_conf *conf)
 	t_3d_obj 	*obj;
 	double		*param;
 
-
+	
 	param = get_params(buf, 11);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
 	obj->obj = cylinder_init(param);
+	free(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
@@ -292,6 +284,7 @@ void		triangle(char *buf, t_conf *conf)
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = TRIANGLE;
 	obj->obj = triangle_init(param);
+	free(param);
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
