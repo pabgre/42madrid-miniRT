@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/08 09:05:55 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/08 10:30:45 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		close_mlx(t_mlx *mlx)
 }
 
 int		pressed_key(int key, t_mlx *mlx)
-{	
+{
 	printf("KEY = %d\n", key);
 	if (key == 53)
 	{

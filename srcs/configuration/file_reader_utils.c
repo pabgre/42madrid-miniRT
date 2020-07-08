@@ -195,21 +195,37 @@ double			*get_params_array(char **s_param)
 	return (param);
 }
 
+int ft_mcd(int a, int b){
+	int c;
+
+	c = 1;
+
+	while (b != 0){
+		c = b;
+		b = a % b;
+		a = c;
+	}
+	return (c);
+}
+
+
 void		camera(char *buf, t_conf *conf)
 {
 	t_screen my_screen;
 	double	*param;
+	int mcd;
 
 	param = get_params(buf, 7);
-	conf->my_camera.pos = vec(param[0], param[1], param[2]);
-	conf->my_camera.dist = 5;
-	my_screen.h = 9;
-	my_screen.w = 16;
+	mcd = ft_mcd(conf->mlx.window_size.x, conf->mlx.window_size.y);
+	my_screen.w = conf->mlx.window_size.x / mcd;
+	my_screen.h = conf->mlx.window_size.y / mcd;
+	conf->my_camera.dist = (my_screen.w / 2.0) / tan(param[6] * 3.14 / 360.0);
 	my_screen.x_axis = normalize(vec(0, -1, 0));
 	my_screen.y_axis = normalize(vec(0, 0, 1));
-	my_screen.pos = add(prod(normalize(cross_prod
-				(my_screen.x_axis, my_screen.y_axis)),
-				conf->my_camera.dist), conf->my_camera.pos);
+	my_screen.pos = vec(param[0], param[1], param[2]);
+	conf->my_camera.pos = add(prod(normalize(cross_prod(
+				my_screen.x_axis, my_screen.y_axis)),
+				-conf->my_camera.dist), my_screen.pos);
 	free(param);
 	conf->my_camera.display = my_screen;
 }
@@ -264,7 +280,7 @@ void		cylinder(char *buf, t_conf *conf)
 	t_3d_obj 	*obj;
 	double		*param;
 
-	
+
 	param = get_params(buf, 11);
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = CYLINDER;
@@ -296,7 +312,7 @@ void		scene_parser(char *buf, t_conf *conf)
 		conf->flag.r = 1;
 	}
 	else if (*buf == 'A')
-		write(1, "AMBIENT LIGHT IS HARDCODED >:(\n", ft_strlen("AMBIENT L IS HARDCODED >:(\n"));
+		write(1, "AMBIENT LIGHT IS HARDCODED >:(\n", ft_strlen("AMBIENT LIGHT IS HARDCODED >:(\n"));
 	else if (*buf == 'l')
 		light(buf, conf);
 	else if (*buf == 's' && (++buf && *buf == 'p'))
