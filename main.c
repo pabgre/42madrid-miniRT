@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 09:55:56 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:33:47 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int main(int argc,char **argv)
 	t_conf	conf;
 
 
-	conf.my_scene.obj_lst = ft_lstnew(NULL);
 	if (argc > 1)
 	{
 		conf = scene_conf(argv[1]);
