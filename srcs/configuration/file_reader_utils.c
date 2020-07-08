@@ -214,12 +214,16 @@ void		camera(char *buf, t_conf *conf)
 	t_screen my_screen;
 	double	*param;
 	int mcd;
+	double angle;
 
 	param = get_params(buf, 7);
 	mcd = ft_mcd(conf->mlx.window_size.x, conf->mlx.window_size.y);
 	my_screen.w = conf->mlx.window_size.x / mcd;
 	my_screen.h = conf->mlx.window_size.y / mcd;
-	conf->my_camera.dist = (my_screen.w / 2.0) / tan(param[6] * 3.14 / 360.0);
+	angle = param[6] > 180 ? 180 : param[6];
+	angle = param[6] < 0 ? 0 : param[6];
+	angle *= 3.14 / 360.0;
+	conf->my_camera.dist = (my_screen.w / 2.0) / tan(angle);
 	my_screen.x_axis = normalize(cross_prod(
 								vec(param[3],param[4],param[5]),vec(0, 0, -1)));
 	my_screen.y_axis = normalize(vec(0, 0, -1));
