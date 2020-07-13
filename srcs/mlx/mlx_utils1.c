@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/13 12:35:44 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/13 13:10:47 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,32 @@ int		close_mlx(t_mlx *mlx)
 	exit (0);
 }
 
+void	pan_cam( int key, t_hook_data *hook_data)
+{
+	if (key == 123)
+		{
+			((t_camera*)hook_data->camera->content)->pos.z -= 5;
+			((t_camera*)hook_data->camera->content)->display.pos.z -= 5;
+		}
+
+	else if (key == 124)
+		{
+			((t_camera*)hook_data->camera->content)->pos.z += 5;
+			((t_camera*)hook_data->camera->content)->display.pos.z += 5;
+	
+		}
+	else if (key == 125)
+		{
+			((t_camera*)hook_data->camera->content)->pos.y += 5;
+			((t_camera*)hook_data->camera->content)->display.pos.y += 5;
+		}
+	else if (key == 126)
+		{
+			((t_camera*)hook_data->camera->content)->pos.y -= 5;
+			((t_camera*)hook_data->camera->content)->display.pos.y -= 5;
+		}
+}
+
 int		pressed_key(int key, t_hook_data *hook_data)
 {
 	printf("KEY = %d\n", key);
@@ -48,13 +74,19 @@ int		pressed_key(int key, t_hook_data *hook_data)
 	{
 		system("leaks coolMiniRT");
 	}
-	else if (key == 18){
+	else if (key == 18)
+	{
 		(*(t_camera*)hook_data->camera->content).pos = vec((*(t_camera*)hook_data->camera->content).pos.x + 1, (*(t_camera*)hook_data->camera->content).pos.y, (*(t_camera*)hook_data->camera->content).pos.z);
 		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
+	}
+	else if (key >= 123 && key <= 126)
+	{
+		pan_cam(key, hook_data);
+		perform_raytracer(*(t_camera*)hook_data->camera->content, *hook_data->scene, hook_data->mlx);
 		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
 		printf("image updated?\n");
 	}
-	else if (key == 124){
+	else if (key == 19){
 		hook_data->camera = hook_data->camera->next;
 		if (hook_data->camera == NULL){
 			hook_data->camera = hook_data->scene->cam_lst;

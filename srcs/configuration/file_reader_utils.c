@@ -354,26 +354,44 @@ void		scene_parser(char *buf, t_conf *conf)
 	}
 }
 
+int		setfile(char **file, char *buf, int i)
+{
+	if (is_in_set(*buf, "R"))
+	{
+		file[0] = ft_strdup(buf);
+		return (0);
+	}
+	else
+	{
+		file[i] = ft_strdup(buf);
+		return (1);
+	}
+}
+
 t_conf		scene_conf(char *scene)
 {
 	t_conf	conf;
 	int		fd;
 	char	*buf;
-	char	*set;
+	char	*file[42];
+	int		i;
 
-	set = ft_strdup("R A c l sp pl sq cy tr");
+	i = 1;
 	fd = open(scene, O_RDONLY);
 	while (get_next_line(fd, &buf))
 	{
-		if (is_in_set(*buf, set))
-		{
-			scene_parser(buf, &conf);
-		}
+		if (is_in_set(*buf, "R A c l sp pl sq cy tr"))
+			i += setfile(file, buf, i);
 		free(buf);
 	}
+	i = 0;
+	while(file[i])
+	{
+		scene_parser(file[i], &conf);
+		free(file[i]);
+		i++;
+	}
 	free(buf);
-	free(set);
 	close(fd);
-	printf("\n\t Leak chasing : conf 1 : %p\n", &conf);
 	return (conf);
 }
