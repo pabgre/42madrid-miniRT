@@ -6,11 +6,12 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/08 10:30:45 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:28:57 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "hook_data.h"
 
 void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx)
 {
@@ -36,16 +37,22 @@ int		close_mlx(t_mlx *mlx)
 	exit (0);
 }
 
-int		pressed_key(int key, t_mlx *mlx)
+int		pressed_key(int key, t_hook_data *hook_data)
 {
 	printf("KEY = %d\n", key);
 	if (key == 53)
 	{
-		close_mlx(mlx);
+		close_mlx(hook_data->mlx);
 	}
 	else if (key == 37)
 	{
 		system("leaks coolMiniRT");
+	}
+	else if (key == 18){
+		hook_data->cameras->pos = vec(hook_data->cameras->pos.x + 1, hook_data->cameras->pos.y, hook_data->cameras->pos.z);
+		perform_raytracer(*hook_data->cameras, *hook_data->scene, hook_data->mlx);
+		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
+		printf("image updated?\n");
 	}
 	return(0);
 }

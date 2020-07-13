@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/07/13 11:56:13 by jballest         ###   ########.fr       */
+=======
+/*   Updated: 2020/07/08 13:28:21 by psan-gre         ###   ########.fr       */
+>>>>>>> 9e36bc5ef8bfc4299be3dcedc2713e50b5ba8990
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +26,11 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 	t_vector current_direction;
 	t_ray_hit_data data;
 
-	ft_init_mlx(mlx);
 	printf("window_h = %f \n window_w = %f\n", mlx->window_size.y, mlx->window_size.x);
 	printf("bpp = %d \n", mlx->bpp);
 
 	x = 0;
 	data = ray_hit_data_init();
-
 	while (x < mlx->window_size.y)
 	{
 		y = 0;

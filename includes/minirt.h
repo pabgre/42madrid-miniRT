@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:03:12 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/01 11:18:45 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:55:48 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@
 # include "my_mlx.h"
 # include "color.h"
 # include "file_reader.h"
+# include "hook_data.h"
 #endif

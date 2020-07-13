@@ -64,13 +64,21 @@ int		nbrlen(long nb)
 	return (len);
 }
 
+double		limit(double d, double min, double max)
+{
+	d = (d < min) ? min : d;
+	d = (d > max) ? max : d;
+	return (d);
+}
+
 t_color		color(double r, double g, double b)
 {
 	t_color		color;
 
-	color.r = r;
-	color.g = g;
-	color.b = b;
+
+	color.r = limit(r, 0, 255);
+	color.g = limit(g, 0, 255);
+	color.b = limit(b, 0, 255);
 	return (color);
 }
 
@@ -220,8 +228,7 @@ void		camera(char *buf, t_conf *conf)
 	mcd = ft_mcd(conf->mlx.window_size.x, conf->mlx.window_size.y);
 	my_screen.w = conf->mlx.window_size.x / mcd;
 	my_screen.h = conf->mlx.window_size.y / mcd;
-	angle = param[6] > 180 ? 180 : param[6];
-	angle = param[6] < 0 ? 0 : param[6];
+	angle = limit(param[6], 0, 180);
 	angle *= 3.14 / 360.0;
 	conf->my_camera.dist = (my_screen.w / 2.0) / tan(angle);
 	my_screen.x_axis = normalize(cross_prod(
@@ -236,16 +243,12 @@ void		camera(char *buf, t_conf *conf)
 
 void	resolution(char *buf, t_conf *conf)
 {
-	float		x;
-	float		y;
 	double		*param;
 
 	param = get_params(buf, 2);
-	x = param[0];
-	y = param[1];
+	conf->mlx.window_size.x = limit(param[0], 1, 2560);
+	conf->mlx.window_size.y = limit(param[1], 1, 1440);
 	free(param);
-	conf->mlx.window_size.x = (x > 2560) ? 2560 : x;
-	conf->mlx.window_size.y = (y > 1440) ? 1440 : y;
 }
 
 void	light(char *buf, t_conf *conf)
