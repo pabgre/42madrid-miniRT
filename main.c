@@ -3,19 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 12:49:18 by jballest         ###   ########.fr       */
-=======
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 13:23:27 by psan-gre         ###   ########.fr       */
->>>>>>> 9e36bc5ef8bfc4299be3dcedc2713e50b5ba8990
+/*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
+/*   Updated: 2020/07/13 12:44:57 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 
@@ -208,11 +202,11 @@ int main(int argc,char **argv)
 
 	hook_data->mlx = &mlx;
 
-	hook_data->cameras = &conf.my_camera;
+	hook_data->camera = conf.my_scene.cam_lst;
 	hook_data->scene = &conf.my_scene;
 
 	ft_init_mlx(&mlx);
-	perform_raytracer(conf.my_camera, conf.my_scene, &mlx);
+	perform_raytracer((*(t_camera*)hook_data->camera->content), conf.my_scene, &mlx);
 	if (conf.flag.save)
 		get_bmp_image(&mlx);
 	mlx_hook(mlx.win, 2, 0, pressed_key, hook_data);

@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/08 13:28:57 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:35:44 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,19 @@ int		pressed_key(int key, t_hook_data *hook_data)
 		system("leaks coolMiniRT");
 	}
 	else if (key == 18){
-		hook_data->cameras->pos = vec(hook_data->cameras->pos.x + 1, hook_data->cameras->pos.y, hook_data->cameras->pos.z);
-		perform_raytracer(*hook_data->cameras, *hook_data->scene, hook_data->mlx);
+		(*(t_camera*)hook_data->camera->content).pos = vec((*(t_camera*)hook_data->camera->content).pos.x + 1, (*(t_camera*)hook_data->camera->content).pos.y, (*(t_camera*)hook_data->camera->content).pos.z);
+		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
 		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
 		printf("image updated?\n");
+	}
+	else if (key == 124){
+		hook_data->camera = hook_data->camera->next;
+		if (hook_data->camera == NULL){
+			hook_data->camera = hook_data->scene->cam_lst;
+		}
+		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
+		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
+		printf("camera updated?\n");
 	}
 	return(0);
 }

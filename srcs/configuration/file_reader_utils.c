@@ -220,25 +220,28 @@ int ft_mcd(int a, int b){
 void		camera(char *buf, t_conf *conf)
 {
 	t_screen my_screen;
+	t_camera *my_camera;
 	double	*param;
 	int mcd;
 	double angle;
 
+	my_camera = malloc(sizeof(t_camera));
 	param = get_params(buf, 7);
 	mcd = ft_mcd(conf->mlx.window_size.x, conf->mlx.window_size.y);
 	my_screen.w = conf->mlx.window_size.x / mcd;
 	my_screen.h = conf->mlx.window_size.y / mcd;
 	angle = limit(param[6], 0, 180);
 	angle *= 3.14 / 360.0;
-	conf->my_camera.dist = (my_screen.w / 2.0) / tan(angle);
+	my_camera->dist = (my_screen.w / 2.0) / tan(angle);
 	my_screen.x_axis = normalize(cross_prod(
-								vec(param[3],param[4],param[5]),vec(0, 0, -1)));
+						vec(param[3], param[4], param[5]), vec(0, 0, -1)));
 	my_screen.y_axis = normalize(vec(0, 0, -1));
 	my_screen.pos = vec(param[0], param[1], param[2]);
-	conf->my_camera.pos = add(prod(normalize(vec(param[3],param[4],param[5])),
-				-conf->my_camera.dist), my_screen.pos);
+	my_camera->pos = add(prod(normalize(vec(param[3], param[4], param[5])),
+				-my_camera->dist), my_screen.pos);
 	free(param);
-	conf->my_camera.display = my_screen;
+	my_camera->display = my_screen;
+	ft_lstadd_front(&(conf->my_scene.cam_lst), ft_lstnew(my_camera));
 }
 
 void	resolution(char *buf, t_conf *conf)
