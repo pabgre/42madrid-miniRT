@@ -6,7 +6,7 @@
 #    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/01 13:28:31 by jballest         ###   ########.fr        #
+#    Updated: 2020/07/13 10:32:42 by jballest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,12 +69,15 @@ SRC_CONF =				srcs/configuration/atod.c	\
 			srcs/configuration/file_reader_utils.c	\
 # --------------------------------------------------------------------------------
 
-all: mlx $(NAME)
+all: $(NAME)
 	-@$(CC) main.c $(OBJS) $(INCLUDES) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
 debug: mlx
 	$(RM) coolMiniRTDebug
 	-@$(CC) -g main.c $(SRC) $(INCLUDES) $(LIBFT_DIR)*.c $(MLX) $(CFLAGS) -o $(NAME)Debug
+
+test: all
+	./coolMiniRT
 
 $(NAME): $(OBJS)
 	-@make bonus -C $(LIBFT_DIR)
@@ -105,6 +108,6 @@ fclean:	clean
 
 	-@$(RM) $(NAME)
 
-re:	fclean all
+re:	fclean all test
 
 .PHONY:	all clean fclean re

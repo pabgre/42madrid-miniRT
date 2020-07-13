@@ -6,7 +6,7 @@
 /*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/01 11:21:31 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:56:13 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
 			if (data.hit_object != NONE)
 				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, ft_rgb_to_int(data.color), mlx);
 			else
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, 0xFFFFFF), mlx);
+				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, ft_rgb_to_int(ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius))), mlx);
 			y += 1;
 		}
 		x += 1;

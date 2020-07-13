@@ -312,7 +312,7 @@ void		ambient(char *buf, t_conf * conf){
 	double *param;
 
 	param = get_params(buf, 4);
-	conf->my_scene.ambient.radius = (1.0 - param[0]);
+	conf->my_scene.ambient.radius = param[0];
 	conf->my_scene.ambient.color = color(param[1], param[2], param[3]);
 	free(param);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:18:38 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 11:33:47 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:49:18 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ int main(int argc,char **argv)
 		return (-1);
 	my_screen = conf.my_camera.display;
 	mlx.ptr = mlx_init();
-	printf("ptr:%p", mlx.ptr);
-	printf("\n\t Leak chasing : conf 0 : %p\n", &conf);
+	//printf("ptr:%p", mlx.ptr);
+	//printf("\n\t Leak chasing : conf 0 : %p\n", &conf);
 	mlx.window_title = ft_strdup("My_test my_of my_my my_raytracer");
 	mlx.window_size.x = conf.mlx.window_size.x;
 	mlx.window_size.y = conf.mlx.window_size.y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/08 11:28:02 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:49:07 by jballest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,22 +103,32 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 	t_list	*aux;
 	t_line	ray;
 	t_light	current_light;
+	t_color lightcolor;
 
 	aux = my_scene.light_lst;
+	lightcolor = init_rgb(0, 0, 0);
 	while (aux != NULL){
 		current_light = *((t_light*)aux->content);
 		ray.dir = normalize(subs(current_light.pos, hit_data.hit_point));
 		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.000001));
 		ratio = current_light.radius;
-		fac = 1;
+		fac = 0;
 		if (!hit_ray_in_any_object_lst(ray, my_scene).hit_object)
-			fac = (1 - (dot_prod(normalize(hit_data.normal), \
-									normalize(ray.dir)) * ratio));
-		fac = fac > 1 ? 1 : fac;
-		hit_data.color = ft_rgb_shade(hit_data.color, fac * my_scene.ambient.radius); //Combine last with current
+			fac = dot_prod(normalize(hit_data.normal), normalize(ray.dir));
+
+		fac = fac < 0 ? 0 : fac;
+		//hit_data.color = ft_rgb_shade(hit_data.color, fac * my_scene.ambient.radius); //Combine last with current
+		lightcolor = ft_rgb_sum(lightcolor, ft_rgb_shade(current_light.color, fac * ratio));
 		aux = aux->next;
 	}
-
+	lightcolor = ft_rgb_sum_ambient(lightcolor, ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius));
+	//hit_data.color = lightcolor;
+	//lightcolor = ft_rgb_sum(lightcolor, ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius));
+	//hit_data.color = ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius);
+	hit_data.color = ft_color_multiply(hit_data.color, lightcolor);
+	//hit_data.color = ft_rgb_sum(hit_data.color, lightcolor);
+	//hit_data.color = ft_rgb_shade(ft_rgb_sum(hit_data.color, lightcolor), fac * my_scene.ambient.radius);
+	//hit_data.color = ft_rgb_shade(hit_data.color, my_scene.ambient.radius);
 	return (hit_data);
 }
 
