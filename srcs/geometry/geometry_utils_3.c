@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/26 16:54:18 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/13 13:08:03 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,22 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 		{
 			data.hit_point = pt_a;
 			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
-		
+
 		}
 		else if (b_in_cylinder && which_is_near(pt_b, middle_point, ray.point))
 		{
 			data.hit_point = pt_b;
-			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+			data.normal = subs(data.hit_point,
+				closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
 		}
 		else
 		{
 			data.hit_point = middle_point;
-			data.normal = cylinder.dir;
+			if (is_in_positive_plane_side(data.hit_point,
+							pl(cylinder.dir, cylinder.center)))
+				data.normal = cylinder.dir;
+			else
+				data.normal = prod(cylinder.dir, -1);
 		}
 	}
 	return (data);
