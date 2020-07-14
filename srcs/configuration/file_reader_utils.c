@@ -225,6 +225,7 @@ void		camera(char *buf, t_conf *conf)
 	int mcd;
 	double angle;
 
+	conf->flag.c = 1;
 	my_camera = malloc(sizeof(t_camera));
 	param = get_params(buf, 7);
 	mcd = ft_mcd(conf->mlx.window_size.x, conf->mlx.window_size.y);
@@ -242,7 +243,6 @@ void		camera(char *buf, t_conf *conf)
 	free(param);
 	my_camera->display = my_screen;
 	ft_lstadd_front(&(conf->my_scene.cam_lst), ft_lstnew(my_camera));
-	conf->flag.c = 1;
 }
 
 void	resolution(char *buf, t_conf *conf)
