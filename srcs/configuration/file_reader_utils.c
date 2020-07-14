@@ -242,6 +242,7 @@ void		camera(char *buf, t_conf *conf)
 	free(param);
 	my_camera->display = my_screen;
 	ft_lstadd_front(&(conf->my_scene.cam_lst), ft_lstnew(my_camera));
+	conf->flag.c = 1;
 }
 
 void	resolution(char *buf, t_conf *conf)
@@ -251,6 +252,7 @@ void	resolution(char *buf, t_conf *conf)
 	param = get_params(buf, 2);
 	conf->mlx.window_size.x = limit(param[0], 1, 2560);
 	conf->mlx.window_size.y = limit(param[1], 1, 1440);
+	conf->flag.r = 1;
 	free(param);
 }
 
@@ -327,10 +329,7 @@ void		ambient(char *buf, t_conf * conf){
 void		scene_parser(char *buf, t_conf *conf)
 {
 	if (*buf == 'R')
-	{
 		resolution(buf, conf);
-		conf->flag.r = 1;
-	}
 	else if (*buf == 'A')
 		ambient(buf, conf);
 	else if (*buf == 'l')
@@ -348,10 +347,7 @@ void		scene_parser(char *buf, t_conf *conf)
 	else if (*buf == 't')
 		triangle(buf, conf);
 	else
-	{
-		conf->flag.error += 1;
-		printf("ERROR #%d : Check your '.rt' file\n", conf->flag.error);
-	}
+		conf->flag.error = 1;
 }
 
 int		setfile(char **file, char *buf, int i)

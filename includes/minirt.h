@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:03:12 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/08 12:55:48 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:25:24 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@
 # include "color.h"
 # include "file_reader.h"
 # include "hook_data.h"
+# include "error.h"
 #endif

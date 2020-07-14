@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/13 12:44:57 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/14 12:26:34 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ int main(int argc,char **argv)
 	{
 		conf = scene_conf("default.rt");
 	}
-	if (conf.flag.error || !conf.flag.r)
-		return (-1);
+	if (conf.flag.error || !conf.flag.r || !conf.flag.c)
+		return (ft_error(conf));
 	my_screen = conf.my_camera.display;
 	mlx.ptr = mlx_init();
 	//printf("ptr:%p", mlx.ptr);
@@ -213,6 +213,4 @@ int main(int argc,char **argv)
 	mlx_hook(mlx.win, 17, 0, close_mlx, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.ptr);
-
-
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jballest <jballest@student.42.fr>          +#+  +:+       +#+         #
+#    By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/13 10:32:42 by jballest         ###   ########.fr        #
+#    Updated: 2020/07/14 12:12:24 by npinto-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRC_COLOR = srcs/color/color_utils.c	\
 SRC_CONF =				srcs/configuration/atod.c	\
 			srcs/configuration/gnl/get_next_line.c	\
 			srcs/configuration/file_reader_utils.c	\
+			srcs/configuration/error_utils.c \
 # --------------------------------------------------------------------------------
 
 all: $(NAME)

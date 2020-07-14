@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/13 13:10:47 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/14 08:47:32 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,15 @@ int		pressed_key(int key, t_hook_data *hook_data)
 		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
 		printf("image updated?\n");
 	}
-	else if (key == 19){
+	else if (key == 19)
+	{
 		hook_data->camera = hook_data->camera->next;
 		if (hook_data->camera == NULL){
 			hook_data->camera = hook_data->scene->cam_lst;
 		}
 		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
 		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
-		printf("camera updated?\n");
+		printf("camera ZZZZ updated?\n");
 	}
 	return(0);
 }
