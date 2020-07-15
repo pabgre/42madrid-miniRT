@@ -314,6 +314,43 @@ void		cylinder(char *buf, t_conf *conf)
 }
 
 
+void		square(char *buf, t_conf *conf)
+{
+	t_3d_obj 	*obj;
+	double		*param;
+	t_vector	v;
+	t_vector	w;
+	t_triangle *tr;
+
+	param = get_params(buf, 10);
+	v = normalize(vec(param[3], 0, -param[5]));
+	w = normalize(cross_prod(v, vec(param[3], param[4], param[5])));
+	v =  prod(v, param[6] * sqrt(2)/2);
+	w =  prod(w, param[6] * sqrt(2)/2);
+
+
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = TRIANGLE;
+	tr = malloc(sizeof(t_triangle));
+	tr->point_a = add(vec(param[0], param[1], param[2]), v);
+	tr->point_b = add(vec(param[0], param[1], param[2]), w);
+	tr->point_c = subs(vec(param[0], param[1], param[2]), v);
+	tr->color = init_rgb(param[7], param[8], param[9]);
+	obj->obj = tr;
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
+
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = TRIANGLE;
+	tr = malloc(sizeof(t_triangle));
+	tr->point_a = subs(vec(param[0], param[1], param[2]), v);
+	tr->point_b = subs(vec(param[0], param[1], param[2]), w);
+	tr->point_c = add(vec(param[0], param[1], param[2]), v);
+	tr->color = init_rgb(param[7], param[8], param[9]);
+	obj->obj = tr;
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
+	free(param);
+}
+
 
 void		triangle(char *buf, t_conf *conf)
 {
