@@ -323,7 +323,7 @@ void		square(char *buf, t_conf *conf)
 	t_triangle *tr;
 
 	param = get_params(buf, 10);
-	v = normalize(vec(param[3], 0, -param[5]));
+	v = normalize(vec(param[5], 0, -param[3]));
 	w = normalize(cross_prod(v, vec(param[3], param[4], param[5])));
 	v =  prod(v, param[6] * sqrt(2)/2);
 	w =  prod(w, param[6] * sqrt(2)/2);
@@ -338,7 +338,6 @@ void		square(char *buf, t_conf *conf)
 	tr->color = init_rgb(param[7], param[8], param[9]);
 	obj->obj = tr;
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
-
 	obj = malloc(sizeof(t_3d_obj));
 	obj->type = TRIANGLE;
 	tr = malloc(sizeof(t_triangle));
@@ -396,8 +395,13 @@ void		scene_parser(char *buf, t_conf *conf)
 		ambient(buf, conf);
 	else if (*buf == 'l')
 		light(buf, conf);
-	else if (*buf == 's' && (++buf && *buf == 'p'))
-		sphere(buf, conf);
+	else if (*buf == 's'){
+		buf++;
+		if (*buf == 'p')
+			sphere(buf, conf);
+		else if (*buf == 'q')
+			square(buf, conf);
+	}
 	else if (*buf == 'c')
 	{
 		buf++;
