@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/15 12:14:54 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:40:27 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ bool			is_pt_between_origin_and_line(t_vector pt,
 	origin_b = closest_point_line(origin, line);
 	plane = pl(normalize(subs(origin_b, origin)), origin_b);
 	origin_b = line_plane_intersection(l(subs(pt, origin), origin), plane);
-	result = distance(pt, origin_b) <= distance(origin, origin_b);
-	result = result && distance(pt, origin) <= distance(origin, origin_b);
+	result = distance(pt, origin_b) <= distance(origin, origin_b) + 0.1;
+	result = result && distance(pt, origin) <= distance(origin, origin_b) + 0.1;
 	return (result);
 }
 
