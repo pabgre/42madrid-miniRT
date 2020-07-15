@@ -10,6 +10,7 @@ typedef	struct s_flag
 	int		r;
 	int		c;
 	int		error;
+	int		no_f;
 }				t_flag;
 
 

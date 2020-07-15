@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/14 08:47:32 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/15 10:15:09 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,55 @@ int		close_mlx(t_mlx *mlx)
 	exit (0);
 }
 
-void	pan_cam( int key, t_hook_data *hook_data)
+void	pan_cam(int key, t_hook_data *hook_data)
 {
 	if (key == 123)
 		{
-			((t_camera*)hook_data->camera->content)->pos.z -= 5;
-			((t_camera*)hook_data->camera->content)->display.pos.z -= 5;
+			((t_camera*)hook_data->camera->content)->pos.z += 5;
+			((t_camera*)hook_data->camera->content)->display.pos.z += 5;
 		}
 
 	else if (key == 124)
 		{
-			((t_camera*)hook_data->camera->content)->pos.z += 5;
-			((t_camera*)hook_data->camera->content)->display.pos.z += 5;
+			((t_camera*)hook_data->camera->content)->pos.z -= 5;
+			((t_camera*)hook_data->camera->content)->display.pos.z -= 5;
 	
 		}
 	else if (key == 125)
 		{
-			((t_camera*)hook_data->camera->content)->pos.y += 5;
-			((t_camera*)hook_data->camera->content)->display.pos.y += 5;
-		}
-	else if (key == 126)
-		{
 			((t_camera*)hook_data->camera->content)->pos.y -= 5;
 			((t_camera*)hook_data->camera->content)->display.pos.y -= 5;
 		}
+	else if (key == 126)
+		{
+			((t_camera*)hook_data->camera->content)->pos.y += 5;
+			((t_camera*)hook_data->camera->content)->display.pos.y += 5;
+		}
+}
+
+void	zoom(int key, t_hook_data *hook_data)
+{
+	if (key == 13)
+	{
+		((t_camera*)hook_data->camera->content)->pos.x -= 10;
+		((t_camera*)hook_data->camera->content)->display.pos.x -= 10;
+	}
+	else if (key == 1)
+	{
+		((t_camera*)hook_data->camera->content)->pos.x += 10;
+		((t_camera*)hook_data->camera->content)->display.pos.x += 10;
+	}
+	//rotation??
+	else if (key == 0)
+	{
+		((t_camera*)hook_data->camera->content)->pos.z -= 5;
+		((t_camera*)hook_data->camera->content)->display.pos.z -= 4;
+	}
+	else if (key == 2)
+	{
+		((t_camera*)hook_data->camera->content)->pos.z += 5;
+		((t_camera*)hook_data->camera->content)->display.pos.z += 4;
+	}
 }
 
 int		pressed_key(int key, t_hook_data *hook_data)
@@ -74,10 +99,12 @@ int		pressed_key(int key, t_hook_data *hook_data)
 	{
 		system("leaks coolMiniRT");
 	}
-	else if (key == 18)
+	else if (key == 13 || (key >= 0 && key <= 2))
 	{
-		(*(t_camera*)hook_data->camera->content).pos = vec((*(t_camera*)hook_data->camera->content).pos.x + 1, (*(t_camera*)hook_data->camera->content).pos.y, (*(t_camera*)hook_data->camera->content).pos.z);
+		zoom(key, hook_data);
 		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
+		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
+		printf("Zoomzoom?\n"); 
 	}
 	else if (key >= 123 && key <= 126)
 	{

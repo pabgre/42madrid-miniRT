@@ -374,20 +374,25 @@ t_conf		scene_conf(char *scene)
 
 	i = 1;
 	fd = open(scene, O_RDONLY);
-	while (get_next_line(fd, &buf))
+	if (fd != -1)
 	{
-		if (is_in_set(*buf, "R A c l sp pl sq cy tr"))
-			i += setfile(file, buf, i);
+		while (get_next_line(fd, &buf))
+		{
+			if (is_in_set(*buf, "R A c l sp pl sq cy tr"))
+				i += setfile(file, buf, i);
+			free(buf);
+		}
+		i = 0;
+		while(file[i])
+		{
+			scene_parser(file[i], &conf);
+			free(file[i]);
+			i++;
+		}
 		free(buf);
+		close(fd);
 	}
-	i = 0;
-	while(file[i])
-	{
-		scene_parser(file[i], &conf);
-		free(file[i]);
-		i++;
-	}
-	free(buf);
-	close(fd);
+	else
+		conf.flag.no_f = 1;
 	return (conf);
 }
