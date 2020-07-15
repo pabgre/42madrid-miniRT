@@ -120,6 +120,18 @@ t_triangle	*triangle_init(double *param)
 	return (triangle);
 }
 
+t_m_plane	*plane_init(double *param)
+{
+	t_m_plane *plane;
+
+	plane = malloc(sizeof(t_m_plane));
+	plane->point = vec(param[0], param[1], param[2]);
+	plane->normal = normalize(vec(param[3], param[4], param[5]));
+	plane->color = color(param[6], param[7], param[8]);
+
+	return (plane);
+}
+
 //####CORE_FTS####
 
 double		*get_params(const char *buf, int size)
@@ -264,7 +276,7 @@ void	light(char *buf, t_conf *conf)
 	current_light = malloc(sizeof(t_light));
 	param = get_params(buf, 7);
 	current_light->pos = vec(param[0], param[1], param[2]);
-	current_light->radius = param[3];
+	current_light->radius = limit(param[3], 0, 1);
 	current_light->color = color(param[4], param[5], param[6]);
 	free(param);
 	ft_lstadd_front(&(conf->my_scene.light_lst), ft_lstnew(current_light));
@@ -316,7 +328,7 @@ void		triangle(char *buf, t_conf *conf)
 	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
 }
 
-void		ambient(char *buf, t_conf * conf){
+void		ambient(char *buf, t_conf *conf){
 	double *param;
 
 	param = get_params(buf, 4);
@@ -325,6 +337,19 @@ void		ambient(char *buf, t_conf * conf){
 	free(param);
 }
 
+
+void		plane(char *buf, t_conf *conf)
+{
+	t_3d_obj	*obj;
+	double		*param;
+
+	param = get_params(buf, 9);
+	obj = malloc(sizeof(t_3d_obj));
+	obj->type = PLANE;
+	obj->obj = plane_init(param);
+	free(param);
+	ft_lstadd_front(&(conf->my_scene.obj_lst), ft_lstnew(obj));
+}
 
 void		scene_parser(char *buf, t_conf *conf)
 {
@@ -344,6 +369,8 @@ void		scene_parser(char *buf, t_conf *conf)
 		else if (*buf != 'y' && conf->flag.r)
 			camera(buf, conf);
 	}
+	else if (*buf == 'p')
+		plane (buf, conf);
 	else if (*buf == 't')
 		triangle(buf, conf);
 	else

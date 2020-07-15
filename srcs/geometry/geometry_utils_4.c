@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/03/03 14:46:40 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/15 12:14:54 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minirt.h"
 #include "../../includes/geometry.h"
 #include "../../includes/raytracer.h"
 
@@ -31,6 +32,7 @@ t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 		{
 			data.color = plane.color;
 			data.hit_object = PLANE;
+			data.normal = plane.normal;
 		}
 	}
 	return (data);

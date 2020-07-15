@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/13 11:49:07 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/15 11:52:03 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ t_ray_hit_data	ray_hit_this_obj(t_line ray, t_3d_obj *obj_data)
 	else if (obj_data->type == TRIANGLE)
 	{
 		return (ray_hit_triangle(ray, *(t_triangle*)(obj_data->obj)));
+	}
+	else if (obj_data->type == PLANE)
+	{
+		return (ray_hit_math_plane(ray, *(t_m_plane*)(obj_data->obj)));
 	}
 	else
 		return (ray_hit_data_init());
