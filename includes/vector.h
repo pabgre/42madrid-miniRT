@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:06:28 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/25 17:13:33 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/17 11:32:41 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ double magnitude(t_vector u);
 double distance(t_vector u, t_vector v);
 double angle(t_vector u, t_vector v);
 t_vector normalize(t_vector u);
+t_vector	rotate(t_vector u, t_vector axis, double theta);
 #endif

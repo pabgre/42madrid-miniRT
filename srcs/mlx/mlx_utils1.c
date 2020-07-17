@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/15 10:15:09 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:28:58 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,50 +41,70 @@ void	pan_cam(int key, t_hook_data *hook_data)
 {
 	if (key == 123)
 		{
-			((t_camera*)hook_data->camera->content)->pos.z += 5;
-			((t_camera*)hook_data->camera->content)->display.pos.z += 5;
+			((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,-10));
+			((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,-10));
 		}
 
 	else if (key == 124)
 		{
-			((t_camera*)hook_data->camera->content)->pos.z -= 5;
-			((t_camera*)hook_data->camera->content)->display.pos.z -= 5;
-	
+			((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,10));
+			((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,10));
+
 		}
 	else if (key == 125)
 		{
-			((t_camera*)hook_data->camera->content)->pos.y -= 5;
-			((t_camera*)hook_data->camera->content)->display.pos.y -= 5;
+			((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.x_axis,10));
+			((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.x_axis,10));
 		}
 	else if (key == 126)
 		{
-			((t_camera*)hook_data->camera->content)->pos.y += 5;
-			((t_camera*)hook_data->camera->content)->display.pos.y += 5;
+			((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.x_axis,-10));
+			((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.x_axis,-10));
 		}
 }
 
 void	zoom(int key, t_hook_data *hook_data)
 {
+	t_vector normal;
+	double theta;
+
+	normal = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.y_axis,
+									((t_camera*)hook_data->camera->content)->display.x_axis));
+	theta = 3.14 / 12;
 	if (key == 13)
 	{
-		((t_camera*)hook_data->camera->content)->pos.x -= 10;
-		((t_camera*)hook_data->camera->content)->display.pos.x -= 10;
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, -theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.x_axis = normalize(cross_prod(normal, ((t_camera*)hook_data->camera->content)->display.y_axis));
 	}
 	else if (key == 1)
 	{
-		((t_camera*)hook_data->camera->content)->pos.x += 10;
-		((t_camera*)hook_data->camera->content)->display.pos.x += 10;
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.x_axis = normalize(cross_prod(normal, ((t_camera*)hook_data->camera->content)->display.y_axis));
 	}
 	//rotation??
 	else if (key == 0)
 	{
-		((t_camera*)hook_data->camera->content)->pos.z -= 5;
-		((t_camera*)hook_data->camera->content)->display.pos.z -= 4;
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.x_axis, -theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.y_axis = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.x_axis, normal));
 	}
 	else if (key == 2)
 	{
-		((t_camera*)hook_data->camera->content)->pos.z += 5;
-		((t_camera*)hook_data->camera->content)->display.pos.z += 4;
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.x_axis, theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.y_axis = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.x_axis,normal));
+	}
+	else if (key == 6)
+	{
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(normal,10));
+		((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal,10));
+	}
+	else if (key == 7)
+	{
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(normal,-10));
+		((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal,-10));
 	}
 }
 
@@ -99,12 +119,12 @@ int		pressed_key(int key, t_hook_data *hook_data)
 	{
 		system("leaks coolMiniRT");
 	}
-	else if (key == 13 || (key >= 0 && key <= 2))
+	else if (key == 13 || (key >= 0 && key <= 2) || key == 6 || key == 7)
 	{
 		zoom(key, hook_data);
 		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
 		mlx_put_image_to_window(hook_data->mlx->ptr, hook_data->mlx->win, hook_data->mlx->img, 0, 0);
-		printf("Zoomzoom?\n"); 
+		printf("Zoomzoom?\n");
 	}
 	else if (key >= 123 && key <= 126)
 	{
