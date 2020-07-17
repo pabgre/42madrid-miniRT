@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/16 13:40:24 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/17 09:30:44 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.000001));
 		ratio = current_light.radius;
 		fac = 0;
+		//para psangre
 		if (!hit_ray_in_any_object_lst(ray, my_scene).hit_object || which_is_near(current_light.pos,hit_ray_in_any_object_lst(ray, my_scene).hit_point, ((t_camera*)my_scene.cam_lst)->pos))
 			fac = dot_prod(normalize(hit_data.normal), normalize(ray.dir));
 		fac = fac < 0 ? 0 : fac;
