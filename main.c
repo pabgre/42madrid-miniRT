@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/15 09:24:55 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:48:10 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int main(int argc,char **argv)
 	{
 		conf = scene_conf("scenes/default.rt");
 	}
-	if (conf.flag.error || !conf.flag.r || !conf.flag.c || conf.flag.no_f)
+	if ((conf.flag.error || !conf.flag.r || !conf.flag.c || conf.flag.no_f) && !conf.flag.save)
 		return (conf_error(conf));
 	my_screen = conf.my_camera.display;
 	mlx.ptr = mlx_init();

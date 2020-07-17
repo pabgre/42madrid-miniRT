@@ -39,4 +39,5 @@ void		sphere(char *buf, t_conf *conf);
 double		v1_param(char **buf);
 t_vector	v3_param(char **buf);
 t_color		v3_param_color(char **buf);
+double		limit(double d, double min, double max);
 #endif

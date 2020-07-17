@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/17 10:59:56 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:19:55 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,11 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 		aux = aux->next;
 	}
 	lightcolor = ft_rgb_sum_ambient(lightcolor, ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius));
-	hit_data.color = ft_color_multiply(hit_data.color, lightcolor);
+	//hit_data.color = ft_color_multiply(hit_data.color, lightcolor);
+	//hit_data.color = ft_color_addition(hit_data.color, lightcolor);
+	//shit_data.color = ft_color_dodge(hit_data.color, lightcolor);
+	//hit_data.color = ft_color_screen(hit_data.color, lightcolor);
+	hit_data.color = ft_color_lighten(hit_data.color, lightcolor);
 	return (hit_data);
 }
 

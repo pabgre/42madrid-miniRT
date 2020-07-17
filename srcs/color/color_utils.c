@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/17 11:02:51 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:21:38 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/color.h"
+#include "minirt.h"
 
 int	ft_rgb_to_int(t_color rgb)
 {
@@ -101,5 +102,52 @@ t_color	ft_color_multiply(t_color rgb1, t_color rgb2)
 	rescol.r = rgb1.r * rgb2.r / 255;
 	rescol.g = rgb1.g * rgb2.g / 255;
 	rescol.b = rgb1.b * rgb2.b / 255;
+	return (rescol);
+}
+
+t_color	ft_color_addition(t_color rgb1, t_color rgb2)
+{
+	t_color rescol;
+
+	rescol.r = rgb1.r + rgb2.r;
+	rescol.r = (rescol.r > 255) ? 255 : rescol.r;
+	rescol.g = rgb1.g + rgb2.g;
+	rescol.g = (rescol.g > 255) ? 255 : rescol.g;
+	rescol.b = rgb1.b + rgb2.b;
+	rescol.b = (rescol.b > 255) ? 255 : rescol.b;
+	ft_rgb_normalize(&rescol);
+	return (rescol);
+}
+
+t_color	ft_color_dodge(t_color rgb1, t_color rgb2)
+{
+	t_color rescol;
+
+	rescol.r = (rgb2.r * 256) / (255 - rgb1.r + 1);
+	rescol.g = (rgb2.g * 256) / (255 - rgb1.g + 1);
+	rescol.b = (rgb2.b * 256) / (255 - rgb1.b + 1);
+
+	ft_rgb_normalize(&rescol);
+	return (rescol);
+}
+
+t_color	ft_color_screen(t_color rgb1, t_color rgb2)
+{
+	t_color	rescol;
+
+	rescol.r = 255 - (((255 - rgb1.r) * (255 - rgb2.r)) / 255);
+	rescol.g = 255 - (((255 - rgb1.g) * (255 - rgb2.g)) / 255);
+	rescol.b = 255 - (((255 - rgb1.b) * (255 - rgb2.b)) / 255);
+	return (rescol);
+}
+
+t_color	ft_color_lighten(t_color rgb1, t_color rgb2)
+{
+	t_color	rescol;
+
+	rescol.r = (rgb1.r > rgb2.r) ? rgb1.r : rgb2.r;
+	rescol.g = (rgb1.g > rgb2.g) ? rgb1.g : rgb2.g;
+	rescol.b = (rgb1.b > rgb2.b) ? rgb1.b : rgb2.b;
+
 	return (rescol);
 }

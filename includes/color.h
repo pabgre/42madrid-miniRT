@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:38:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/13 11:48:55 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:15:47 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ t_color	ft_rgb_tint(t_color rgb, float tint_amount);
 t_color	ft_rgb_sum(t_color rgb1, t_color rgb2);
 t_color	ft_rgb_sum_ambient(t_color rgb1, t_color rgb2);
 t_color	ft_color_multiply(t_color rgb1, t_color rgb2);
+t_color	ft_color_addition(t_color rgb1, t_color rgb2);
+t_color	ft_color_dodge(t_color rgb1, t_color rgb2);
+t_color	ft_color_screen(t_color rgb1, t_color rgb2);
+t_color	ft_color_lighten(t_color rgb1, t_color rgb2);
 void	ft_rgb_normalize(t_color *rgb);
 
 #endif
