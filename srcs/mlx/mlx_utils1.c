@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/17 12:28:58 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:52:28 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void	zoom(int key, t_hook_data *hook_data)
 
 	normal = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.y_axis,
 									((t_camera*)hook_data->camera->content)->display.x_axis));
-	theta = 3.14 / 12;
+	theta = 3.14 / 36;
 	if (key == 13)
 	{
-		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, -theta);
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, theta);
 		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
 		((t_camera*)hook_data->camera->content)->display.x_axis = normalize(cross_prod(normal, ((t_camera*)hook_data->camera->content)->display.y_axis));
 	}
 	else if (key == 1)
 	{
-		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, theta);
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.y_axis, -theta);
 		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
 		((t_camera*)hook_data->camera->content)->display.x_axis = normalize(cross_prod(normal, ((t_camera*)hook_data->camera->content)->display.y_axis));
 	}
