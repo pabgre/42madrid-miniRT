@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/13 11:50:37 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/17 11:02:51 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_color	ft_rgb_shade(t_color rgb, double shade_amount)
 	color.r = (unsigned char)((double)rgb.r * shade_amount);
 	color.g = (unsigned char)((double)rgb.g * shade_amount);
 	color.b = (unsigned char)((double)rgb.b * shade_amount);
-
 	return (color);
 }
 
