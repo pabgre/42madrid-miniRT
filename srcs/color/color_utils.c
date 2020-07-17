@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/17 12:21:38 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:31:54 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_color	ft_color_addition(t_color rgb1, t_color rgb2)
 	rescol.g = (rescol.g > 255) ? 255 : rescol.g;
 	rescol.b = rgb1.b + rgb2.b;
 	rescol.b = (rescol.b > 255) ? 255 : rescol.b;
-	ft_rgb_normalize(&rescol);
+	
 	return (rescol);
 }
 
@@ -127,7 +127,6 @@ t_color	ft_color_dodge(t_color rgb1, t_color rgb2)
 	rescol.g = (rgb2.g * 256) / (255 - rgb1.g + 1);
 	rescol.b = (rgb2.b * 256) / (255 - rgb1.b + 1);
 
-	ft_rgb_normalize(&rescol);
 	return (rescol);
 }
 
@@ -151,3 +150,48 @@ t_color	ft_color_lighten(t_color rgb1, t_color rgb2)
 
 	return (rescol);
 }
+
+t_color	ft_color_merge(t_color rgb1, t_color rgb2)
+{
+	t_color rescol;
+
+	rescol.r = rgb1.r + rgb2.r - 128;
+	rescol.r = (rescol.r > 255) ? 255 : rescol.r;
+	rescol.g = rgb1.g + rgb2.g - 128;
+	rescol.g = (rescol.g > 255) ? 255 : rescol.g;
+	rescol.b = rgb1.b + rgb2.b - 128;
+	rescol.b = (rescol.b > 255) ? 255 : rescol.b;
+	
+	return (rescol);
+}
+
+t_color	ft_color_overlay(t_color rgb1, t_color rgb2)
+{
+	t_color rescol;
+	
+	rescol.r = (rgb2.r / 255) * (rgb2.r + (2 * rgb1.r / 255) * (255 - rgb2.r));
+	rescol.g = (rgb2.g / 255) * (rgb2.g + (2 * rgb1.g / 255) * (255 - rgb2.g));
+	rescol.b = (rgb2.b / 255) * (rgb2.b + (2 * rgb1.b / 255) * (255 - rgb2.b));
+	
+	return (rescol);
+}
+
+t_color ft_color_hardlight(t_color rgb1, t_color rgb2)
+{
+	t_color rescol;
+
+	if (rgb1.r > 128)
+		rescol.r = 255 - ((255 - 2 * (rgb1.r - 128) * (255 - rgb2.r)) / 256);
+	else
+		rescol.r = (2 * rgb1.r * rgb2.r) / 256;
+	if (rgb1.g > 128)
+		rescol.g = 255 - ((255 - 2 * (rgb1.g - 128) * (255 - rgb2.g)) / 256);
+	else
+		rescol.g = (2 * rgb1.g * rgb2.g) / 256;
+	if (rgb1.b > 128)
+		rescol.b = 255 - ((255 - 2 * (rgb1.b - 128) * (255 - rgb2.b)) / 256);
+	else
+		rescol.b = (2 * rgb1.b * rgb2.b) / 256;
+	return (rescol);
+}
+
