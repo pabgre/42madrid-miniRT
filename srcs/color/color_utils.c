@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/20 10:24:38 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/20 10:40:41 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,5 +208,14 @@ t_color	ft_color_soflight(t_color rgb1, t_color rgb2)
 	return (rescol);
 }
 
+t_color ft_color_layer_opacity(t_color rgb, double alpha)
+{
+	alpha = 100 / alpha;
 
+	rgb.r = rgb.r / alpha;
+	rgb.g = rgb.g / alpha;
+	rgb.b = rgb.b / alpha;
+
+	return (rgb);
+}
 

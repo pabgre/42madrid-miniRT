@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 17:38:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/20 09:16:55 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/20 10:38:57 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_color	ft_color_merge(t_color rgb1, t_color rgb2);
 t_color	ft_color_overlay(t_color rgb1, t_color rgb2);
 t_color	ft_color_hardlight(t_color rgb1, t_color rgb2);
 t_color	ft_color_soflight(t_color rgb1, t_color rgb2);
+t_color ft_color_layer_opacity(t_color rgb, double alpha);
 void	ft_rgb_normalize(t_color *rgb);
 
 #endif
