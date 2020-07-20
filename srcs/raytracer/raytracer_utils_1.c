@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/20 11:18:33 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:32:38 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
 	hit_data.color = ft_color_multiply(hit_data.color, lightcolor);
 	//hit_data.color = ft_color_addition(hit_data.color, lightcolor);
 	//shit_data.color = ft_color_dodge(hit_data.color, lightcolor);
-	hit_data.color = ft_color_layer_opacity(hit_data.color, 100);
-	lightcolor = ft_color_layer_opacity(lightcolor, 50);
+	lightcolor = ft_color_layer_opacity(lightcolor, 60);
 	hit_data.color = ft_color_screen(hit_data.color, lightcolor);
 	//hit_data.color = ft_color_lighten(hit_data.color, lightcolor);
 	//hit_data.color = ft_color_merge(hit_data.color, lightcolor);
