@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/17 13:31:54 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/20 10:24:38 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_color	ft_rgb_shade(t_color rgb, double shade_amount)
 
 	shade_amount = (shade_amount >= 1 ? 1 : shade_amount);
 	shade_amount = (shade_amount <= 0 ? 0 : shade_amount);
-	color.r = (unsigned char)((double)rgb.r * shade_amount);
-	color.g = (unsigned char)((double)rgb.g * shade_amount);
-	color.b = (unsigned char)((double)rgb.b * shade_amount);
+	color.r = (unsigned char)((double)rgb.r * shade_amount) ;
+	color.g = (unsigned char)((double)rgb.g * shade_amount) ;
+	color.b = (unsigned char)((double)rgb.b * shade_amount) ;
 	return (color);
 }
 
@@ -194,4 +194,19 @@ t_color ft_color_hardlight(t_color rgb1, t_color rgb2)
 		rescol.b = (2 * rgb1.b * rgb2.b) / 256;
 	return (rescol);
 }
+
+t_color	ft_color_soflight(t_color rgb1, t_color rgb2)
+{
+	t_color	rescol;
+
+	rescol = ft_color_screen(rgb1, rgb2);
+
+	rescol.r = (((255 - rgb2.r) * rgb1.r + rescol.r) / 255) * rgb1.r;
+	rescol.g = (((255 - rgb2.g) * rgb1.g + rescol.g) / 255) * rgb1.g;
+	rescol.b = (((255 - rgb2.b) * rgb1.b + rescol.b) / 255) * rgb1.b;
+
+	return (rescol);
+}
+
+
 
