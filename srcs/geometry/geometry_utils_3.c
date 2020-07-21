@@ -6,7 +6,7 @@
 /*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/15 13:33:42 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/21 12:50:20 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,19 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 	a_in_cylinder = is_pt_in_cylinder(pt_a, cylinder);
 	b_in_cylinder = is_pt_in_cylinder(pt_b, cylinder);
 	data.hit_object = CYLINDER;
+	middle_point = line_plane_intersection(ray, pl(cylinder.dir,
+			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
 	if (a_in_cylinder && b_in_cylinder)
 	{
 		data.hit_point = closest_point(pt_a, pt_b, ray.point);
 		data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
 	}
 	else if (!a_in_cylinder && !b_in_cylinder)
-		data.hit_object = NONE;
+	{		
+			data.hit_object = NONE;
+	}
 	else
 	{
-		middle_point = line_plane_intersection(ray, pl(cylinder.dir,
-			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
 		if (distance(middle_point, add(cylinder.center,
 			prod(cylinder.dir, cylinder.height))) > cylinder.radius)
 			middle_point = line_plane_intersection(ray, pl(cylinder.dir,

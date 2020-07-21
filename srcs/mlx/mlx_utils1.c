@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:04:46 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/17 12:52:28 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/21 09:09:09 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,23 @@ void	zoom(int key, t_hook_data *hook_data)
 		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(normal,-10));
 		((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal,-10));
 	}
+	//world rot??
+	else if (key == 12)
+	{
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.x_axis, theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.y_axis = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.x_axis,normal));				
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,-6));
+		((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,-6));
+	}
+	else if (key == 14)
+	{
+		normal = rotate(normal, ((t_camera*)hook_data->camera->content)->display.x_axis, -theta);
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(normal, -((t_camera*)hook_data->camera->content)->dist));
+		((t_camera*)hook_data->camera->content)->display.y_axis = normalize(cross_prod(((t_camera*)hook_data->camera->content)->display.x_axis, normal));
+		((t_camera*)hook_data->camera->content)->pos = add(((t_camera*)hook_data->camera->content)->pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,6));
+		((t_camera*)hook_data->camera->content)->display.pos = add(((t_camera*)hook_data->camera->content)->display.pos, prod(((t_camera*)hook_data->camera->content)->display.y_axis,6));
+	}
 }
 
 int		pressed_key(int key, t_hook_data *hook_data)
@@ -119,7 +136,7 @@ int		pressed_key(int key, t_hook_data *hook_data)
 	{
 		system("leaks coolMiniRT");
 	}
-	else if (key == 13 || (key >= 0 && key <= 2) || key == 6 || key == 7)
+	else if (key == 13 || (key >= 0 && key <= 2) || key == 6 || key == 7 || key == 12 || key == 14)
 	{
 		zoom(key, hook_data);
 		perform_raytracer((*(t_camera*)hook_data->camera->content), *hook_data->scene, hook_data->mlx);
