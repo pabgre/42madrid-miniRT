@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/14 12:46:52 by npinto-g         ###   ########.fr        #
+#    Updated: 2020/07/23 12:25:23 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRC_MLX = srcs/mlx/mlx_utils1.c	\
 SRC_POL = srcs/polinom/polinom_utils_1.c	\
 
 SRC_COLOR = srcs/color/color_utils.c	\
+			srcs/color/color_utils2.c
 
 SRC_CONF =				srcs/configuration/atod.c	\
 			srcs/configuration/gnl/get_next_line.c	\
