@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 11:26:15 by npinto-g          #+#    #+#             */
-/*   Updated: 2020/07/15 09:25:00 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/23 12:31:17 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		conf_error(t_conf conf)
 	printf("\033[1;31m");
 	printf("# ERROR :\n");
 	if (!conf.flag.no_f)
-	{	
+	{
 		if (!conf.flag.r)
 			printf("\tNO RESOLUTION set\n");
 		if (!conf.flag.c)
