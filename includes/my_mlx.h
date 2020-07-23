@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:20:08 by jballest          #+#    #+#             */
-/*   Updated: 2020/02/17 20:55:56 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:56:38 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ typedef struct	s_mlx
 
 void	ft_init_mlx(t_mlx *mlx);
 void	ft_paint_pixel(int i, unsigned int color, t_mlx *mlx);
+int		close_mlx(t_mlx *mlx);
 
 #endif

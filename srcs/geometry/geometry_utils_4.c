@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 13:52:59 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:40:27 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minirt.h"
 #include "../../includes/geometry.h"
 #include "../../includes/raytracer.h"
 
@@ -31,6 +32,7 @@ t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 		{
 			data.color = plane.color;
 			data.hit_object = PLANE;
+			data.normal = plane.normal;
 		}
 	}
 	return (data);
@@ -39,7 +41,16 @@ t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 bool			is_pt_between_origin_and_line(t_vector pt,
 											t_vector origin, t_line line)
 {
-	return (dist_point_line(pt, line) <= dist_point_line(origin, line));
+	bool result;
+	t_vector origin_b;
+	t_m_plane plane;
+
+	origin_b = closest_point_line(origin, line);
+	plane = pl(normalize(subs(origin_b, origin)), origin_b);
+	origin_b = line_plane_intersection(l(subs(pt, origin), origin), plane);
+	result = distance(pt, origin_b) <= distance(origin, origin_b) + 0.1;
+	result = result && distance(pt, origin) <= distance(origin, origin_b) + 0.1;
+	return (result);
 }
 
 bool			is_point_in_triangle(t_vector pt, t_triangle triangle)
@@ -61,7 +72,7 @@ bool			is_point_in_triangle(t_vector pt, t_triangle triangle)
 t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 {
 	t_m_plane			plane_container;
-	t_ray_hit_data	data;
+	t_ray_hit_data		data;
 
 	plane_container = pl(cross_prod(subs(triangle.point_a, triangle.point_b),
 				subs(triangle.point_c, triangle.point_b)), triangle.point_b);
@@ -72,6 +83,7 @@ t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 	{
 		data.hit_object = TRIANGLE;
 		data.color = triangle.color;
+		data.normal = plane_container.normal;
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:06:28 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/13 17:42:23 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/17 11:32:41 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct	s_vector
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }				t_vector;
 
 t_vector vec(double x, double y, double z);
@@ -30,4 +30,5 @@ double magnitude(t_vector u);
 double distance(t_vector u, t_vector v);
 double angle(t_vector u, t_vector v);
 t_vector normalize(t_vector u);
+t_vector	rotate(t_vector u, t_vector axis, double theta);
 #endif

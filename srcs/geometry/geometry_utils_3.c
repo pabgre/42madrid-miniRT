@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/21 11:43:23 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/21 12:50:20 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,44 @@ t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 	a_in_cylinder = is_pt_in_cylinder(pt_a, cylinder);
 	b_in_cylinder = is_pt_in_cylinder(pt_b, cylinder);
 	data.hit_object = CYLINDER;
+	middle_point = line_plane_intersection(ray, pl(cylinder.dir,
+			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
 	if (a_in_cylinder && b_in_cylinder)
+	{
 		data.hit_point = closest_point(pt_a, pt_b, ray.point);
+		data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+	}
 	else if (!a_in_cylinder && !b_in_cylinder)
-		data.hit_object = NONE;
+	{		
+			data.hit_object = NONE;
+	}
 	else
 	{
-		middle_point = line_plane_intersection(ray, pl(cylinder.dir,
-			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
 		if (distance(middle_point, add(cylinder.center,
 			prod(cylinder.dir, cylinder.height))) > cylinder.radius)
 			middle_point = line_plane_intersection(ray, pl(cylinder.dir,
 			add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
 		if (a_in_cylinder && which_is_near(pt_a, middle_point, ray.point))
+		{
 			data.hit_point = pt_a;
+			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+
+		}
 		else if (b_in_cylinder && which_is_near(pt_b, middle_point, ray.point))
+		{
 			data.hit_point = pt_b;
+			data.normal = subs(data.hit_point,
+				closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+		}
 		else
+		{
 			data.hit_point = middle_point;
+			if (is_in_positive_plane_side(data.hit_point,
+							pl(cylinder.dir, cylinder.center)))
+				data.normal = cylinder.dir;
+			else
+				data.normal = prod(cylinder.dir, -1);
+		}
 	}
 	return (data);
 }
@@ -92,11 +112,17 @@ t_ray_hit_data	ray_hit_cylinder(t_line ray, t_cylinder cylinder)
 		pt_b = add(ray.point,
 					prod(ray.dir, -(-pol.b - sqrt(disc)) / (-2 * pol.a)));
 		data = choose_hit_point_1(pt_a, pt_b, cylinder, ray);
+		data.color = cylinder.color;
 	}
 	return (data);
 }
 
 t_ray_hit_data	cylinder_hit_point(t_line ray, t_cylinder cylinder)
 {
-	return (ray_hit_cylinder(ray, cylinder));
+	t_ray_hit_data data;
+
+	data = ray_hit_cylinder(ray, cylinder);
+	if (!is_in_positive_plane_side(data.hit_point, pl(ray.dir, ray.point)))
+		data.hit_object = NONE;
+	return (data);
 }

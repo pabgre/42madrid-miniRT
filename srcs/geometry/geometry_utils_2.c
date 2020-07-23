@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/02/20 18:36:16 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:52:44 by npinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ double			ray_hit_sphere(t_line ray, t_sphere sphere)
 	disc = discr(sphere_pol) / 4;
 	return (disc);
 }
+#include <stdio.h>
 
 t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 {
@@ -61,7 +62,12 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 			data.hit_point = add(ray.point, prod(ray.dir, dist_b));
 			data.hit_object = SPHERE;
 		}
+		data.normal = normalize(subs(data.hit_point, sphere.center));
+		data.color = sphere.color;
 	}
+	/*printf(" CENTER X = %f \n", sphere.center.x);
+	printf(" CENTER Z = %f \n", sphere.center.z);
+	printf(" RADIUS = %f \n", sphere.radius);*/
 	return (data);
 }
 
