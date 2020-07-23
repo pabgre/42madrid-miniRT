@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/23 12:25:23 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/07/23 13:12:53 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,13 @@ SRC_COLOR = srcs/color/color_utils.c	\
 
 SRC_CONF =				srcs/configuration/atod.c	\
 			srcs/configuration/gnl/get_next_line.c	\
-			srcs/configuration/file_reader_utils.c	\
+			srcs/configuration/file_reader_utils1.c	\
+			srcs/configuration/file_reader_utils2.c	\
+			srcs/configuration/file_reader_utils3.c	\
+			srcs/configuration/file_reader_utils4.c	\
+			srcs/configuration/file_reader_utils5.c	\
+			srcs/configuration/file_reader_utils6.c	\
+			srcs/configuration/file_reader_utils7.c	\
 			srcs/configuration/error_utils.c \
 # --------------------------------------------------------------------------------
 
