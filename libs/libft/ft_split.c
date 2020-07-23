@@ -3,81 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 21:22:28 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/06 11:37:08 by npinto-g         ###   ########.fr       */
+/*   Created: 2019/11/09 14:58:08 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/12 16:42:35 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int		ft_wcount(char const *s, char c)
+static	int	nb_words(char const *s, char c, int *lenght)
 {
 	int		i;
-	int		wcount;
+	int		nb;
 
 	i = 0;
-	wcount = 0;
+	nb = 0;
+	if (!s)
+		return (-1);
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
-			i++;
-		else
+		if (s[i] != c)
 		{
+			nb += 1;
 			while (s[i] != c && s[i] != '\0')
 				i++;
-			wcount++;
 		}
+		else
+			i++;
 	}
-	return (wcount);
+	*lenght = i - 1;
+	return (nb);
 }
 
-static char		*ft_wordsplit(char const *str, char c)
+static	int	set_word(char **out, int nb, int j, int i)
 {
-	char	*word;
-	int		i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	if (!(word = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != c)
+	if (!(out[nb] = (char*)malloc(sizeof(char) * (j - i + 1))))
 	{
-		word[i] = str[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
-char			**ft_split(char const *s, char c)
-{
-	char	**words;
-	int		i;
-
-	if (!s || !c)
-	{
-		words = malloc(sizeof(char*));
-		words[0] = NULL;
-		return (words);
-	}
-	if (!(words = (char **)malloc(sizeof(char*) * (ft_wcount(s, c) + 1))))
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s && (*s == c))
-			s++;
-		if (*s && *s != c)
+		while (out[nb++] != NULL)
 		{
-			words[i++] = ft_wordsplit(s, c);
-			while (*s && *s != c)
-				s++;
+			free(out[nb]);
 		}
+		free(out);
+		return (0);
 	}
-	words[i] = NULL;
-	return (words);
+	else
+	{
+		return (1);
+	}
+}
+
+char		**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		nb;
+	char	**out;
+
+	i = 0;
+	nb = nb_words(s, c, &i);
+	if (!(out = (char**)malloc(sizeof(char*) * (nb + 1))) || nb == -1)
+		return (NULL);
+	out[nb] = NULL;
+	while (i >= 0)
+	{
+		if (s[i] != c)
+		{
+			j = i;
+			while (i >= 0 && s[i] != c)
+				i--;
+			nb--;
+			if (set_word(out, nb, j, i) == 0)
+				return (NULL);
+			ft_strlcpy(out[nb], &s[i + 1], (j - i + 1));
+		}
+		i--;
+	}
+	return (out);
 }

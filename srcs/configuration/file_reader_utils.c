@@ -149,7 +149,7 @@ double		*get_params(const char *buf, int size)
 		{
 			param[l] = ft_atod(&buf[pos]);
 			l++;
-			while(!ft_isspace(buf[pos]) && buf[pos] != ',' && buf[pos])
+			while((buf[pos])!= 32 && buf[pos] != ',' && buf[pos])
 				pos++;
 		}
 		pos++;
@@ -166,7 +166,7 @@ char		*rm_spaces(char *buf)
 	aux = ft_strdup(buf);
 	while(aux[i] != '\0')
 	{
-		if (ft_isspace(aux[i]))
+		if (aux[i] != 32)
 		{
 			aux[i] = ',';
 		}

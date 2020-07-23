@@ -3,34 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 11:56:23 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/15 15:35:03 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/09 17:31:12 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/11 19:05:06 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-char	*ft_itoa(int n)
+static	int	nb_digit(int n)
 {
-	char			*num;
-	unsigned int	onum;
-	int				is_negative;
-	int				nsize;
+	int size;
 
-	is_negative = n < 0 ? 1 : 0;
-	nsize = ft_ndigits(n) + is_negative;
-	if (!(num = (char *)malloc((nsize + 1) * sizeof(char))))
-		return (0);
-	onum = is_negative ? -n : n;
-	num[nsize] = 0;
-	if (is_negative)
-		num[0] = '-';
-	while (--nsize >= is_negative)
+	size = 0;
+	if (n <= 0)
+		size++;
+	while (n != 0)
 	{
-		num[nsize] = onum % 10 + 48;
-		onum /= 10;
+		size++;
+		n = n / 10;
 	}
-	return (num);
+	return (size);
+}
+
+char		*ft_itoa(int n)
+{
+	int		aux;
+	int		size;
+	char	*out;
+
+	aux = 0;
+	size = nb_digit(n);
+	if (!(out = (char*)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	out[size - 1] = '0';
+	out[size] = '\0';
+	if (n < 0)
+		out[0] = '-';
+	while (n != 0)
+	{
+		aux = n % 10;
+		if (aux < 0)
+			aux = -aux;
+		out[size - 1] = '0' + aux;
+		n = n / 10;
+		size--;
+	}
+	return (out);
 }

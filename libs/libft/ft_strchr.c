@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 16:15:00 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/07 16:46:47 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/05 18:06:35 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/07 16:48:40 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
+	int		i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == c)
+		{
+			return (&((char*)s)[i]);
+		}
+		i++;
 	}
-	if ((char)c == 0)
-		return ((char *)s);
+	if (c == '\0')
+	{
+		return (&((char*)s)[i]);
+	}
 	return (0);
 }

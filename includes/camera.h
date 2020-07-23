@@ -6,14 +6,15 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 19:36:34 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/18 15:38:50 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/23 12:04:53 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
 # include "vector.h"
-typedef struct s_screen
+
+typedef struct	s_screen
 {
 	t_vector pos;
 	t_vector x_axis;
@@ -23,7 +24,7 @@ typedef struct s_screen
 	int w;
 }				t_screen;
 
-typedef struct s_camera
+typedef struct	s_camera
 {
 	t_vector pos;
 

@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 11:29:48 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/18 16:53:34 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/05 18:50:22 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/07 17:31:58 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t hayc;
-	size_t needc;
+	size_t i;
+	size_t j;
 
-	if (!*needle)
-		return ((char *)haystack);
-	hayc = 0;
-	while (*(haystack + hayc) != 0 && hayc < len)
+	i = 0;
+	j = 0;
+	if (needle[i] == '\0')
+		return ((char*)haystack);
+	while (haystack[i] != '\0')
 	{
-		needc = 0;
-		while (*(haystack + hayc + needc) == *(needle + needc) &&
-				hayc + needc < len && *(needle + needc) != 0)
+		j = 0;
+		while (i + j < len && needle[j] != '\0' &&
+		haystack[i + j] == needle[j] && haystack[j] != '\0')
 		{
-			if (*(needle + needc + 1) == 0)
-				return ((char *)(haystack + hayc));
-			else
-				needc++;
+			j++;
 		}
-		hayc++;
+		if (needle[j] == '\0')
+			return (&((char*)haystack)[i]);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

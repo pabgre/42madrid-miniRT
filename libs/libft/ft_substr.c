@@ -3,36 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 07:54:34 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/11 11:21:19 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/06 14:44:52 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/11 18:42:22 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	slen;
-	size_t	cnt;
-	char	*str;
+	char	*out;
+	size_t	i;
+	size_t	j;
 
+	j = 0;
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	slen = ft_strlen(s + start);
-	if (slen < len)
-		len = slen;
-	if (!(str = (char *)malloc((len + 1) * sizeof(char))))
+	while (((char*)s)[j] != '\0' && j < start)
+		j++;
+	if (!(out = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	cnt = 0;
-	while (cnt < len)
+	i = 0;
+	while (i < len && ((char*)s)[j + i] != '\0')
 	{
-		str[cnt] = s[start + cnt];
-		cnt++;
+		out[i] = ((char*)s)[start + i];
+		i++;
 	}
-	str[cnt] = 0;
-	return (str);
+	out[i] = '\0';
+	return (out);
 }

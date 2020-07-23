@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 20:39:15 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/10 17:06:47 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/05 18:37:52 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/11 18:15:00 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	if (!dst)
 		return (dstsize);
 	if (dstsize > 0)
 	{
-		while (--dstsize && *(src + i))
+		while (i < dstsize - 1 && src[i] != '\0')
 		{
-			*(dst + i) = *(src + i);
+			dst[i] = ((char*)src)[i];
 			i++;
 		}
-		*(dst + i) = 0;
-		return (ft_strlen((char *)src));
+		dst[i] = '\0';
 	}
-	return (ft_strlen((char *)src));
+	while (src[i] != '\0')
+		i++;
+	return (i);
 }

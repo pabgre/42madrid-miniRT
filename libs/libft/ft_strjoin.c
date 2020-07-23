@@ -3,39 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 11:09:22 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/11 13:22:08 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/06 14:52:10 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/11 18:45:21 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	strlen;
-	size_t	cnt;
+	int		size;
+	int		i;
+	char	*out;
 
+	i = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	strlen = ft_strlen(s1) + ft_strlen(s2);
-	cnt = 0;
-	if (!(str = (char *)malloc((strlen + 1) * sizeof(char))))
+	size = ft_strlen(s1) + ft_strlen(s2);
+	if (!(out = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
-	while (*(s1 + cnt) != 0)
+	size = 0;
+	while (s1[size] != '\0')
 	{
-		*(str + cnt) = *(s1 + cnt);
-		cnt++;
+		out[size] = s1[size];
+		size++;
 	}
-	strlen = cnt;
-	cnt = 0;
-	while (*(s2 + cnt) != 0)
+	while (s2[i] != '\0')
 	{
-		*(str + strlen + cnt) = *(s2 + cnt);
-		cnt++;
+		out[size + i] = s2[i];
+		i++;
 	}
-	*(str + strlen + cnt) = 0;
-	return (str);
+	out[size + i] = '\0';
+	return (out);
 }

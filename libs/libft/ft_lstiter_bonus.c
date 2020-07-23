@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 18:18:51 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/16 18:20:07 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/12 15:27:57 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/12 18:09:10 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	while (lst)
+	t_list *thisnode;
+
+	thisnode = lst;
+	while (thisnode != NULL)
 	{
-		f(lst->content);
-		lst = lst->next;
+		f(thisnode->content);
+		thisnode = thisnode->next;
 	}
 }

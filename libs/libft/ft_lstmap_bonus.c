@@ -3,33 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 12:36:27 by jballest          #+#    #+#             */
-/*   Updated: 2019/11/18 13:13:32 by jballest         ###   ########.fr       */
+/*   Created: 2019/11/12 15:47:04 by psan-gre          #+#    #+#             */
+/*   Updated: 2019/11/12 18:09:19 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new;
-	t_list *first;
+	t_list *out;
+	t_list *out_aux;
+	t_list *lst_aux;
 
-	if (lst || del)
+	lst_aux = lst;
+	out = NULL;
+	if (lst_aux != NULL)
 	{
-		if (!(first = ft_lstnew(f(lst->content))))
-			return (NULL);
-		lst = lst->next;
-		while (lst)
+		if ((out = (t_list*)malloc(sizeof(t_list))))
 		{
-			if (!(new = ft_lstnew(f(lst->content))))
-				return (NULL);
-			ft_lstadd_back(&first, new);
-			lst = lst->next;
+			out_aux = out;
+			while (out_aux != NULL && lst_aux != NULL)
+			{
+				out_aux->content = f(lst_aux->content);
+				if ((out_aux->next = (t_list*)malloc(sizeof(t_list))))
+				{
+					out_aux = out_aux->next;
+					lst_aux = lst_aux->next;
+				}
+				else
+					ft_lstclear(&out, del);
+			}
 		}
-		return (first);
 	}
-	return (NULL);
+	return (out);
 }
