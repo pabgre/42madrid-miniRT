@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 11:16:03 by npinto-g          #+#    #+#             */
-/*   Updated: 2020/07/15 08:55:49 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/23 12:17:58 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-int		conf_error(t_conf conf);
+int	conf_error(t_conf conf);
 
 #endif
