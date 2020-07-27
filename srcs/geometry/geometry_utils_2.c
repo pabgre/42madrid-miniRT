@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:42:48 by pabgre            #+#    #+#             */
-/*   Updated: 2020/03/05 12:52:44 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/27 11:08:33 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/geometry.h"
-#include "../../includes/raytracer.h"
-#include "../../includes/polinom.h"
+#include "geometry.h"
+#include "raytracer.h"
+#include "polinom.h"
 #include <math.h>
 
 t_polinom2		sphere_ray_equation(t_line ray, t_sphere sphere)
@@ -35,7 +35,6 @@ double			ray_hit_sphere(t_line ray, t_sphere sphere)
 	disc = discr(sphere_pol) / 4;
 	return (disc);
 }
-#include <stdio.h>
 
 t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 {
@@ -53,21 +52,13 @@ t_ray_hit_data	sphere_hit_point(t_line ray, t_sphere sphere)
 		dist_a += sqrt(disc);
 		dist_b -= sqrt(disc);
 		if (dist_a < dist_b && 0 < dist_a)
-		{
 			data.hit_point = add(ray.point, prod(ray.dir, dist_a));
-			data.hit_object = SPHERE;
-		}
 		else if (0 < dist_b)
-		{
 			data.hit_point = add(ray.point, prod(ray.dir, dist_b));
-			data.hit_object = SPHERE;
-		}
+		data.hit_object = (dist_a < dist_b && 0 < dist_a) ||
+							(0 < dist_b) ? SPHERE : data.hit_object;
 		data.normal = normalize(subs(data.hit_point, sphere.center));
 		data.color = sphere.color;
 	}
-	/*printf(" CENTER X = %f \n", sphere.center.x);
-	printf(" CENTER Z = %f \n", sphere.center.z);
-	printf(" RADIUS = %f \n", sphere.radius);*/
 	return (data);
 }
-

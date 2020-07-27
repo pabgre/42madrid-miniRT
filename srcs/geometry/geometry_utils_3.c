@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:03:47 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/21 12:50:20 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/27 11:47:47 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/geometry.h"
-#include "../../includes/raytracer.h"
-#include "../../includes/polinom.h"
+#include "geometry.h"
+#include "raytracer.h"
+#include "polinom.h"
 #include <math.h>
 
 t_polinom2		cylinder_ray_equation(t_line ray, t_cylinder cylinder)
@@ -32,64 +32,59 @@ t_polinom2		cylinder_ray_equation(t_line ray, t_cylinder cylinder)
 	return (pol);
 }
 
-bool			is_pt_in_cylinder(t_vector pt, t_cylinder cylinder)
+t_ray_hit_data	choose_hit_point_2(t_ray_hit_data data, t_line ray,
+										t_cylinder c, t_c_data c_data)
 {
-	t_line			cylinder_line;
-
-	cylinder_line = l(cylinder.dir, cylinder.center);
-	return (distance(closest_point_line(pt, cylinder_line), cylinder.center)
-			<= cylinder.height);
+	c_data.mid_p = line_plane_intersection(ray, pl(c.dir,
+			add(c.center, prod(c.dir, c.height))));
+	if (distance(c_data.mid_p, add(c.center,
+		prod(c.dir, c.height))) > c.radius)
+		c_data.mid_p = line_plane_intersection(ray, pl(c.dir,
+		add(c.center, prod(c.dir, -c.height))));
+	if (c_data.a_in && which_is_near(c_data.pt_a, c_data.mid_p, ray.point))
+	{
+		data.hit_point = c_data.pt_a;
+		data.normal = subs(data.hit_point,
+						closest_point_line(data.hit_point, l(c.dir, c.center)));
+	}
+	else if (c_data.b_in && which_is_near(c_data.pt_b, c_data.mid_p, ray.point))
+	{
+		data.hit_point = c_data.pt_b;
+		data.normal = subs(data.hit_point,
+						closest_point_line(data.hit_point, l(c.dir, c.center)));
+	}
+	else
+	{
+		data.hit_point = c_data.mid_p;
+		data.normal = is_in_positive_plane_side(data.hit_point,
+						pl(c.dir, c.center)) ? c.dir : prod(c.dir, -1);
+	}
+	return (data);
 }
 
 t_ray_hit_data	choose_hit_point_1(t_vector pt_a, t_vector pt_b,
 									t_cylinder cylinder, t_line ray)
 {
 	t_ray_hit_data	data;
-	bool			a_in_cylinder;
-	bool			b_in_cylinder;
-	t_vector		middle_point;
+	bool			a_in;
+	bool			b_in;
+	t_c_data		c_data;
 
-	a_in_cylinder = is_pt_in_cylinder(pt_a, cylinder);
-	b_in_cylinder = is_pt_in_cylinder(pt_b, cylinder);
+	a_in = is_pt_in_cylinder(pt_a, cylinder);
+	b_in = is_pt_in_cylinder(pt_b, cylinder);
 	data.hit_object = CYLINDER;
-	middle_point = line_plane_intersection(ray, pl(cylinder.dir,
-			add(cylinder.center, prod(cylinder.dir, cylinder.height))));
-	if (a_in_cylinder && b_in_cylinder)
+	if (a_in && b_in)
 	{
 		data.hit_point = closest_point(pt_a, pt_b, ray.point);
-		data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
+		data.normal = subs(data.hit_point, closest_point_line(data.hit_point,
+											l(cylinder.dir, cylinder.center)));
 	}
-	else if (!a_in_cylinder && !b_in_cylinder)
-	{		
-			data.hit_object = NONE;
-	}
+	else if (!a_in && !b_in)
+		data.hit_object = NONE;
 	else
 	{
-		if (distance(middle_point, add(cylinder.center,
-			prod(cylinder.dir, cylinder.height))) > cylinder.radius)
-			middle_point = line_plane_intersection(ray, pl(cylinder.dir,
-			add(cylinder.center, prod(cylinder.dir, -cylinder.height))));
-		if (a_in_cylinder && which_is_near(pt_a, middle_point, ray.point))
-		{
-			data.hit_point = pt_a;
-			data.normal = subs(data.hit_point, closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
-
-		}
-		else if (b_in_cylinder && which_is_near(pt_b, middle_point, ray.point))
-		{
-			data.hit_point = pt_b;
-			data.normal = subs(data.hit_point,
-				closest_point_line(data.hit_point, l(cylinder.dir, cylinder.center)));
-		}
-		else
-		{
-			data.hit_point = middle_point;
-			if (is_in_positive_plane_side(data.hit_point,
-							pl(cylinder.dir, cylinder.center)))
-				data.normal = cylinder.dir;
-			else
-				data.normal = prod(cylinder.dir, -1);
-		}
+		c_data = cylinder_data_init(a_in, b_in, pt_a, pt_b);
+		data = choose_hit_point_2(data, ray, cylinder, c_data);
 	}
 	return (data);
 }

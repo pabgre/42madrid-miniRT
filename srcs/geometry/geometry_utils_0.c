@@ -6,17 +6,16 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:35:46 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/02/25 16:56:22 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 11:04:26 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/geometry.h"
-#include "../../includes/vector.h"
-
+#include "geometry.h"
+#include "vector.h"
 
 t_vector	closest_point_line(t_vector point, t_line my_line)
 {
-	t_vector closest_point;
+	t_vector	closest_point;
 
 	closest_point = add(my_line.point,
 	prod(my_line.dir, dot_prod(subs(point, my_line.point), my_line.dir)));
@@ -30,7 +29,6 @@ double		dist_point_line(t_vector point, t_line my_line)
 	closest_point = closest_point_line(point, my_line);
 	return (distance(point, closest_point));
 }
-
 
 t_vector	line_plane_intersection(t_line line, t_m_plane pl)
 {

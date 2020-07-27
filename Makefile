@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/23 13:12:53 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/07/27 11:49:52 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_GEO =	srcs/geometry/geometry_utils_0.c	\
 			srcs/geometry/geometry_utils_2.c	\
 			srcs/geometry/geometry_utils_3.c	\
 			srcs/geometry/geometry_utils_4.c	\
+			srcs/geometry/geometry_utils_5.c
 
 SRC_RAY =	srcs/raytracer/raytracer_utils_1.c	\
 			srcs/raytracer/raytracer_utils_2.c	\
