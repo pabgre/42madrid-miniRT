@@ -3,46 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:30:13 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/15 11:58:55 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:33:31 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
-void perform_raytracer(t_camera my_camera, t_scene my_scene, t_mlx *mlx)
+void	aux_perform_raytracer(t_ray_hit_data data, t_vector2_int screen,
+							t_mlx *mlx, t_scene scene)
 {
-	int x;
-	int y;
-	double x_plane;
-	double y_plane;
-	t_vector current_point;
-	t_vector current_direction;
-	t_ray_hit_data data;
+	if (data.hit_object != NONE)
+		ft_paint_pixel(screen.x * mlx->size_line + screen.y * mlx->bpp / 8,
+						ft_rgb_to_int(data.color), mlx);
+	else
+		ft_paint_pixel(screen.x * mlx->size_line + screen.y * mlx->bpp / 8,
+			mlx_get_color_value(mlx->ptr, ft_rgb_to_int(
+				ft_rgb_shade(scene.ambient.color, scene.ambient.radius))), mlx);
+}
 
-	printf("window_h = %f \n window_w = %f\n", mlx->window_size.y, mlx->window_size.x);
-	printf("bpp = %d \n", mlx->bpp);
+void	perform_raytracer(t_camera cam, t_scene scene, t_mlx *mlx)
+{
+	t_vector2_int		screen;
+	t_vector2_double	plane;
+	t_vector			c_pt;
+	t_vector			current_direction;
+	t_ray_hit_data		data;
 
-	x = 0;
+	screen.x = 0;
 	data = ray_hit_data_init();
-	while (x < mlx->window_size.y)
+	while (++screen.x < mlx->window_size.y)
 	{
-		y = 0;
-		while (y < mlx->window_size.x)
+		screen.y = 0;
+		while (++screen.y < mlx->window_size.x)
 		{
-			x_plane = (x + 1.0)/ mlx->window_size.y * my_camera.display.h - my_camera.display.h / 2.0;
-			y_plane = (y + 1.0)/ mlx->window_size.x * my_camera.display.w - my_camera.display.w / 2.0;
-			current_point = add(add(prod(my_camera.display.x_axis, x_plane) , prod(my_camera.display.y_axis, y_plane)), my_camera.display.pos);
-			current_direction = normalize(subs(current_point, my_camera.pos));
-			data = trace_ray(current_point, current_direction, my_scene);
-			if (data.hit_object != NONE)
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, ft_rgb_to_int(data.color), mlx);
-			else
-				ft_paint_pixel(x * mlx->size_line +  y * mlx->bpp / 8, mlx_get_color_value(mlx->ptr, ft_rgb_to_int(ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius))), mlx);
-			y += 1;
+			plane.x = (screen.x + 0.0) /
+				mlx->window_size.y * cam.display.h - cam.display.h / 2.0;
+			plane.y = (screen.y + 0.0) /
+				mlx->window_size.x * cam.display.w - cam.display.w / 2.0;
+			c_pt = add(add(prod(cam.display.x_axis, plane.x),
+						prod(cam.display.y_axis, plane.y)), cam.display.pos);
+			current_direction = normalize(subs(c_pt, cam.pos));
+			data = trace_ray(c_pt, current_direction, scene);
+			aux_perform_raytracer(data, screen, mlx, scene);
 		}
-		x += 1;
 	}
 }

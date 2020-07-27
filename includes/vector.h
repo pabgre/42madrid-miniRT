@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:06:28 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/17 11:32:41 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:34:03 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@ typedef struct	s_vector
 	double		y;
 	double		z;
 }				t_vector;
+
+typedef struct	s_vector2_int
+{
+	int x;
+	int y;
+}				t_vector2_int;
+
+typedef struct	s_vector2_double
+{
+	double x;
+	double y;
+}				t_vector2_double;
 
 t_vector vec(double x, double y, double z);
 t_vector prod(t_vector u, double lamda);
