@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:09:31 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/23 13:09:44 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:46:28 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ t_conf		scene_conf(char *scene)
 			free(buf);
 		}
 		i = 0;
-		while (file[i])
+		while (file[i++])
 		{
-			scene_parser(file[i], &conf);
-			free(file[i]);
-			i++;
+			scene_parser(file[i - 1], &conf);
+			free(file[i - 1]);
 		}
 		free(buf);
 		close(fd);

@@ -6,14 +6,14 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/27 12:03:24 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:38:23 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "minirt.h"
 
-int	ft_rgb_to_int(t_color rgb)
+int		ft_rgb_to_int(t_color rgb)
 {
 	int color;
 
