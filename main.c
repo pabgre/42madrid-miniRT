@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/17 12:48:10 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:45:39 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minirt.h"
 
@@ -33,7 +32,6 @@ typedef	struct s_info_header
 	uint32_t	imp_color;
 }				t_info_header;
 
-
 int		w_to_file(size_t fd, int num, ...)
 {
 	va_list		args;
@@ -41,9 +39,8 @@ int		w_to_file(size_t fd, int num, ...)
 
 	va_start(args, num);
 	value = va_arg(args, uint32_t);
-	while(num--)
+	while (num--)
 	{
-		//printf("%d\n", value);
 		write(fd, &value, sizeof(uint32_t));
 		value = va_arg(args, uint32_t);
 	}
@@ -68,7 +65,7 @@ void	w_header(size_t fd, size_t width, size_t height, size_t bpp)
 {
 	t_header	header;
 
-	header.signature = ft_strdup("BM");//ft_strdup
+	header.signature = ft_strdup("BM");
 	header.filesize = width * height * bpp / 8 + 54;
 	header.reserved = 0;
 	header.dataoffset = 54;
@@ -122,7 +119,6 @@ void	get_bmp_image(t_mlx	*mlx)
 		pixel -= width * bpp / 8 * 2;
 		h++;
 	}
-	//write (fd, pixel, width * height * bpp / 8);
 	close(fd);
 }
 

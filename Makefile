@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/27 12:38:41 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/07/27 13:28:59 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ SRC_GEO =	srcs/geometry/geometry_utils_0.c	\
 SRC_RAY =	srcs/raytracer/raytracer_utils_1.c	\
 			srcs/raytracer/raytracer_utils_2.c	\
 
-SRC_MLX = srcs/mlx/mlx_utils1.c	\
+SRC_MLX =	srcs/mlx/mlx_utils1.c	\
+			srcs/mlx/mlx_utils2.c	\
+			srcs/mlx/mlx_utils3.c	\
 
 SRC_POL = srcs/polinom/polinom_utils_1.c	\
 
