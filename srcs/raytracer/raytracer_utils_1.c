@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 12:13:16 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:48:21 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,10 @@ t_ray_hit_data	trace_ray(t_vector point, t_vector direction, t_scene my_scene)
 
 	ray.point = point;
 	ray.dir = direction;
-
 	hit_data = hit_ray_in_any_object_lst(ray, my_scene);
 	if (hit_data.hit_object != NONE)
 	{
 		hit_data = light_info(my_scene, hit_data);
 	}
-
 	return (hit_data);
 }

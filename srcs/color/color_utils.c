@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/27 13:38:23 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:47:46 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		ft_rgb_to_int(t_color rgb)
 	color = rgb.r;
 	color = (color << 8) + rgb.g;
 	color = (color << 8) + rgb.b;
-
 	return (color);
 }
 
@@ -31,7 +30,6 @@ t_color	init_rgb(unsigned char r, unsigned char g, unsigned char b)
 	color.r = r;
 	color.g = g;
 	color.b = b;
-
 	return (color);
 }
 
@@ -54,7 +52,6 @@ t_color	ft_rgb_tint(t_color rgb, float tint_amount)
 	color.r = rgb.r + (255 - rgb.r) * tint_amount;
 	color.g = rgb.g + (255 - rgb.g) * tint_amount;
 	color.b = rgb.b + (255 - rgb.b) * tint_amount;
-
 	return (color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:24:44 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 11:48:53 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:48:34 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ t_c_data	cylinder_data_init(bool a_in, bool b_in,
 	c_data.b_in = b_in;
 	c_data.pt_a = pt_a;
 	c_data.pt_b = pt_b;
-
 	return (c_data);
 }

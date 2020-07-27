@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 11:43:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 11:44:00 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:49:01 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_ray_hit_data	ray_hit_math_plane(t_line ray, t_m_plane plane)
 	data = ray_hit_data_init();
 	if (dot_prod(ray.dir, plane.normal) != 0)
 	{
-
 		data.hit_point = line_plane_intersection(ray, plane);
 		if (is_in_positive_plane_side(data.hit_point, pl(ray.dir, ray.point)))
 		{
@@ -76,7 +75,6 @@ t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 
 	plane_container = pl(cross_prod(subs(triangle.point_a, triangle.point_b),
 				subs(triangle.point_c, triangle.point_b)), triangle.point_b);
-
 	data = ray_hit_math_plane(ray, plane_container);
 	if (data.hit_object != NONE &&
 	is_point_in_triangle(data.hit_point, triangle))
@@ -89,6 +87,5 @@ t_ray_hit_data	ray_hit_triangle(t_line ray, t_triangle triangle)
 	{
 		data.hit_object = NONE;
 	}
-
 	return (data);
 }

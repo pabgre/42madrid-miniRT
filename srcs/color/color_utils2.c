@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 12:21:48 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 13:38:53 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:47:59 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_color	ft_color_addition(t_color rgb1, t_color rgb2)
 	rescol.g = (rescol.g > 255) ? 255 : rescol.g;
 	rescol.b = rgb1.b + rgb2.b;
 	rescol.b = (rescol.b > 255) ? 255 : rescol.b;
-
 	return (rescol);
 }
 
@@ -70,6 +69,5 @@ t_color	ft_color_layer_opacity(t_color rgb, double alpha)
 	rgb.r = rgb.r / alpha;
 	rgb.g = rgb.g / alpha;
 	rgb.b = rgb.b / alpha;
-
 	return (rgb);
 }

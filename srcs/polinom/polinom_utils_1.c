@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:49:23 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 11:58:26 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:47:31 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_polinom2	poli(double a, double b, double c)
 	pol.a = a;
 	pol.b = b;
 	pol.c = c;
-
 	return (pol);
 }
 
