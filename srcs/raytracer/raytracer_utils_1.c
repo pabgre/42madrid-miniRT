@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npinto-g <npinto-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:58:32 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/20 11:32:38 by npinto-g         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:06:49 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 t_ray_hit_data	ray_hit_data_init(void)
 {
@@ -21,7 +21,7 @@ t_ray_hit_data	ray_hit_data_init(void)
 	data.color.r = 255;
 	data.color.g = 255;
 	data.color.b = 255;
-	data.normal = vec(0,0,0);
+	data.normal = vec(0, 0, 0);
 	return (data);
 }
 
@@ -74,75 +74,34 @@ t_ray_hit_data	hit_ray_in_any_object_lst(t_line ray, t_scene my_scene)
 	return (data);
 }
 
-/*t_ray_hit_data		hit_ray_in_any_object(t_line ray, t_scene my_scene)
+t_ray_hit_data	light_info(t_scene scene, t_ray_hit_data hit_data)
 {
-	t_ray_hit_data	hit_data;
-	t_ray_hit_data	hit_data_aux;
-
-	hit_data = sphere_hit_point(ray, my_scene.my_sphere);
-	hit_data_aux = cylinder_hit_point(ray, my_scene.my_cylinder);
-	if (hit_data.hit_object != NONE)
-	{
-		if (hit_data_aux.hit_object != NONE && which_is_near(
-			hit_data_aux.hit_point, hit_data.hit_point, ray.point))
-			hit_data = hit_data_aux;
-	}
-	else
-		hit_data = hit_data_aux;
-	hit_data_aux = ray_hit_triangle(ray, my_scene.my_triangle);
-	if (hit_data.hit_object != NONE)
-	{
-		if (hit_data_aux.hit_object != NONE && which_is_near(
-			hit_data_aux.hit_point, hit_data.hit_point, ray.point))
-			hit_data = hit_data_aux;
-	}
-	else
-		hit_data = hit_data_aux;
-	return (hit_data);
-}*/
-
-t_ray_hit_data	light_info(t_scene my_scene, t_ray_hit_data hit_data){
-	float	ratio;
 	float	fac;
 	t_list	*aux;
 	t_line	ray;
-	t_light	current_light;
+	t_light	c_light;
 	t_color lightcolor;
 
-	aux = my_scene.light_lst;
+	aux = scene.light_lst;
 	lightcolor = init_rgb(0, 0, 0);
-	while (aux != NULL){
-		current_light = *((t_light*)aux->content);
-		ray.dir = normalize(subs(current_light.pos, hit_data.hit_point));
+	while (aux != NULL)
+	{
+		c_light = *((t_light*)aux->content);
+		ray.dir = normalize(subs(c_light.pos, hit_data.hit_point));
 		ray.point = add(hit_data.hit_point, prod(ray.dir, 0.000001));
-		ratio = current_light.radius;
 		fac = 0;
-		//para psangre
-		if (!hit_ray_in_any_object_lst(ray, my_scene).hit_object || !which_is_near(ray.point,current_light.pos, hit_ray_in_any_object_lst(ray, my_scene).hit_point))
+		if (!hit_ray_in_any_object_lst(ray, scene).hit_object || !which_is_near(
+			ray.point, c_light.pos, hit_ray_in_any_object_lst(ray, scene).hit_point))
 			fac = dot_prod(normalize(hit_data.normal), normalize(ray.dir));
 		fac = fac < 0 ? 0 : fac;
-		//hit_data.color = ft_rgb_shade(hit_data.color, fac * my_scene.ambient.radius); //Combine last with current
-		lightcolor = ft_rgb_sum_ambient(lightcolor, ft_rgb_shade(current_light.color, fac * ratio));
+		lightcolor = ft_rgb_sum(lightcolor,
+						ft_rgb_shade(c_light.color, fac * c_light.radius));
 		aux = aux->next;
 	}
-	lightcolor = ft_rgb_sum_ambient(lightcolor, ft_rgb_shade(my_scene.ambient.color, my_scene.ambient.radius));
+	lightcolor = ft_rgb_sum(lightcolor, ft_rgb_shade(scene.ambient.color, scene.ambient.radius));
 	hit_data.color = ft_color_multiply(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_addition(hit_data.color, lightcolor);
-	//shit_data.color = ft_color_dodge(hit_data.color, lightcolor);
 	lightcolor = ft_color_layer_opacity(lightcolor, 60);
 	hit_data.color = ft_color_screen(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_lighten(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_merge(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_hardlight(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_overlay(lightcolor, hit_data.color);
-	//hit_data.color = ft_color_multiply(lightcolor, hit_data.color);
-	//hit_data.color = ft_color_addition(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_dodge(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_screen(lightcolor, hit_data.color);
-	//hit_data.color = ft_color_lighten(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_merge(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_hardlight(hit_data.color, lightcolor);
-	//hit_data.color = ft_color_soflight(hit_data.color, lightcolor);
 	return (hit_data);
 }
 

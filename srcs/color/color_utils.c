@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:27 by jballest          #+#    #+#             */
-/*   Updated: 2020/07/23 12:23:19 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:03:24 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ t_color	ft_rgb_tint(t_color rgb, float tint_amount)
 	return (color);
 }
 
-t_color	ft_rgb_sum_ambient(t_color rgb1, t_color rgb2)
+t_color	ft_rgb_sum(t_color rgb1, t_color rgb2)
 {
 	t_color rescol;
 
 	rescol.r = (rgb1.r + rgb2.r) > 255 ? 255 : (rgb1.r + rgb2.r);
 	rescol.g = (rgb1.g + rgb2.g) > 255 ? 255 : (rgb1.g + rgb2.g);
-	rescol.b = (rgb1.b+ rgb2.b) > 255 ? 255 : (rgb1.b + rgb2.b);
+	rescol.b = (rgb1.b + rgb2.b) > 255 ? 255 : (rgb1.b + rgb2.b);
 	return (rescol);
 }
