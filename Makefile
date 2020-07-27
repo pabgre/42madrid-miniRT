@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/27 11:49:52 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/07/27 12:38:41 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC = $(SRC_VECTOR) $(SRC_GEO) $(SRC_MATRIX) $(SRC_RAY) $(SRC_MLX) $(SRC_COLOR) 
 
 SRC_VECTOR =	srcs/vector/vector_utils_1.c	\
 				srcs/vector/vector_utils_2.c	\
+				srcs/vector/vector_utils_3.c
 
 SRC_GEO =	srcs/geometry/geometry_utils_0.c	\
 			srcs/geometry/geometry_utils_1.c	\

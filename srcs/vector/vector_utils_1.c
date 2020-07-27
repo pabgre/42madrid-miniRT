@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jballest <jballest@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:36 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/01 11:20:58 by jballest         ###   ########.fr       */
+/*   Updated: 2020/07/27 12:36:33 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
-t_vector vec(double x, double y, double z)
+t_vector	vec(double x, double y, double z)
 {
 	t_vector out;
+
 	out.x = x;
 	out.y = y;
 	out.z = z;
@@ -22,22 +23,22 @@ t_vector vec(double x, double y, double z)
 	return (out);
 }
 
-t_vector prod(t_vector u, double lamda)
+t_vector	prod(t_vector u, double lamda)
 {
 	return (vec(u.x * lamda, u.y * lamda, u.z * lamda));
 }
 
-t_vector add(t_vector u, t_vector v)
+t_vector	add(t_vector u, t_vector v)
 {
-	return(vec(u.x + v.x, u.y + v.y, u.z + v.z));
+	return (vec(u.x + v.x, u.y + v.y, u.z + v.z));
 }
 
-t_vector subs(t_vector u, t_vector v)
+t_vector	subs(t_vector u, t_vector v)
 {
-	return(vec(u.x - v.x, u.y - v.y, u.z - v.z));
+	return (vec(u.x - v.x, u.y - v.y, u.z - v.z));
 }
 
-double dot_prod(t_vector u, t_vector v)
+double		dot_prod(t_vector u, t_vector v)
 {
-	return(u.x * v.x + u.y * v.y + u.z * v.z);
+	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }
