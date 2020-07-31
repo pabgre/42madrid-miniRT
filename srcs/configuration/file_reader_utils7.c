@@ -6,13 +6,13 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:09:31 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 13:46:28 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:36:05 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		setfile(char **file, char *buf, int i)
+int			setfile(char **file, char *buf, int i)
 {
 	if (is_in_set(*buf, "R"))
 	{
@@ -26,16 +26,12 @@ int		setfile(char **file, char *buf, int i)
 	}
 }
 
-t_conf		scene_conf(char *scene)
+t_conf		scene_conf(int fd, int i)
 {
 	t_conf	conf;
-	int		fd;
 	char	*buf;
 	char	*file[42];
-	int		i;
 
-	i = 1;
-	fd = open(scene, O_RDONLY);
 	if (fd != -1)
 	{
 		while (get_next_line(fd, &buf))

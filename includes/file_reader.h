@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:01:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/23 13:30:10 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:36:14 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef	struct	s_conf
 	t_flag		flag;
 }				t_conf;
 
-t_conf		scene_conf(char *scene);
+t_conf		scene_conf(int fd, int i);
 void		scene_parser(char *buf, t_conf *conf);
 void		conf_printer(t_conf conf);
 int			nbrlen(long nb);

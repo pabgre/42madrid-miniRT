@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 12:45:39 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:43:35 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,13 @@ int main(int argc,char **argv)
 
 	if (argc > 1)
 	{
-		conf = scene_conf(argv[1]);
+		conf = scene_conf(open(argv[1], O_RDONLY), 1);
 		if ( argc > 2 && strcmp("--save", argv[2]) == 0)
 			conf.flag.save = 1;
 	}
 	else
 	{
-		conf = scene_conf("scenes/default.rt");
+		conf = scene_conf(open("scenes/default.rt", O_RDONLY), 1);
 	}
 	if ((conf.flag.error || !conf.flag.r || !conf.flag.c || conf.flag.no_f) && !conf.flag.save)
 		return (conf_error(conf));

@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:36 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 12:36:33 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:25:46 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_vector	vec(double x, double y, double z)
 	out.x = x;
 	out.y = y;
 	out.z = z;
-
 	return (out);
 }
 

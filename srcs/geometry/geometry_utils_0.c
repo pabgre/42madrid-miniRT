@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:35:46 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/27 11:04:26 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:27:30 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ t_vector	closest_point(t_vector point_a, t_vector point_b, t_vector origin)
 		return (point_b);
 }
 
-bool	which_is_near(t_vector pt_a, t_vector pt_b, t_vector origin)
+bool		which_is_near(t_vector pt_a, t_vector pt_b, t_vector origin)
 {
 	return (distance(pt_a, origin) <= distance(pt_b, origin));
 }
-
