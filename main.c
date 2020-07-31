@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:44:56 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/31 10:57:45 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:34:10 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	setup(t_screen my_screen, t_mlx mlx, t_conf conf)
 	perform_raytracer((*(t_camera*)hook_data->camera->content),
 			conf.my_scene, &mlx);
 	if (conf.flag.save)
-		get_bmp_image(&mlx);
+		get_bmp_image(&mlx, (size_t)mlx.bpp);
 	mlx_hook(mlx.win, 2, 0, pressed_key, hook_data);
 	mlx_hook(mlx.win, 17, 0, close_mlx, &mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
@@ -60,6 +60,5 @@ int		main(int argc, char **argv)
 		return (conf_error(conf));
 	my_screen = conf.my_camera.display;
 	mlx.ptr = mlx_init();
-
 	setup(my_screen, mlx, conf);
 }

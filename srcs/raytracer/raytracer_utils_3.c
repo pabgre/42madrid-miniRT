@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 10:41:16 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/31 10:58:40 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:28:56 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,31 @@ void	w_infoheader(size_t fd, uint32_t width, uint32_t height, uint16_t bpp)
 	w_to_file(fd, 2, info.palette, info.imp_color);
 }
 
-void	get_bmp_image(t_mlx	*mlx)
+void	get_bmp_image(t_mlx *mlx, size_t bpp)
 {
-	size_t		fd;
-	size_t		width = (size_t)mlx->window_size.x;
-	size_t		height = (size_t)mlx->window_size.y;
-	size_t		bpp = (size_t)mlx->bpp;
-	char		*pixel = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
-	int		h = 0;
-	int		w;
+	size_t			fd;
+	char			*pixel;
+	t_vector2_int	win_size;
+	t_vector2_int	img_size;
 
+	pixel = mlx_get_data_addr(mlx->img, &mlx->bpp,
+	&mlx->size_line, &mlx->endian);
+	win_size = vec2_int(mlx->window_size.x, mlx->window_size.y);
+	img_size.y = 0;
 	fd = open("save.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0640);
-	w_header(fd, width, height, bpp);
-	w_infoheader(fd, width, height, bpp);
-	pixel += (width * height * bpp / 8) - width * bpp / 8;
-	while (h < (int)height)
+	w_header(fd, win_size.x, win_size.y, bpp);
+	w_infoheader(fd, win_size.x, win_size.y, bpp);
+	pixel += (win_size.x * win_size.y * bpp / 8) - win_size.x * bpp / 8;
+	while (img_size.y < (int)win_size.y)
 	{
-		w = 0;
-		while (w < (int)width)
+		img_size.x = 0;
+		while (img_size.x++ < (int)win_size.x)
 		{
 			write(fd, pixel, 4);
 			pixel += 4;
-			w++;
 		}
-		pixel -= width * bpp / 8 * 2;
-		h++;
+		pixel -= win_size.x * (size_t)mlx->bpp / 8 * 2;
+		img_size.y++;
 	}
 	close(fd);
 }

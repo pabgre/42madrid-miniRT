@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:20:01 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/31 10:50:38 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:24:33 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ t_ray_hit_data	hit_ray_in_any_object_lst(t_line ray, t_scene my_scene);
 int				w_to_file(size_t fd, int num, ...);
 int				intpow(int base, int exponent);
 void			w_header(size_t fd, size_t width, size_t height, size_t bpp);
-void			get_bmp_image(t_mlx	*mlx);
+void			get_bmp_image(t_mlx	*mlx, size_t bpp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:37:52 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/31 10:37:39 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:26:58 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,13 @@ t_vector	rotate(t_vector u, t_vector axis, double theta)
 					prod(w, sin(theta) / magnitude(w))), magnitude(u_orth));
 	res = add(res, u_par);
 	return (res);
+}
+
+t_vector2_int	vec2_int(int x, int y)
+{
+	t_vector2_int vec;
+
+	vec.x = x;
+	vec.y = y;
+	return (vec);
 }
