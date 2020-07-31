@@ -6,7 +6,7 @@
 /*   By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:01:53 by psan-gre          #+#    #+#             */
-/*   Updated: 2020/07/31 10:36:14 by psan-gre         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:51:49 by psan-gre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 # include "../srcs/configuration/gnl/get_next_line.h"
 # include "vector.h"
 # include "raytracer.h"
+
+typedef	struct	s_header
+{
+	char		*signature;
+	uint32_t	filesize;
+	uint32_t	reserved;
+	uint32_t	dataoffset;
+}				t_header;
+
+typedef	struct	s_info_header
+{
+	size_t		size_info_header;
+	uint16_t	planes;
+	uint32_t	compression;
+	uint32_t	comp_size;
+	uint32_t	xppm;
+	uint32_t	yppm;
+	uint32_t	palette;
+	uint32_t	imp_color;
+}				t_info_header;
 
 typedef	struct	s_flag
 {

@@ -6,7 +6,7 @@
 #    By: psan-gre <psan-gre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/03 15:27:00 by jballest          #+#    #+#              #
-#    Updated: 2020/07/27 13:28:59 by psan-gre         ###   ########.fr        #
+#    Updated: 2020/07/31 10:49:04 by psan-gre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_GEO =	srcs/geometry/geometry_utils_0.c	\
 
 SRC_RAY =	srcs/raytracer/raytracer_utils_1.c	\
 			srcs/raytracer/raytracer_utils_2.c	\
+			srcs/raytracer/raytracer_utils_3.c	\
 
 SRC_MLX =	srcs/mlx/mlx_utils1.c	\
 			srcs/mlx/mlx_utils2.c	\
